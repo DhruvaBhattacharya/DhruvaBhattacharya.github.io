@@ -1,7 +1,7 @@
 {
   "name": "Dhruva Bhattacharya",
   "title": "Backend Software Engineer | Distributed Systems & Production GenAI",
-  "tagline": "I build backend systems that are designed to scale, not just work. okay",
+  "tagline": "I build backend systems that are designed to scale, not just work",
   "status": {
     "available": true,
     "badge": "Targeting Product-Based SDE Roles",
@@ -20,7 +20,7 @@
     ],
     "resumeUrl": "./resume.pdf"
   },
-  "summary": "I build backend systems that are designed to scale, not just work. okay. Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms at Tata Consultancy Services. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022).",
+  "summary": "I build backend systems that are designed to scale, not just work. Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022). Targeting Product-Based SDE / Backend & AI Engineering Roles.",
   "highlights": [
     {
       "id": "target-roles",
@@ -83,5 +83,5 @@
       "description": "Alibaba Cloud Low Code Contest 2022"
     }
   ],
-  "lastSyncedAt": "2026-09-23T20:49:29.302Z"
+  "lastSyncedAt": "2026-09-23T20:59:13.963Z"
 }

@@ -41,7 +41,7 @@ function consolidate() {
       if (liData.bio.summary.length > 150) {
         profile.summary = liData.bio.summary;
       } else {
-        const verifiedBase = "Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms. Slashed API latency by 85% and boosted throughput by 40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia. Targeting Product-Based SDE / Backend & AI Engineering Roles.";
+        const verifiedBase = "Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022). Targeting Product-Based SDE / Backend & AI Engineering Roles.";
         profile.summary = `${liData.bio.summary}. ${verifiedBase}`;
         profile.tagline = liData.bio.summary;
       }

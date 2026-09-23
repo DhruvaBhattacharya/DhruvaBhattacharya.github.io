@@ -1,33 +1,143 @@
-# Logs
+# ==============================================================================
+# PORTFOLIO 2.0 - GITIGNORE
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Local Configuration Files
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+*.env.local
+*.env.*.local
+*.env.development
+*.env.development.local
+*.env.test
+*.env.test.local
+*.env.production
+*.env.production.local
+*.env.staging
+*.env.prod
+!.env.example
+
+# ------------------------------------------------------------------------------
+# 2. Secrets, Private Keys, Certificates, Tokens & Passwords
+# ------------------------------------------------------------------------------
+*.pem
+*.key
+*.pkcs12
+*.p12
+*.pfx
+*.cert
+*.crt
+id_rsa
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.pub
+credentials.json
+*credential*
+*credentials*
+*secret*
+*password*
+*passwd*
+*token*
+*.token
+service-account*.json
+serviceAccountKey*.json
+auth*.json
+.npmrc
+.yarnrc
+.netrc
+
+# ------------------------------------------------------------------------------
+# 3. Logs, Diagnostics & Process Dumps
+# ------------------------------------------------------------------------------
 logs
+logs/
 *.log
+*.log.*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+report.*.json
+*.pid
+*.seed
+*.pid.lock
 
-node_modules
-dist
-dist-ssr
+# ------------------------------------------------------------------------------
+# 4. Dependencies, Build Outputs & Runtimes
+# ------------------------------------------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+.cache/
+.vite/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
 *.local
 
-# Editor directories and files
+# ------------------------------------------------------------------------------
+# 5. Operating System Generated Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+ehthumbs_vista.db
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+
+# ------------------------------------------------------------------------------
+# 6. IDE, Editors & Development Tools
+# ------------------------------------------------------------------------------
+.idea/
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
 
-# Temporary sync payloads
+# ------------------------------------------------------------------------------
+# 7. Database Dumps & Local Storage
+# ------------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+dump.rdb
+
+# ------------------------------------------------------------------------------
+# 8. Temporary Payloads, Scripts Caches & Unnecessary Files
+# ------------------------------------------------------------------------------
 scripts/.*_payload.json
+scripts/*.payload.json
+scripts/.linkedin_payload.json
+scripts/.github_payload.json
+*.bak
+*.tmp
+*.temp
 
-# Legacy temporary dumps and archives
+# ------------------------------------------------------------------------------
+# 9. Legacy Repository Dumps and Raw Image/PDF Duplicates
+# ------------------------------------------------------------------------------
 legacy_*
 DhruvaBhattacharya.github.io-master/
 *.jpeg
+*.jpg.bak
 Latest_resume-DhruvaBhattacharya .pdf

@@ -13,7 +13,7 @@ Data is synthesized from the legacy build files (`DhruvaBhattacharya.github.io-m
 ### 2.1 Core Identity & Contact
 - **Name**: Dhruva Bhattacharya
 - **Role**: Backend Software Engineer & Generative AI / Microservices Developer
-- **Status**: Serving Notice Period (30 Days Notice)
+- **Status**: Targeting Product-Based SDE / Backend & AI Engineering Roles
 - **Email**: `dhruvabhattacharya130102@gmail.com`
 - **Location**: Jabalpur, Madhya Pradesh, India
 - **GitHub**: [github.com/dhruvaop](https://github.com/dhruvaop)
@@ -101,7 +101,7 @@ Legacy Architecture (1.0)               Portfolio 2.0 (Modernized)
 1. **Single-Repository Workflow**: No separate or secondary repositories. All codebase, automation scripts (`scripts/`), GitHub Actions workflows (`.github/workflows/`), and deployment targets live directly in this repository (`DhruvaBhattacharya.github.io`).
 2. **In-Repo Automated Commits to Prod**: When the Saturday 1:00 PM IST cron job detects changes in LinkedIn or GitHub contributions, it automatically commits the updated data directly to `main` in this repository and publishes the production build to GitHub Pages.
 3. **Local Development First**: The portfolio must run locally on developer machines (`npm run dev`) without needing any external API keys or network connection. All data layers feature reliable local fallbacks.
-4. **Interactive Multi-Photo Persona Switcher**: Integrates all 4 uploaded user photos (`Professional 2`, `Coding Dhruva`, `Professional 1`, `Casual Dhruva`) into an interactive persona switcher (`👔 Professional`, `💻 Engineering`, `🎯 Portrait`, `🕶️ Creative`) in the Hero section, featuring custom face-centering optical alignment (`professional-2-portrait.jpeg`, `objectPosition: 'center 10%'`, card container `h-[460px] sm:h-[500px]`), and a dedicated 800x800 face-centered headshot avatar (`profile-headshot.jpeg`) with 30 Days Notice status in the Contact section.
+4. **Interactive Multi-Photo Persona Switcher**: Integrates all 4 uploaded user photos (`Professional 2`, `Coding Dhruva`, `Professional 1`, `Casual Dhruva`) into an interactive persona switcher (`👔 Professional`, `💻 Engineering`, `🎯 Portrait`, `🕶️ Creative`) in the Hero section, featuring custom face-centering optical alignment (`professional-2-portrait.webp`, `objectPosition: 'center 10%'`, card container `h-[460px] sm:h-[500px]`), and a dedicated 800x800 face-centered headshot avatar (`profile-headshot.webp`) with active recruiter status chip in the Contact section.
 
 
 ### 3.1 Dependency & Folder Tree (Modernization Matrix)
@@ -221,7 +221,7 @@ Portfolio-2.0/
   - Glassmorphic Surfaces: `apple-glass-nav` (`-webkit-backdrop-filter: blur(20px) saturate(180%)`), high-precision border rings (`border-white/10`)
   - Primary Accent: Neon Cyan (`#06B6D4` / `cyan-400`) & Electric Indigo (`#6366F1`)
 - **Key Interactivity & Dynamic Features**:
-  - Live pulse indicator: "🟢 30 Days Notice Period | Product-Based SDE / Backend & AI Engineering Roles"
+  - Live pulse indicator: "🟢 Targeting Product-Based SDE / Backend & AI Engineering Roles"
   - Gen Z Theme Switcher: Hover warning popover *"Programmers Like Dark Mode Light Attracts Bugs"* + interactive bug alert toast
   - Interactive Schedule Interview Dialog: Multi-channel launch via Gmail Web, desktop mail, and copy invitation template
   - Client Intelligence & Recruiter Check-In (`VisitorTracker.jsx`): Automatic browser/OS/aspect-ratio logging, guestbook name capture, and `Ctrl+Shift+V` analytics ledger

@@ -106,10 +106,10 @@ E:\Portfolio 2.0\
   - Sticky glassmorphic navbar with active section indicators and resume download.
 - [x] **Hero Section**:
   - Punchy headline highlighting Backend Engineering & Generative AI.
-  - Live pulse pill: `"🟢 30 Days Notice Period | Product-Based SDE / Backend & AI Engineering Roles"`.
-  - Recruiter signal badge: `"Serving Notice Period (30 Days Notice)"`.
-  - Impact metric counters: `85% Latency Cut`, `40% Throughput Boost`, `900+ LeetCode Solved`, `Rank 1 Alibaba Cloud`.
-  - Dedicated interactive Photo Persona Switcher featuring all 4 user photos (`Professional 2`, `Coding Dhruva`, `Professional 1`, `Casual Dhruva`) with custom face-centering optical alignment (`professional-2-portrait.jpeg`, `center 10%`, container `h-[460px] sm:h-[500px]`) ensuring Dhruva's face, glasses, and expression remain uncropped and visible.
+  - Live pulse pill: `"🟢 Targeting Product-Based SDE / Backend & AI Engineering Roles"`.
+  - Recruiter signal badge: `"Targeting Product-Based SDE / Backend & AI Engineering Roles"`.
+  - Impact metric counters: `85% Latency Cut`, `40% Throughput Boost`, `900+ LeetCode Solved`, `Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022)`.
+  - Dedicated interactive Photo Persona Switcher featuring all 4 user photos (`Professional 2`, `Coding Dhruva`, `Professional 1`, `Casual Dhruva`) with custom face-centering optical alignment (`professional-2-portrait.webp`, `center 10%`, container `h-[460px] sm:h-[500px]`) ensuring Dhruva's face, glasses, and expression remain uncropped and visible.
 - [x] **Experience Section (Strict STAR Pattern)**:
   - Formatted strictly in **STAR pattern** (Situation, Task, Action, Result) without deviating from resume or LinkedIn.
   - Tata Consultancy Services (TCS): TCS HOBS Telecom OSS/BSS & Microsoft ESS AI Agent (Client: Microsoft delivered via TCS).
@@ -128,8 +128,8 @@ E:\Portfolio 2.0\
   - Retained strictly **LeetCode (900+)** and **GeeksforGeeks (GFG)** profiles; removed all others.
   - Direct links to concrete GitHub repositories (`weather-forecast-`, `DhruvaBhattacharya.github.io`).
 - [x] **Contact & Footer Section**:
-  - Unified Profile & Status Chip displaying `profile-headshot.jpeg` (800x800 square face-centered crop) ensuring 100% facial clarity and symmetry with `30 Days Notice` status.
-  - Notice status: `Serving Notice Period (30 Days Notice)` / `30 Days Notice Period (Serving Notice)`.
+  - Unified Profile & Status Chip displaying `profile-headshot.webp` (800x800 square face-centered crop) ensuring 100% facial clarity and symmetry with `Targeting Product-Based SDE / Backend & AI Engineering Roles` status.
+  - Recruiter status: `Targeting Product-Based SDE / Backend & AI Engineering Roles`.
   - Removed phone number completely; retained only direct email `dhruvabhattacharya130102@gmail.com` with 1-click clipboard copy.
   - Removed user-facing cron sync banner for clean aesthetics.
   - Added exact footer: `Made with ❤️ by Dhruva Bhattacharya`.

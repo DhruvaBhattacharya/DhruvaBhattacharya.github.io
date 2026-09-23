@@ -6,10 +6,21 @@
     "period": "Aug 2024 – Present",
     "location": "India",
     "type": "Full-Time",
+    "about": "I build backend systems that are designed to scale, not just work. Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms at Tata Consultancy Services. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022).",
     "subProjects": [
       {
         "title": "TCS HOBS – Telecom OSS/BSS Platform",
-        "techStack": ["Java", "Spring Boot", "Microservices", "MongoDB", "Redis", "REST APIs", "SOAP/JAXB", "Docker", "SLA Webhooks"],
+        "techStack": [
+          "Java",
+          "Spring Boot",
+          "Microservices",
+          "MongoDB",
+          "Redis",
+          "REST APIs",
+          "SOAP/JAXB",
+          "Docker",
+          "SLA Webhooks"
+        ],
         "summary": "High-concurrency multi-tenant OSS/BSS platform powering global telecom giants (Sonatel, Malaysian Telecom, OGN, Vodafone) for mission-critical invoicing, billing, ticketing, and account provisioning.",
         "starDetails": {
           "situation": "The multi-tenant telecom OSS/BSS core suffered from p99 read bottlenecks caused by heavy cross-database joins on high-volume account records, XML payload serialization overheads from legacy SOAP/JAXB endpoints, and manual ticket SLA tracking.",
@@ -27,7 +38,16 @@
       {
         "title": "Microsoft ESS (Employee Self-Service) AI Agent",
         "client": "Client: Microsoft (Delivered via TCS on Microsoft Internal Tool Stack)",
-        "techStack": ["Generative AI", "Copilot Studio", "Azure Logic Apps", ".NET Core", "Azure DevOps", "Azure AI Document Intelligence (OCR)", "Playwright", "Prompt Engineering"],
+        "techStack": [
+          "Generative AI",
+          "Copilot Studio",
+          "Azure Logic Apps",
+          ".NET Core",
+          "Azure DevOps",
+          "Azure AI Document Intelligence (OCR)",
+          "Playwright",
+          "Prompt Engineering"
+        ],
         "summary": "Enterprise Generative AI agent solution deployed within Microsoft M365 ecosystem to streamline employee self-service and automate multilingual document extraction.",
         "starDetails": {
           "situation": "Enterprise employees required contextual in-tenant self-service for payroll, leave balances, hardware requests, and support tickets inside M365 Copilot, while global finance teams faced labor-intensive manual data entry on multilingual Purchase Orders across 6+ languages.",
@@ -54,7 +74,13 @@
     "subProjects": [
       {
         "title": "VR Surgical Simulation Prototype",
-        "techStack": ["Unity", "C#", "Virtual Reality", "Physics Modeling", "3D Spatial Mechanics"],
+        "techStack": [
+          "Unity",
+          "C#",
+          "Virtual Reality",
+          "Physics Modeling",
+          "3D Spatial Mechanics"
+        ],
         "summary": "High-fidelity interactive virtual reality surgical simulation prototype engineered for medical procedural training.",
         "starDetails": {
           "situation": "Medical training procedures required realistic, immersive 3D simulation prototypes capable of replicating surgical mechanics with real-time feedback and sub-20ms interaction latency.",

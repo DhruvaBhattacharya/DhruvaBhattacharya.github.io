@@ -90,6 +90,19 @@ export default function Experience() {
                       </div>
                     </div>
 
+                    {/* LinkedIn Synced About & Engineering Focus */}
+                    {item.about && (
+                      <div className="mt-5 p-4 rounded-xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-800/40">
+                        <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#0071e3] dark:text-cyan-400 mb-1.5">
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>Role Overview & Engineering Focus (LinkedIn Synced)</span>
+                        </div>
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                          {item.about}
+                        </p>
+                      </div>
+                    )}
+
                     {/* Sub-projects list with clean pattern */}
                     <div className="mt-6 space-y-10">
                       {item.subProjects.map((sub, idx) => (

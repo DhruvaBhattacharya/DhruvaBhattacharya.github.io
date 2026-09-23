@@ -47,6 +47,15 @@ function consolidate() {
       }
       profile.lastSyncedAt = liData.syncedAt || new Date().toISOString();
       writeJson(profilePath, profile);
+
+      // Also update Work Experience with latest LinkedIn About narrative
+      const expPath = path.join(DATA_DIR, 'experience.json');
+      const expData = readJsonSafe(expPath, []);
+      if (Array.isArray(expData) && expData.length > 0) {
+        expData[0].about = profile.summary;
+        writeJson(expPath, expData);
+        console.log('[Consolidate] Updated Work Experience in experience.json with LinkedIn About narrative.');
+      }
     }
     // Clean up temporary payload
     fs.unlinkSync(LINKEDIN_PAYLOAD);

@@ -1,0 +1,97 @@
+name: Portfolio Sync & Deploy
+
+on:
+  schedule:
+    # Every Saturday at 1:00 PM IST (07:30 UTC) -> Cron: '30 7 * * 6'
+    - cron: '30 7 * * 6'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+  push:
+    branches:
+      - main
+      - master
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages and repo write
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  sync-build-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 1: Ingest LinkedIn Bio (Public Non-Authenticated)
+      - name: Ingest LinkedIn Bio (Public Non-Authenticated)
+        run: node scripts/sync-linkedin.cjs
+
+      # Step 2: Ingest GitHub Top Contributions
+      - name: Ingest GitHub Top Contributions
+        run: node scripts/sync-github-contributions.cjs
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 3: Consolidate Dynamic Feeds into Data Layer
+      - name: Consolidate Feeds into Data Layer
+        run: node scripts/consolidate-data.cjs
+
+      # Step 4: Auto-commit updated data to this repository if changes detected
+      - name: Commit Updated Profile Data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data)" ]; then
+            git add src/data
+            git commit -m "chore(sync): automated weekly LinkedIn & GitHub contributions sync [skip ci]"
+            git push origin HEAD
+          else
+            echo "No data changes detected. Skipping git commit."
+          fi
+
+      # Step 5: Build Vite Production Bundle
+      - name: Build Vite Application
+        run: npm run build
+
+      # Step 6: Configure & Upload to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # Step 7: Purge temporary caches and extra data stores after successful update
+      - name: Purge Runner Caches & Temporary Storage
+        if: always()
+        run: |
+          echo "Purging temporary payloads, npm caches, and runner data stores..."
+          rm -f scripts/.linkedin_payload.json scripts/.github_payload.json
+          npm cache clean --force 2>/dev/null || true
+          rm -rf ~/.npm /tmp/* 2>/dev/null || true
+          echo "GitHub Actions cache and runner storage cleared."

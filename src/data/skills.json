@@ -1,0 +1,64 @@
+[
+  {
+    "category": "AI, Generative AI & Agentic Systems",
+    "icon": "Cpu",
+    "skills": [
+      { "name": "RAG Pipelines (Ingestion, Chunking, Retrieval)", "level": "Advanced", "highlight": true },
+      { "name": "Prompt Engineering & Guardrails", "level": "Advanced", "highlight": true },
+      { "name": "Hallucination Mitigation", "level": "Advanced", "highlight": true },
+      { "name": "Azure AI Document Intelligence (Multilingual OCR)", "level": "Advanced", "highlight": true },
+      { "name": "M365 Copilot Studio Connectors", "level": "Advanced", "highlight": true },
+      { "name": "Groq Cloud / Llama-3.3-70B", "level": "Advanced", "highlight": true },
+      { "name": "Ollama / Local LLM Orchestration", "level": "Proficient", "highlight": false }
+    ]
+  },
+  {
+    "category": "Backend Engineering & Microservices",
+    "icon": "Server",
+    "skills": [
+      { "name": "Java", "level": "Advanced", "highlight": true },
+      { "name": "Spring Boot & Spring MVC", "level": "Advanced", "highlight": true },
+      { "name": "Microservices Architecture", "level": "Advanced", "highlight": true },
+      { "name": "REST API Design & Orchestration", "level": "Advanced", "highlight": true },
+      { "name": "Redis In-Memory Caching", "level": "Advanced", "highlight": true },
+      { "name": "Legacy SOAP to REST Migration", "level": "Advanced", "highlight": true },
+      { "name": ".NET Core & Azure Logic Apps", "level": "Proficient", "highlight": false },
+      { "name": "Node.js / Express.js", "level": "Advanced", "highlight": false }
+    ]
+  },
+  {
+    "category": "Databases & High-Throughput Storage",
+    "icon": "Database",
+    "skills": [
+      { "name": "MongoDB (Document Clustering & Aggregations)", "level": "Advanced", "highlight": true },
+      { "name": "Query Optimization & Index Tuning", "level": "Advanced", "highlight": true },
+      { "name": "Redis (Low-Latency Cache Invalidation)", "level": "Advanced", "highlight": true },
+      { "name": "MySQL & SQL Server", "level": "Advanced", "highlight": false },
+      { "name": "PL/SQL & Data Modeling", "level": "Proficient", "highlight": false }
+    ]
+  },
+  {
+    "category": "Languages & Core Systems",
+    "icon": "Code2",
+    "skills": [
+      { "name": "Java (Enterprise / Concurrency)", "level": "Advanced", "highlight": true },
+      { "name": "Python (AI / Scripting / APIs)", "level": "Advanced", "highlight": true },
+      { "name": "C/C++ (DSA & Memory)", "level": "Proficient", "highlight": false },
+      { "name": "C# (.NET Microservices)", "level": "Proficient", "highlight": false },
+      { "name": "JavaScript (Node.js / Async)", "level": "Advanced", "highlight": false },
+      { "name": "Bash Shell Scripting", "level": "Proficient", "highlight": false }
+    ]
+  },
+  {
+    "category": "Cloud, DevOps & Observability",
+    "icon": "Cloud",
+    "skills": [
+      { "name": "Azure Cloud Services", "level": "Advanced", "highlight": true },
+      { "name": "Docker Containerization", "level": "Proficient", "highlight": true },
+      { "name": "CI/CD (GitHub Actions, Azure DevOps)", "level": "Advanced", "highlight": true },
+      { "name": "Playwright Test Automation", "level": "Proficient", "highlight": false },
+      { "name": "Swagger / OpenAPI Documentation", "level": "Advanced", "highlight": false },
+      { "name": "Structured Logging & Application Insights", "level": "Advanced", "highlight": true }
+    ]
+  }
+]

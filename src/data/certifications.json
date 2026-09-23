@@ -1,0 +1,99 @@
+{
+  "education": [
+    {
+      "degree": "B.Tech in Computer Science & Engineering",
+      "specialization": "Artificial Intelligence & Machine Learning",
+      "institution": "Gyan Ganga Institute of Technology & Sciences (GGITS)",
+      "period": "2020 – 2024",
+      "score": "CGPA: 8.28 / 10",
+      "location": "Jabalpur, Madhya Pradesh",
+      "courses": [
+        "Data Structures & Algorithms",
+        "Microservice Architectures",
+        "Database Management Systems",
+        "Operating Systems",
+        "Cloud Computing",
+        "Deep Learning & NLP"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Rank 1 (Asia) – Alibaba Cloud Low Code Development Contest 2022",
+      "organization": "Alibaba Cloud",
+      "description": "Secured 1st place in Asia out of participating international engineering teams.",
+      "badge": "Rank 1 Winner",
+      "year": "2022"
+    },
+    {
+      "title": "Smart India Hackathon (SIH) Finalist",
+      "organization": "Government of India / AICTE",
+      "description": "Advanced past regional & state qualifiers into national finale of India's 36-hour non-stop hackathon.",
+      "badge": "National Finalist",
+      "year": "2022"
+    },
+    {
+      "title": "900+ LeetCode Problems Solved",
+      "organization": "LeetCode",
+      "description": "Deep algorithmic problem solving across dynamic programming, graph theory, trees, and system design.",
+      "badge": "Top Problem Solver",
+      "year": "Active"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Microsoft Certified: Azure AI Engineer Associate",
+      "issuer": "Microsoft",
+      "date": "Verified",
+      "badgeColor": "cyan"
+    },
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "date": "Verified",
+      "badgeColor": "amber"
+    },
+    {
+      "name": "AWS Cloud Foundations",
+      "issuer": "Amazon Web Services",
+      "date": "Verified",
+      "badgeColor": "amber"
+    },
+    {
+      "name": "AWS Machine Learning for NLP",
+      "issuer": "Amazon Web Services",
+      "date": "Verified",
+      "badgeColor": "amber"
+    },
+    {
+      "name": "Executive Certificate in Generative AI",
+      "issuer": "UpGrad",
+      "date": "Verified",
+      "badgeColor": "indigo"
+    },
+    {
+      "name": "AI-First Software Engineering",
+      "issuer": "Airtribe",
+      "date": "Verified",
+      "badgeColor": "emerald"
+    },
+    {
+      "name": "Hydrological Modelling",
+      "issuer": "Indian Space Research Organization (ISRO)",
+      "date": "Verified",
+      "badgeColor": "blue"
+    },
+    {
+      "name": "IBM Cloud Essentials - V3",
+      "issuer": "IBM",
+      "date": "Verified",
+      "badgeColor": "blue"
+    },
+    {
+      "name": "CPA: Programming Essentials in C++",
+      "issuer": "CISCO Networking Academy",
+      "date": "Verified",
+      "badgeColor": "emerald"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+================================================================================
+PORTFOLIO 2.0 - GITHUB ACTIONS CI/CD & REPOSITORY SETUP GUIDE
+================================================================================
+Author: Dhruva Bhattacharya
+Target Repository: DhruvaBhattacharya.github.io (or Portfolio-2.0)
+Sync Target: LinkedIn (Bio + Experience) & GitHub Top Contributions
+Deployment Target: GitHub Pages (Custom domain or *.github.io)
+Cron Schedule: Every Saturday at 1:00 PM IST (UTC: 07:30 AM every Saturday -> 30 7 * * 6)
+================================================================================
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+1. Workflow Architecture Overview
+2. GitHub Repository Permissions Configuration
+3. GitHub Secrets & Variables Configuration
+4. GitHub Pages Deployment Configuration
+5. Cron Job Scheduling Syntax Explained
+6. Sync Scripts & Consolidation Logic Explained
+7. Manual Workflow Execution (Testing)
+8. Local Development & Testing Commands
+9. Troubleshooting & FAQ
+
+================================================================================
+1. WORKFLOW ARCHITECTURE OVERVIEW
+================================================================================
+The CI/CD pipeline located at `.github/workflows/portfolio-sync-deploy.yml` operates
+entirely within THIS SINGLE REPOSITORY in 4 automated sequential phases:
+
+  [Step 1: Ingest LinkedIn Data]
+      Target: https://www.linkedin.com/in/dhruvabhattacharya/
+      Scope: Bio (Headline + About) & Experience Section only
+      Script: scripts/sync-linkedin.cjs
+      Action: Extracts headline, summary and experience roles; prepares payload
+
+  [Step 2: Ingest GitHub Contributions]
+      Target: https://github.com/dhruvaop
+      Scope: Top pinned repositories, star counts, commit activity, language breakdown
+      Script: scripts/sync-github-contributions.cjs
+      Action: Ingests top repos, stars, and contribution metrics
+
+  [Step 3: Consolidate & Auto-Commit to this Repo]
+      Script: scripts/consolidate-data.cjs
+      Action: Merges fresh dynamic data into src/data/experience.json and profile.json
+      Git: Checks for git diff; if changes detected, commits directly to 'main'
+           branch in THIS repository using GitHub Actions Bot
+
+  [Step 4: Build & Deploy to GitHub Pages]
+      Build Tool: Vite (npm run build)
+      Output Directory: dist/
+      Deploy Action: actions/deploy-pages@v4
+      URL: https://dhruvabhattacharya.github.io/
+
+================================================================================
+2. GITHUB REPOSITORY PERMISSIONS CONFIGURATION
+================================================================================
+GitHub Actions requires write permissions to commit updated data files back to
+your repository and to deploy your website to GitHub Pages.
+
+Follow these steps in your GitHub repository:
+1. Open your repository on GitHub:
+   https://github.com/dhruvaop/DhruvaBhattacharya.github.io (or your repo name)
+2. Click on the "Settings" tab at the top.
+3. In the left sidebar, click on "Actions" -> "General".
+4. Scroll down to the "Workflow permissions" section.
+5. Select: "Read and write permissions".
+6. Check the box: "Allow GitHub Actions to create and approve pull requests".
+7. Click the green "Save" button.
+
+================================================================================
+3. GITHUB SECRETS & VARIABLES CONFIGURATION
+================================================================================
+To enable automated data fetching without hitting API rate limits:
+
+A. GITHUB PERSONAL ACCESS TOKEN (GH_PAT):
+   Used to query the GitHub GraphQL API to fetch your contribution calendar,
+   top repositories, stars, and language stats.
+
+   How to create:
+   1. Go to GitHub -> Settings -> Developer settings -> Personal access tokens -> Tokens (classic).
+      Direct Link: https://github.com/settings/tokens
+   2. Click "Generate new token (classic)".
+   3. Note: "Portfolio 2.0 Ingestion Token".
+   4. Expiration: 90 days or No expiration.
+   5. Scopes to check:
+      - [x] repo (Full control of private repositories - or public_repo if public)
+      - [x] read:user (Read all user profile data)
+   6. Click "Generate token" and copy the token string (starts with ghp_...).
+   7. In your Portfolio repo:
+      Settings -> Secrets and variables -> Actions -> "New repository secret"
+      - Name: GH_PAT
+      - Secret: <paste the generated token>
+      - Click "Add secret".
+
+B. ZERO LINKEDIN AUTHENTICATION REQUIRED (PUBLIC SYNC):
+   The pipeline does NOT require any LinkedIn authentication, session cookies,
+   or passwords. The ingestion script (`scripts/sync-linkedin.cjs`) fetches the
+   public profile URL directly using open crawler headers. If LinkedIn restricts
+   full access, the fail-safe rule is engaged: updates are accepted strictly
+   from the public LinkedIn BIO/Headline metadata, ensuring the CI/CD pipeline
+   and builds NEVER fail. Zero secret configuration needed for LinkedIn!
+
+================================================================================
+4. GITHUB PAGES DEPLOYMENT CONFIGURATION
+================================================================================
+To configure GitHub Pages to deploy using GitHub Actions:
+
+1. Open your repository on GitHub.
+2. Click "Settings" -> "Pages" (in the left sidebar).
+3. Under "Build and deployment":
+   - Source: Select "GitHub Actions" from the dropdown.
+   (Note: Do NOT choose "Deploy from a branch", select "GitHub Actions").
+4. The deployment environment `github-pages` will automatically be configured.
+
+================================================================================
+5. CRON JOB SCHEDULING SYNTAX EXPLAINED
+================================================================================
+Your requirement: Trigger once every week on Saturday at 1:00 PM IST.
+
+Timezone Conversion:
+- IST (Indian Standard Time) is UTC + 5:30.
+- 1:00 PM IST = 13:00 IST.
+- 13:00 - 5:30 = 07:30 UTC.
+- Day of week: Saturday = 6 (0 is Sunday, 6 is Saturday).
+
+Cron Expression:
+  `30 7 * * 6`
+   │  │ │ │ └── Day of week (6 = Saturday)
+   │  │ │ └──── Month (all)
+   │  │ └────── Day of month (all)
+   │  │ 
+   │  └──────── Hour in UTC (7 = 07:00 UTC)
+   └─────────── Minute (30)
+
+Result: Executes at exactly 07:30 UTC every Saturday, which corresponds
+to 1:00 PM IST every Saturday.
+
+In `.github/workflows/portfolio-sync-deploy.yml`:
+```yaml
+on:
+  schedule:
+    - cron: '30 7 * * 6'
+  workflow_dispatch: # Allows manual trigger anytime
+```
+
+================================================================================
+6. SYNC SCRIPTS & CONSOLIDATION LOGIC EXPLAINED
+================================================================================
+A. `scripts/sync-linkedin.cjs`:
+   - Connects to LinkedIn profile: https://www.linkedin.com/in/dhruvabhattacharya/
+   - Targets ONLY:
+     1. Bio (Headline, summary/about text)
+     2. Experience (Company names, job titles, start/end dates, bullet descriptions)
+   - Filters out irrelevant social posts, feeds, and activity.
+   - Validates that extracted data is non-empty before updating `src/data/linkedin-sync.json`.
+   - If blocked or captcha encountered, outputs a safe warning and retains existing baseline.
+
+B. `scripts/sync-github-contributions.cjs`:
+   - Queries GitHub GraphQL API for user `dhruvaop`.
+   - Fetches:
+     * Pinned repositories & top repositories sorted by stars
+     * Total commit contributions in the past 12 months
+     * Primary language breakdown
+   - Saves to `src/data/github-contributions.json`.
+
+C. `scripts/consolidate-data.cjs`:
+   - Compares fresh data with existing `src/data/experience.json` and `src/data/profile.json`.
+   - Merges verified experience entries.
+   - Updates `src/data/metadata.json` with the latest synchronization timestamp and sync status.
+
+================================================================================
+7. MANUAL WORKFLOW EXECUTION (TESTING)
+================================================================================
+You don't need to wait until Saturday to test the automation:
+
+1. Open your repository on GitHub.
+2. Click on the "Actions" tab.
+3. In the left sidebar, click on "Portfolio Sync & Deploy".
+4. On the right, click the "Run workflow" button.
+5. Select branch: `main` (or current branch).
+6. Click the green "Run workflow" button.
+7. Click on the running workflow to observe:
+   - Ingest LinkedIn Data step
+   - Ingest GitHub Contributions step
+   - Consolidate & Commit Data step
+   - Build Vite App step
+   - Deploy to GitHub Pages step
+8. Once finished with green checkmarks, refresh your portfolio website!
+
+================================================================================
+8. LOCAL DEVELOPMENT & TESTING COMMANDS
+================================================================================
+To test everything locally on your machine:
+
+1. Install dependencies:
+   npm install
+
+2. Test data harvesting scripts locally:
+   node scripts/sync-github-contributions.cjs
+   node scripts/sync-linkedin.cjs
+   node scripts/consolidate-data.cjs
+
+3. Run the modern Vite development server:
+   npm run dev
+
+4. Build production bundle locally:
+   npm run build
+
+5. Preview the built bundle locally:
+   npm run preview
+
+================================================================================
+9. TROUBLESHOOTING & FAQ
+================================================================================
+Q1: Why did the GitHub Actions run fail on "git push"?
+A1: Ensure you enabled "Read and write permissions" under:
+    Repository Settings -> Actions -> General -> Workflow permissions.
+
+Q2: Why did GitHub Pages show a blank page or 404?
+A2: In `vite.config.js`, verify `base`. If your repository is named
+    `DhruvaBhattacharya.github.io`, the base must be `/`. If it's a sub-path
+    repo like `portfolio-2.0`, set `base: '/portfolio-2.0/'`.
+
+Q3: What happens if LinkedIn blocks automated requests?
+A3: The script is written with defensive error handling. If LinkedIn rejects
+    the request, it catches the error, logs a notice, and retains your current
+    verified experience data without failing the build or stopping deployment.
+
+================================================================================

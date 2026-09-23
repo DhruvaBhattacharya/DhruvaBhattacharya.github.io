@@ -1,0 +1,87 @@
+{
+  "name": "Dhruva Bhattacharya",
+  "title": "Backend Software Engineer | Distributed Systems & Production GenAI",
+  "tagline": "I build backend systems that are designed to scale, not just work",
+  "status": {
+    "available": true,
+    "badge": "Targeting Product-Based SDE Roles",
+    "lookingFor": "Product-Based SDE / Backend & AI Engineering Roles"
+  },
+  "contact": {
+    "email": "dhruvabhattacharya130102@gmail.com",
+    "location": "Jabalpur, Madhya Pradesh, India",
+    "preferredLocations": [
+      "Indore",
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "NCR",
+      "Remote"
+    ],
+    "resumeUrl": "./resume.pdf"
+  },
+  "summary": "Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022). Targeting Product-Based SDE / Backend & AI Engineering Roles.",
+  "highlights": [
+    {
+      "id": "target-roles",
+      "label": "Targeting Product-Based SDE & AI Roles"
+    },
+    {
+      "id": "latency",
+      "label": "85% API Latency Reduction"
+    },
+    {
+      "id": "throughput",
+      "label": "+40% Throughput Boost"
+    },
+    {
+      "id": "dsa",
+      "label": "900+ LeetCode DSA Mastered"
+    }
+  ],
+  "socials": [
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/dhruvabhattacharya/",
+      "username": "dhruvabhattacharya"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/dhruvaop",
+      "username": "dhruvaop"
+    },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com/dhruvaop",
+      "username": "dhruvaop (900+ Solved)"
+    },
+    {
+      "name": "GeeksforGeeks",
+      "url": "https://www.geeksforgeeks.org/profile/dhruvabhattacharya",
+      "username": "dhruvabhattacharya"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "API Latency Reduction",
+      "value": "85%",
+      "description": "Cut from 1000ms to 150ms (TCS HOBS)"
+    },
+    {
+      "label": "Transaction Throughput",
+      "value": "+40%",
+      "description": "Via Redis caching & query clustering"
+    },
+    {
+      "label": "LeetCode DSA Solved",
+      "value": "900+",
+      "description": "Top-tier DSA & System Design"
+    },
+    {
+      "label": "Asia Rank #1",
+      "value": "Rank 1",
+      "description": "Alibaba Cloud Low Code Contest 2022"
+    }
+  ],
+  "lastSyncedAt": "2026-09-23T18:25:00.000Z"
+}

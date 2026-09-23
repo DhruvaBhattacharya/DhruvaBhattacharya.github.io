@@ -1,0 +1,94 @@
+<svg viewBox="0 0 440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cyanBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      @font-face {
+        font-family: 'Agustina';
+        src: url('/fonts/Agustina.woff') format('woff');
+      }
+      .hex-outer {
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation: drawOuter 2s ease-in-out forwards;
+      }
+      .hex-inner {
+        stroke-dasharray: 550;
+        stroke-dashoffset: 550;
+        animation: drawInner 2.2s ease-in-out 0.2s forwards;
+      }
+      .initial-d {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+        animation: drawText 1.8s ease-in-out 0.4s forwards;
+      }
+      .initial-b {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+        animation: drawText 1.8s ease-in-out 0.6s forwards;
+      }
+      .sig-text {
+        opacity: 0;
+        animation: fadeIn 1s ease-in-out 1.2s forwards;
+        font-family: 'Agustina', 'Brush Script MT', cursive, sans-serif;
+      }
+      .sub-text {
+        opacity: 0;
+        animation: fadeIn 1s ease-in-out 1.5s forwards;
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+      }
+      @keyframes drawOuter {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes drawInner {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes drawText {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Outer Neon Hexagon -->
+  <path class="hex-outer" filter="url(#neonGlow)"
+    d="M293.5 167.4L229.5 204.4C227 205.8 224 205.8 221.5 204.4L157.5 167.4C155 166 153.5 163.3 153.5 160.5V86.5C153.5 83.7 155 81 157.5 79.6L221.5 42.6C224 41.2 227 41.2 229.5 42.6L293.5 79.6C296 81 297.5 83.7 297.5 86.5V160.5C297.5 163.3 296 166 293.5 167.4Z"
+    stroke="url(#cyanBlueGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Inner Subtle Accent Hexagon -->
+  <path class="hex-inner"
+    d="M285.5 161.4L225.5 196.4C223.5 197.6 220.5 197.6 218.5 196.4L158.5 161.4C156.5 160.2 155.5 158 155.5 155.5V88.5C155.5 86 156.5 83.8 158.5 82.6L218.5 47.6C220.5 46.4 223.5 46.4 225.5 47.6L285.5 82.6C287.5 83.8 288.5 86 288.5 88.5V155.5C288.5 158 287.5 160.2 285.5 161.4Z"
+    stroke="rgba(6, 182, 212, 0.4)" stroke-width="1.5" stroke-dasharray="4 4" />
+
+  <!-- Monogram Letter D (Dhruva) -->
+  <path class="initial-d"
+    d="M188 88V155M188 88H204C216 88 224 96 224 108C224 120 216 128 204 128H188M188 128H206C218 128 226 136 226 148C226 155 220 155 206 155H188"
+    stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Monogram Letter B (Bhattacharya) -->
+  <path class="initial-b"
+    d="M232 88V155M232 88H248C258 88 266 94 266 104C266 114 258 120 248 120H232M232 120H250C260 120 268 127 268 138C268 148 260 155 250 155H232"
+    stroke="url(#cyanBlueGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Dynamic Cursive Signature: Dhruva Bhattacharya -->
+  <text class="sig-text" x="220" y="258" text-anchor="middle" font-size="34" fill="#f8fafc" font-weight="bold">
+    &lt; Dhruva Bhattacharya /&gt;
+  </text>
+
+  <!-- Engineering Subtitle -->
+  <text class="sub-text" x="220" y="288" text-anchor="middle" font-size="11" letter-spacing="4" fill="#06b6d4" font-weight="600">
+    BACKEND &amp; GENERATIVE AI ENGINEER
+  </text>
+</svg>

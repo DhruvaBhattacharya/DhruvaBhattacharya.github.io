@@ -1,0 +1,71 @@
+[
+  {
+    "id": "tcs-backend",
+    "role": "Assistant System Engineer – Backend Developer",
+    "company": "Tata Consultancy Services (TCS)",
+    "period": "Aug 2024 – Present",
+    "location": "India",
+    "type": "Full-Time",
+    "subProjects": [
+      {
+        "title": "TCS HOBS – Telecom OSS/BSS Platform",
+        "techStack": ["Java", "Spring Boot", "Microservices", "MongoDB", "Redis", "REST APIs", "SOAP/JAXB", "Docker", "SLA Webhooks"],
+        "summary": "High-concurrency multi-tenant OSS/BSS platform powering global telecom giants (Sonatel, Malaysian Telecom, OGN, Vodafone) for mission-critical invoicing, billing, ticketing, and account provisioning.",
+        "starDetails": {
+          "situation": "The multi-tenant telecom OSS/BSS core suffered from p99 read bottlenecks caused by heavy cross-database joins on high-volume account records, XML payload serialization overheads from legacy SOAP/JAXB endpoints, and manual ticket SLA tracking.",
+          "task": "Re-engineer the data query layer to scale under peak multi-tenant loads, cut p99 API latencies below 200ms, automate 24-hr ticket SLA breach monitoring, and modernize legacy SOAP services into resilient, stateless REST microservices while guaranteeing 99.9% platform availability.",
+          "action": [
+            "Re-architected cross-database join topologies into a high-performance MongoDB document-store cluster, eliminating multi-table joins on high-volume account records and accelerating data-load throughput.",
+            "Engineered Redis-backed distributed caching for high-read endpoints with intelligent eviction, slashing average API response latency from 1000ms to 150ms (85% reduction) and expanding throughput by 40%.",
+            "Designed parallel and sequential asynchronous API orchestration pipelines in the account-provisioning layer, reducing backend processing duration by 25% while maintaining 99.9% uptime under high concurrency.",
+            "Architected a webhook-driven SLA-breach alerting engine detecting tickets approaching or exceeding a 24-hour SLA window, and led the complete migration of legacy SOAP/JAXB XML services to stateless, annotation-driven Spring Boot REST microservices.",
+            "Root-caused and resolved recurring production defects across API serialization, webhook notifications, and vendor integrations by instituting structured JSON logging, health checks, and automated smoke test suites."
+          ],
+          "result": "Cut API latency by 85% (1000ms to 150ms), boosted transaction throughput by +40%, accelerated backend provisioning by 25%, sustained 99.9% SLA uptime, and reduced production incidents by 18%, debugging time by 25%, and defect leakage by 20%."
+        }
+      },
+      {
+        "title": "Microsoft ESS (Employee Self-Service) AI Agent",
+        "client": "Client: Microsoft (Delivered via TCS on Microsoft Internal Tool Stack)",
+        "techStack": ["Generative AI", "Copilot Studio", "Azure Logic Apps", ".NET Core", "Azure DevOps", "Azure AI Document Intelligence (OCR)", "Playwright", "Prompt Engineering"],
+        "summary": "Enterprise Generative AI agent solution deployed within Microsoft M365 ecosystem to streamline employee self-service and automate multilingual document extraction.",
+        "starDetails": {
+          "situation": "Enterprise employees required contextual in-tenant self-service for payroll, leave balances, hardware requests, and support tickets inside M365 Copilot, while global finance teams faced labor-intensive manual data entry on multilingual Purchase Orders across 6+ languages.",
+          "task": "Architect low-latency Copilot Studio connectors to internal Microsoft APIs, orchestrate autonomous multi-agent handoffs across specialized domains, establish CI/CD quality validation benchmarks, and deliver high-accuracy OCR extraction within a strict 1-day SLA.",
+          "action": [
+            "Engineered production Copilot Studio connectors to Microsoft-internal microservices, surfacing leave balances, ticket statuses, payroll data, and device provisioning directly inside M365 Copilot.",
+            "Designed agent-to-agent routing workflows using Azure Logic Apps and .NET Core to seamlessly dispatch and coordinate user requests across specialized sub-agents with automated stakeholder event notifications.",
+            "Owned rigorous response-quality validation pipelines, benchmarking agent outputs against ground-truth datasets and prompt guardrails to reliably clear an 80%+ accuracy threshold prior to production release.",
+            "Constructed an automated Azure DevOps CI/CD pipeline (Playwright test automation, Azure Key Vault secrets, Application Insights observability) aggregating sub-agent responses and deploying to Copilot Studio.",
+            "Delivered multilingual OCR automation using Azure AI Document Intelligence for Purchase Order validation across 6+ languages (Arabic, Japanese, French, Italian & more) with human-in-the-loop verification."
+          ],
+          "result": "Slashed manual finance data-entry effort by 78% within a 1-day SLA, and achieved a verified 80%+ accuracy threshold across enterprise Copilot Studio agent releases."
+        }
+      }
+    ]
+  },
+  {
+    "id": "techxr-intern",
+    "role": "AR/VR Intern",
+    "company": "TechXR Innovations Pvt. Ltd.",
+    "period": "Jul 2022 – Sep 2022",
+    "location": "Bhopal, Madhya Pradesh, India",
+    "type": "Internship",
+    "subProjects": [
+      {
+        "title": "VR Surgical Simulation Prototype",
+        "techStack": ["Unity", "C#", "Virtual Reality", "Physics Modeling", "3D Spatial Mechanics"],
+        "summary": "High-fidelity interactive virtual reality surgical simulation prototype engineered for medical procedural training.",
+        "starDetails": {
+          "situation": "Medical training procedures required realistic, immersive 3D simulation prototypes capable of replicating surgical mechanics with real-time feedback and sub-20ms interaction latency.",
+          "task": "Architect and deploy an interactive VR surgical prototype in Unity covering environment spatial physics, instrument collision meshes, and tactile user feedback flows.",
+          "action": [
+            "Designed and built a 3D VR surgical simulation prototype in Unity, implementing physics-based instrument interactions, environment collision models, and intuitive surgical workflows.",
+            "Conducted iterative user-validation cycles with domain practitioners to minimize latency and optimize tool positioning ergonomics."
+          ],
+          "result": "Successfully delivered an interactive prototype meeting all latency and spatial physics benchmarks, validated through hands-on user feedback."
+        }
+      }
+    ]
+  }
+]

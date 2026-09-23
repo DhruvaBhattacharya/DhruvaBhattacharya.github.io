@@ -26,7 +26,7 @@ Data is synthesized from the legacy build files (`DhruvaBhattacharya.github.io-m
 ### 2.2 Professional Experience (Synthesized from Latest Resume)
 
 #### 1. Tata Consultancy Services (TCS) — Aug 2024 – Present
-**Role**: Assistant System Engineer – Backend Developer  
+**Role**: System Engineer – Backend Developer  
 **Key Projects & Impact**:
 - **TCS HOBS – Telecom OSS/BSS Platform** *(Java, Spring Boot, Microservices)*:
   - Multi-tenant enterprise platform for global telecom operators (Sonatel, Malaysian Telecom, OGN, Vodafone) managing invoicing, billing, ticketing, and account lifecycle.

@@ -57,7 +57,26 @@ jobs:
           if [ -n "$(git status --porcelain src/data)" ]; then
             git add src/data
             git commit -m "chore(sync): update Work Experience with latest LinkedIn About [skip ci]"
-            git push origin HEAD
+
+            # Resilient push with rebase and retry loop against race conditions
+            SUCCESS=false
+            TARGET_BRANCH="${GITHUB_REF_NAME:-master}"
+            for i in {1..5}; do
+              echo "Synchronizing with remote $TARGET_BRANCH (attempt $i/5)..."
+              git fetch origin "$TARGET_BRANCH"
+              git rebase -X theirs "origin/$TARGET_BRANCH" || git rebase --abort
+              if git push origin "HEAD:$TARGET_BRANCH"; then
+                echo "Successfully pushed data updates to $TARGET_BRANCH."
+                SUCCESS=true
+                break
+              fi
+              echo "Push rejected due to race condition. Retrying in 3s..."
+              sleep 3
+            done
+            if [ "$SUCCESS" != "true" ]; then
+              echo "Error: Failed to push data updates after 5 attempts."
+              exit 1
+            fi
           else
             echo "No experience data changes detected. Skipping git commit."
           fi

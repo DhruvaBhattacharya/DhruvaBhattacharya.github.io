@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mail, MapPin, Copy, Check, Send, ExternalLink, Award, Code2, Sparkles, Clock, CheckCircle2, Calendar, Video, Building, User, X } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, Send, ExternalLink, Award, Code2, Sparkles, Clock, CheckCircle2, Calendar, Video, Building, User, X, AlertCircle } from 'lucide-react';
 import profileData from '../../data/profile.json';
 
 export default function Contact() {
@@ -12,6 +12,9 @@ export default function Contact() {
   const [recruiterEmail, setRecruiterEmail] = useState('');
   const [recruiterPhone, setRecruiterPhone] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [phoneTouched, setPhoneTouched] = useState(false);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('Backend Software Engineer');
   const [preferredPlatform, setPreferredPlatform] = useState('Google Meet');
@@ -72,17 +75,105 @@ ${safeNotes ? `• Additional Notes: ${safeNotes}\n` : ''}
 Looking forward to speaking with you!`;
   };
 
+  // Strict RFC 5322 Standard Email Validation
+  const validateStrictEmail = (email) => {
+    if (!email || typeof email !== 'string') {
+      return { isValid: false, message: 'Work email is mandatory for scheduling an interview.' };
+    }
+    const trimmed = email.trim();
+    if (!trimmed) {
+      return { isValid: false, message: 'Work email is mandatory for scheduling an interview.' };
+    }
+    if (trimmed.length > 254) {
+      return { isValid: false, message: 'Email address cannot exceed 254 characters.' };
+    }
+    if (trimmed.includes('..')) {
+      return { isValid: false, message: 'Email cannot contain consecutive dots.' };
+    }
+    if (trimmed.startsWith('.') || trimmed.endsWith('.')) {
+      return { isValid: false, message: 'Email cannot start or end with a dot.' };
+    }
+    const parts = trimmed.split('@');
+    if (parts.length !== 2) {
+      return { isValid: false, message: 'Email must contain exactly one "@" symbol.' };
+    }
+    const [localPart, domainPart] = parts;
+    if (!localPart || localPart.length > 64) {
+      return { isValid: false, message: 'Email username cannot be empty or exceed 64 characters.' };
+    }
+    if (localPart.startsWith('.') || localPart.endsWith('.')) {
+      return { isValid: false, message: 'Email username cannot start or end with a dot.' };
+    }
+    if (!domainPart || !domainPart.includes('.')) {
+      return { isValid: false, message: 'Email domain must include a valid domain extension (e.g. .com, .org).' };
+    }
+    // Strict RFC 5322 pattern: domain labels must end in a 2+ alpha character TLD
+    const strictRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+    if (!strictRegex.test(trimmed)) {
+      return { isValid: false, message: 'Please enter a valid work email address (e.g. recruiter@company.com).' };
+    }
+    return { isValid: true, message: '' };
+  };
+
+  // Strict International Phone Validation (ITU-T E.164 compliant)
+  const validateStrictPhone = (phone) => {
+    if (!phone || typeof phone !== 'string' || !phone.trim()) {
+      // Phone is optional: valid if blank
+      return { isValid: true, message: '' };
+    }
+    const trimmed = phone.trim();
+
+    // Permitted characters: leading optional +, digits, spaces, dashes, parentheses, dots
+    const validCharRegex = /^\+?[0-9\s\-().]{7,25}$/;
+    if (!validCharRegex.test(trimmed)) {
+      return { isValid: false, message: 'Phone number can only contain digits, "+", spaces, dashes, or parentheses.' };
+    }
+
+    // If '+' is present, it must be at index 0
+    if (trimmed.includes('+') && trimmed.indexOf('+') !== 0) {
+      return { isValid: false, message: 'Country code "+" must be at the very start of the phone number.' };
+    }
+
+    // Extract digits
+    const digits = trimmed.replace(/\D/g, '');
+    if (digits.length < 10) {
+      return { isValid: false, message: 'Phone number must contain at least 10 digits (including area or country code).' };
+    }
+    if (digits.length > 15) {
+      return { isValid: false, message: 'Phone number cannot exceed 15 digits (ITU-T E.164 international standard).' };
+    }
+
+    // Reject dummy repeating numbers (e.g. 0000000000, 1111111111)
+    if (/^(\d)\1+$/.test(digits)) {
+      return { isValid: false, message: 'Please enter a valid, active phone number.' };
+    }
+
+    return { isValid: true, message: '' };
+  };
+
   const handleAutoAcceptSubmit = async (e) => {
     if (e) e.preventDefault();
     if (honeypot) return; // Silent rejection of automated spam bots
 
+    // Mark fields as touched
+    setEmailTouched(true);
+    setPhoneTouched(true);
+
     // Validate Mandatory Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!recruiterEmail || !emailRegex.test(recruiterEmail.trim())) {
-      setEmailError('Please enter a valid work email address (mandatory for scheduling).');
+    const emailResult = validateStrictEmail(recruiterEmail);
+    if (!emailResult.isValid) {
+      setEmailError(emailResult.message);
       return;
     }
     setEmailError('');
+
+    // Validate Optional Phone (strict validation if provided)
+    const phoneResult = validateStrictPhone(recruiterPhone);
+    if (!phoneResult.isValid) {
+      setPhoneError(phoneResult.message);
+      return;
+    }
+    setPhoneError('');
 
     // Anti-spam cooldown (15 seconds)
     const now = Date.now();
@@ -432,37 +523,88 @@ Looking forward to speaking with you!`;
                         <span>Work Email <span className="text-rose-500 font-bold">*</span></span>
                         <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-normal">Mandatory</span>
                       </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="recruiter@company.com"
-                        maxLength={100}
-                        value={recruiterEmail}
-                        onChange={(e) => {
-                          setRecruiterEmail(e.target.value);
-                          if (emailError) setEmailError('');
-                        }}
-                        className={`w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border text-slate-900 dark:text-slate-200 focus:outline-none ${
-                          emailError ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 dark:border-slate-800 focus:border-cyan-500'
-                        }`}
-                      />
+                      <div className="relative">
+                        <input
+                          type="email"
+                          required
+                          placeholder="recruiter@company.com"
+                          maxLength={100}
+                          value={recruiterEmail}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setRecruiterEmail(val);
+                            if (emailTouched) {
+                              const res = validateStrictEmail(val);
+                              setEmailError(res.message);
+                            }
+                          }}
+                          onBlur={() => {
+                            setEmailTouched(true);
+                            const res = validateStrictEmail(recruiterEmail);
+                            setEmailError(res.message);
+                          }}
+                          className={`w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border text-slate-900 dark:text-slate-200 focus:outline-none transition-colors ${
+                            emailError 
+                              ? 'border-rose-500 focus:border-rose-500 bg-rose-50/20 dark:bg-rose-950/20' 
+                              : emailTouched && recruiterEmail && !emailError
+                              ? 'border-emerald-500/60 dark:border-emerald-500/50 focus:border-emerald-500'
+                              : 'border-slate-200 dark:border-slate-800 focus:border-cyan-500'
+                          }`}
+                        />
+                        {emailTouched && recruiterEmail && !emailError && (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 absolute right-3 top-2.5 pointer-events-none" />
+                        )}
+                      </div>
                       {emailError && (
-                        <p className="text-[10px] text-rose-500 mt-1 font-medium">{emailError}</p>
+                        <p className="text-[10px] text-rose-500 mt-1 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{emailError}</span>
+                        </p>
                       )}
                     </div>
+
                     <div>
                       <label className="block text-slate-700 dark:text-slate-400 mb-1 font-medium flex items-center justify-between">
                         <span>Phone / WhatsApp</span>
                         <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">Optional</span>
                       </label>
-                      <input
-                        type="tel"
-                        placeholder="+1 / +91 (Optional)"
-                        maxLength={25}
-                        value={recruiterPhone}
-                        onChange={(e) => setRecruiterPhone(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-200 focus:border-cyan-500 focus:outline-none"
-                      />
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          placeholder="e.g. +91 98765 43210 or +1 415 555 2671"
+                          maxLength={25}
+                          value={recruiterPhone}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setRecruiterPhone(val);
+                            if (phoneTouched) {
+                              const res = validateStrictPhone(val);
+                              setPhoneError(res.message);
+                            }
+                          }}
+                          onBlur={() => {
+                            setPhoneTouched(true);
+                            const res = validateStrictPhone(recruiterPhone);
+                            setPhoneError(res.message);
+                          }}
+                          className={`w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border text-slate-900 dark:text-slate-200 focus:outline-none transition-colors ${
+                            phoneError 
+                              ? 'border-rose-500 focus:border-rose-500 bg-rose-50/20 dark:bg-rose-950/20' 
+                              : phoneTouched && recruiterPhone && !phoneError
+                              ? 'border-emerald-500/60 dark:border-emerald-500/50 focus:border-emerald-500'
+                              : 'border-slate-200 dark:border-slate-800 focus:border-cyan-500'
+                          }`}
+                        />
+                        {phoneTouched && recruiterPhone && !phoneError && (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 absolute right-3 top-2.5 pointer-events-none" />
+                        )}
+                      </div>
+                      {phoneError && (
+                        <p className="text-[10px] text-rose-500 mt-1 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{phoneError}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
 

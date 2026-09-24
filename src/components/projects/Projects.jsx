@@ -8,11 +8,11 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Projects Grid: 3 Verified Production Repositories */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {projectsData.map((project) => (
             <div
               key={project.id}
-              className="glass-card glass-card-hover rounded-3xl p-7 flex flex-col justify-between border border-black/[0.06] dark:border-white/[0.08] relative group transition-all"
+              className="glass-card glass-card-hover rounded-3xl p-5 sm:p-7 flex flex-col justify-between border border-black/[0.06] dark:border-white/[0.08] relative group transition-all"
             >
               <div className="space-y-4">
                 {/* Category & Production Status Badge */}
@@ -66,13 +66,13 @@ export default function Projects() {
               </div>
 
               {/* Direct Action Links */}
-              <div className="flex items-center justify-between gap-3 pt-6 mt-6 border-t border-black/[0.06] dark:border-white/[0.08]">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 pt-5 mt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
                 {project.githubUrl ? (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-2 px-4 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-800 dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium font-mono flex items-center justify-center gap-2 transition-all active:scale-95"
+                    className="flex-1 min-w-[130px] py-2 px-3.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-800 dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium font-mono flex items-center justify-center gap-1.5 transition-all active:scale-95 shrink-0"
                     title="View GitHub Repository"
                   >
                     <Github className="w-4 h-4" />
@@ -87,7 +87,7 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-2 px-5 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-medium font-mono flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95"
+                    className="py-2 px-4 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-medium font-mono flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 shrink-0"
                     title="Live Demo"
                   >
                     <ExternalLink className="w-4 h-4" />

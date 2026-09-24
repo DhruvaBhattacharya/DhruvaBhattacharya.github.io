@@ -25,14 +25,14 @@ export default function App() {
   }, [darkMode]);
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
+    <div className={`min-h-screen flex flex-col font-sans overflow-x-hidden w-full max-w-full transition-colors duration-300 ${
       darkMode 
         ? 'bg-[#000000] text-[#f5f5f7] selection:bg-[#0071e3] selection:text-white' 
         : 'bg-[#fbfbfd] text-[#1d1d1f] selection:bg-[#0071e3] selection:text-white'
     }`}>
       {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-full overflow-x-hidden">
         <Hero />
         <Experience />
         <Projects />

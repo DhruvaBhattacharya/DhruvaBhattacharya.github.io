@@ -28,7 +28,7 @@ export default function Footer() {
                 href={soc.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-1 rounded-full text-xs font-mono font-medium text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.06] dark:border-white/[0.08] transition-all"
+                className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.06] dark:border-white/[0.08] transition-all shrink-0 whitespace-nowrap active:scale-95"
                 title={soc.name}
               >
                 {soc.name}

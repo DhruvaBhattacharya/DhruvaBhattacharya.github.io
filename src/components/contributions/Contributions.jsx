@@ -23,7 +23,7 @@ export default function Contributions() {
         </div>
 
         {/* LeetCode & GFG Milestone Card */}
-        <div className="glass-card rounded-3xl p-6 sm:p-10 border border-black/[0.06] dark:border-white/[0.08] relative overflow-hidden shadow-xl max-w-5xl mx-auto">
+        <div className="glass-card rounded-3xl p-5 sm:p-10 border border-black/[0.06] dark:border-white/[0.08] relative overflow-hidden shadow-xl max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             
             <div className="md:col-span-8 space-y-5">
@@ -48,22 +48,22 @@ export default function Contributions() {
                   href="https://leetcode.com/dhruvaop"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs"
+                  className="px-5 py-2.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap"
                 >
-                  <Award className="w-4 h-4 text-amber-500" />
+                  <Award className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>LeetCode (900+ Solved)</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
                 </a>
 
                 <a
                   href="https://www.geeksforgeeks.org/profile/dhruvabhattacharya"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs"
+                  className="px-5 py-2.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap"
                 >
-                  <Code2 className="w-4 h-4 text-emerald-500" />
+                  <Code2 className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span>GeeksforGeeks Profile</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
                 </a>
               </div>
 
@@ -84,8 +84,8 @@ export default function Contributions() {
             </div>
 
             {/* High-Impact Numerical Stat Tile */}
-            <div className="md:col-span-4 flex flex-col items-center justify-center p-8 bg-black/[0.02] dark:bg-white/[0.04] rounded-3xl border border-black/[0.06] dark:border-white/[0.08] text-center shadow-inner">
-              <span className="text-6xl font-extrabold font-mono text-amber-500 dark:text-amber-400 tracking-tight">{leetcodeMetric}</span>
+            <div className="md:col-span-4 flex flex-col items-center justify-center p-6 sm:p-8 bg-black/[0.02] dark:bg-white/[0.04] rounded-3xl border border-black/[0.06] dark:border-white/[0.08] text-center shadow-inner">
+              <span className="text-5xl sm:text-6xl font-extrabold font-mono text-amber-500 dark:text-amber-400 tracking-tight">{leetcodeMetric}</span>
               <span className="text-base font-bold text-slate-900 dark:text-white mt-2 tracking-tight">DSA Problems Solved</span>
               <span className="text-xs font-mono text-slate-500 dark:text-[#86868b] mt-1">LeetCode & GeeksforGeeks</span>
               <div className="mt-4 px-3 py-1 rounded-full bg-[#0071e3]/10 text-[#0071e3] dark:text-cyan-400 border border-[#0071e3]/20 text-[10px] font-mono uppercase font-semibold">

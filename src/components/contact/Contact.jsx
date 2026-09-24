@@ -363,14 +363,14 @@ Looking forward to speaking with you!`;
             </div>
             
             {/* Social Ribbon */}
-            <div className="mt-6 flex flex-wrap gap-2 justify-center">
+            <div className="mt-6 w-full max-w-full flex flex-wrap gap-2 justify-center">
               {profileData.socials.map((soc) => (
                 <a
                   key={soc.name}
                   href={soc.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white text-xs font-mono border border-black/[0.06] dark:border-white/[0.08] transition-colors shadow-xs shrink-0 whitespace-nowrap active:scale-95"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white text-xs font-mono border border-black/[0.06] dark:border-white/[0.08] transition-colors shadow-xs shrink-0 whitespace-nowrap active:scale-95"
                 >
                   {soc.name}
                 </a>

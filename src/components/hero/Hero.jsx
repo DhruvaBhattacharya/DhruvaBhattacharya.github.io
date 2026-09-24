@@ -94,24 +94,24 @@ export default function Hero() {
             )}
 
             {/* Professional High-Signal Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs font-mono">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs font-mono max-w-full">
               {profileData.highlights?.map((h) => (
                 <span
                   key={h.id}
-                  className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] flex items-center gap-1.5 font-medium shadow-xs hover:border-black/20 dark:hover:border-white/20 transition-colors"
+                  className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] inline-flex items-center gap-1.5 font-medium shadow-xs hover:border-black/20 dark:hover:border-white/20 transition-colors shrink-0"
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#0071e3] dark:text-cyan-400 shrink-0" />
                   <span>{h.label}</span>
                 </span>
               ))}
-              <span className="px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 flex items-center gap-1.5 font-medium shadow-xs">
+              <span className="px-3.5 py-1.5 rounded-2xl sm:rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 inline-flex items-center gap-1.5 font-medium shadow-xs max-w-full text-left">
                 <MapPin className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
-                <span>Open to {profileData.contact.preferredLocations.join(', ')}</span>
+                <span className="break-words">Open to {profileData.contact.preferredLocations.join(', ')}</span>
               </span>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-2">
               <a
                 href="#experience"
                 className="px-6 py-2.5 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium text-sm shadow-sm hover:shadow active:scale-[0.98] transition-all flex items-center gap-2"
@@ -154,14 +154,14 @@ export default function Hero() {
             </div>
 
             {/* Profiles Ribbon: LeetCode, GFG, GitHub, LinkedIn */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-3">
+            <div className="w-full max-w-full flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-3">
               {profileData.socials.map((soc) => (
                 <a
                   key={soc.name}
                   href={soc.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white transition-all flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95 shadow-xs"
                 >
                   <span>{soc.name}</span>
                   <ExternalLink className="w-3 h-3 opacity-60 shrink-0" />

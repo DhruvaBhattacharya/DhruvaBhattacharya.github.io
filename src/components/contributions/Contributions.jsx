@@ -43,12 +43,12 @@ export default function Contributions() {
               </p>
 
               {/* Profiles Action Cluster */}
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
                 <a
                   href="https://leetcode.com/dhruvaop"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap"
+                  className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 text-xs font-mono font-medium inline-flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap max-w-full"
                 >
                   <Award className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>LeetCode (900+ Solved)</span>
@@ -59,7 +59,7 @@ export default function Contributions() {
                   href="https://www.geeksforgeeks.org/profile/dhruvabhattacharya"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-mono font-medium flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap"
+                  className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-mono font-medium inline-flex items-center gap-2 transition-all active:scale-95 shadow-xs shrink-0 whitespace-nowrap max-w-full"
                 >
                   <Code2 className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span>GeeksforGeeks Profile</span>

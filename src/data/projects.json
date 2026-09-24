@@ -20,14 +20,14 @@
     "id": "spell-cam",
     "title": "Spell-Cam – Computer Vision & Optical Recognition Engine",
     "category": "Computer Vision & AI",
-    "badge": "6 Commits",
+    "badge": "Computer Vision",
     "featured": true,
     "description": "Real-time optical recognition and gesture-tracking engine utilizing OpenCV and deep learning to process live video frames and classify spatial gestures with low-latency inference.",
     "techStack": ["Python", "OpenCV", "Computer Vision", "Deep Learning", "NumPy", "Real-Time Inference"],
     "liveUrl": "",
     "githubUrl": "https://github.com/dhruvaop/Spell-Cam",
     "metrics": [
-      "6 Commits Verified",
+      "Spatial Gesture Tracking",
       "Real-Time Frame Processing",
       "Sub-second Vision Inference",
       "Optical Gesture Classifiers"
@@ -37,14 +37,14 @@
     "id": "automatic-attendance-system",
     "title": "Automatic Attendance System – Biometric Face Recognition",
     "category": "Computer Vision & Automation",
-    "badge": "6 Commits",
+    "badge": "Biometrics",
     "featured": true,
     "description": "Automated facial recognition biometric attendance pipeline engineered with OpenCV and Python, featuring automated face encoding, anti-spoofing verification, and zero-touch attendance logging.",
     "techStack": ["Python", "OpenCV", "Face Recognition", "Biometrics", "CSV Data Modeling", "Automation"],
     "liveUrl": "",
     "githubUrl": "https://github.com/Bauddhik-Geeks/Automatic-Attendence-System",
     "metrics": [
-      "6 Commits in Open Source",
+      "Automated Face Encoding",
       "Automated Biometric Logging",
       "Sub-50ms Facial Matching",
       "Anti-Spoofing Verification"

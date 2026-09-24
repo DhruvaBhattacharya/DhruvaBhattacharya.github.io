@@ -68,24 +68,24 @@ export default function Experience() {
                 <div key={item.id} className="space-y-6">
                   
                   {/* Company & Role Header Card */}
-                  <div className="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800">
+                  <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800">
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                          <Building2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
-                          {item.company}
+                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                          <Building2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                          <span>{item.company}</span>
                         </h3>
                         <p className="text-cyan-600 dark:text-cyan-400 font-medium text-sm mt-0.5">
                           {item.role}
                         </p>
                       </div>
-                      <div className="flex items-center gap-3 text-xs font-mono text-slate-600 dark:text-slate-400">
-                        <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-slate-600 dark:text-slate-400">
+                        <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
                           {item.period}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
-                          {item.location}
+                        <span className="flex items-center gap-1 shrink-0">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
+                          <span>{item.location}</span>
                         </span>
                       </div>
                     </div>

@@ -26,7 +26,7 @@ export default function EducationCerts() {
           
           {/* Education Card (5 cols) */}
           <div className="lg:col-span-5">
-            <div className="glass-card rounded-3xl p-7 border border-black/[0.06] dark:border-white/[0.08] h-full flex flex-col justify-between">
+            <div className="glass-card rounded-3xl p-5 sm:p-7 border border-black/[0.06] dark:border-white/[0.08] h-full flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
                   <div className="w-10 h-10 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400">
@@ -80,7 +80,7 @@ export default function EducationCerts() {
               {certsData.achievements.map((ach, idx) => (
                 <div
                   key={idx}
-                  className="glass-card glass-card-hover rounded-2xl p-5 border border-black/[0.06] dark:border-white/[0.08] flex items-start justify-between gap-4"
+                  className="glass-card glass-card-hover rounded-2xl p-4 sm:p-5 border border-black/[0.06] dark:border-white/[0.08] flex items-start justify-between gap-3 sm:gap-4"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">

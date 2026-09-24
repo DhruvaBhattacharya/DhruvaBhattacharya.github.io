@@ -9,6 +9,9 @@ export default function Contact() {
 
   // Form states for scheduling
   const [recruiterName, setRecruiterName] = useState('');
+  const [recruiterEmail, setRecruiterEmail] = useState('');
+  const [recruiterPhone, setRecruiterPhone] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('Backend Software Engineer');
   const [preferredPlatform, setPreferredPlatform] = useState('Google Meet');
@@ -47,6 +50,8 @@ export default function Contact() {
 
   const getInterviewBody = () => {
     const safeName = sanitizeHeader(recruiterName, 60) || 'Hiring Team';
+    const safeEmail = sanitizeHeader(recruiterEmail, 80);
+    const safePhone = sanitizeHeader(recruiterPhone, 40);
     const safeComp = sanitizeHeader(company, 60) || 'Our Organization';
     const safeRole = sanitizeHeader(role, 60) || 'Backend Software Engineer';
     const safePlatform = sanitizeHeader(preferredPlatform, 40) || 'Google Meet';
@@ -59,7 +64,7 @@ I would like to schedule an interview discussion with you regarding the ${safeRo
 
 Details:
 • Recruiter/Interviewer: ${safeName}
-• Company: ${safeComp}
+${safeEmail ? `• Work Email: ${safeEmail}\n` : ''}${safePhone ? `• Phone / WhatsApp (Optional): ${safePhone}\n` : ''}• Company: ${safeComp}
 • Preferred Platform: ${safePlatform}
 • Proposed Date/Window: ${safeDate}
 • Candidate Focus: ${profileData.status.badge}
@@ -70,6 +75,14 @@ Looking forward to speaking with you!`;
   const handleAutoAcceptSubmit = async (e) => {
     if (e) e.preventDefault();
     if (honeypot) return; // Silent rejection of automated spam bots
+
+    // Validate Mandatory Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!recruiterEmail || !emailRegex.test(recruiterEmail.trim())) {
+      setEmailError('Please enter a valid work email address (mandatory for scheduling).');
+      return;
+    }
+    setEmailError('');
 
     // Anti-spam cooldown (15 seconds)
     const now = Date.now();
@@ -82,6 +95,8 @@ Looking forward to speaking with you!`;
     setIsSubmitting(true);
 
     const safeName = sanitizeHeader(recruiterName, 80) || 'Recruiter Guest';
+    const safeEmail = sanitizeHeader(recruiterEmail, 80);
+    const safePhone = sanitizeHeader(recruiterPhone, 40);
     const safeCompany = sanitizeHeader(company, 80) || 'Hiring Organization';
     const safeRole = sanitizeHeader(role, 80) || 'Backend Software Engineer';
     const safePlatform = sanitizeHeader(preferredPlatform, 50) || 'Google Meet';
@@ -94,6 +109,8 @@ Looking forward to speaking with you!`;
       _captcha: 'false',
       'Status': 'AUTO_ACCEPTED',
       'Recruiter Name': safeName,
+      'Recruiter Email (Mandatory)': safeEmail,
+      'Recruiter Phone (Optional)': safePhone || 'Not provided (Optional)',
       'Company / Organization': safeCompany,
       'Role / Position': safeRole,
       'Meeting Platform': safePlatform,
@@ -121,6 +138,8 @@ Looking forward to speaking with you!`;
         timestamp: new Date().toISOString(),
         displayTime: new Date().toLocaleString(),
         name: safeName,
+        email: safeEmail,
+        phone: safePhone || null,
         company: safeCompany,
         role: safeRole,
         category: 'RECRUITER',
@@ -205,7 +224,7 @@ Looking forward to speaking with you!`;
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12">
           
           {/* Email Card with 1-click Copy & Direct Interview Scheduling */}
-          <div className="glass-card glass-card-hover rounded-3xl p-8 border border-black/[0.06] dark:border-white/[0.08] text-center flex flex-col items-center justify-between">
+          <div className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 border border-black/[0.06] dark:border-white/[0.08] text-center flex flex-col items-center justify-between">
             <div className="w-14 h-14 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400 mb-4">
               <Mail className="w-7 h-7" />
             </div>
@@ -238,7 +257,7 @@ Looking forward to speaking with you!`;
           </div>
 
           {/* Location & Availability Card */}
-          <div className="glass-card glass-card-hover rounded-3xl p-8 border border-black/[0.06] dark:border-white/[0.08] text-center flex flex-col items-center justify-between">
+          <div className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 border border-black/[0.06] dark:border-white/[0.08] text-center flex flex-col items-center justify-between">
             <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
               <Clock className="w-7 h-7" />
             </div>
@@ -260,7 +279,7 @@ Looking forward to speaking with you!`;
                   href={soc.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white text-xs font-mono border border-black/[0.06] dark:border-white/[0.08] transition-colors shadow-xs"
+                  className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white text-xs font-mono border border-black/[0.06] dark:border-white/[0.08] transition-colors shadow-xs shrink-0 whitespace-nowrap active:scale-95"
                 >
                   {soc.name}
                 </a>
@@ -274,8 +293,8 @@ Looking forward to speaking with you!`;
 
       {/* Interactive Apple-Style Schedule Interview Modal */}
       {scheduleModalOpen && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-6 sm:p-8 space-y-6 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-5 sm:p-8 space-y-5 animate-in zoom-in-95 duration-200">
             
             {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
@@ -284,7 +303,7 @@ Looking forward to speaking with you!`;
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
                     Schedule an Interview
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -317,21 +336,31 @@ Looking forward to speaking with you!`;
 
                 {/* Summary Table */}
                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs font-mono space-y-1.5">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between gap-2">
                     <span className="text-slate-500">Company / Org:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">{company || 'Hiring Organization'}</span>
+                    <span className="font-bold text-slate-900 dark:text-white text-right">{company || 'Hiring Organization'}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between gap-2">
+                    <span className="text-slate-500">Contact Email:</span>
+                    <span className="text-cyan-700 dark:text-cyan-400 font-semibold text-right">{recruiterEmail}</span>
+                  </div>
+                  {recruiterPhone && (
+                    <div className="flex justify-between gap-2">
+                      <span className="text-slate-500">Phone / WhatsApp:</span>
+                      <span className="text-slate-800 dark:text-slate-200 text-right">{recruiterPhone}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between gap-2">
                     <span className="text-slate-500">Platform:</span>
-                    <span className="text-cyan-700 dark:text-cyan-400 font-semibold">{preferredPlatform}</span>
+                    <span className="text-cyan-700 dark:text-cyan-400 font-semibold text-right">{preferredPlatform}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between gap-2">
                     <span className="text-slate-500">Proposed Slot:</span>
-                    <span className="text-slate-800 dark:text-slate-200">{preferredDate || 'Flexible / Next Available Slot'}</span>
+                    <span className="text-slate-800 dark:text-slate-200 text-right">{preferredDate || 'Flexible / Next Available Slot'}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between gap-2">
                     <span className="text-slate-500">Target Roles:</span>
-                    <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{profileData.status.badge}</span>
+                    <span className="text-emerald-700 dark:text-emerald-400 font-semibold text-right">{profileData.status.badge}</span>
                   </div>
                 </div>
 
@@ -358,7 +387,7 @@ Looking forward to speaking with you!`;
             ) : (
               <>
                 {/* Form Fields */}
-                <div className="space-y-4 text-xs font-mono">
+                <div className="space-y-3.5 text-xs font-mono">
                   {/* Anti-bot Honeypot */}
                   <input
                     type="text"
@@ -391,6 +420,47 @@ Looking forward to speaking with you!`;
                         maxLength={80}
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-200 focus:border-cyan-500 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Recruiter Contact Credentials: Email (Mandatory) & Phone (Optional) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 dark:text-slate-400 mb-1 font-medium flex items-center justify-between">
+                        <span>Work Email <span className="text-rose-500 font-bold">*</span></span>
+                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-normal">Mandatory</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="recruiter@company.com"
+                        maxLength={100}
+                        value={recruiterEmail}
+                        onChange={(e) => {
+                          setRecruiterEmail(e.target.value);
+                          if (emailError) setEmailError('');
+                        }}
+                        className={`w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border text-slate-900 dark:text-slate-200 focus:outline-none ${
+                          emailError ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 dark:border-slate-800 focus:border-cyan-500'
+                        }`}
+                      />
+                      {emailError && (
+                        <p className="text-[10px] text-rose-500 mt-1 font-medium">{emailError}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 dark:text-slate-400 mb-1 font-medium flex items-center justify-between">
+                        <span>Phone / WhatsApp</span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">Optional</span>
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+1 / +91 (Optional)"
+                        maxLength={25}
+                        value={recruiterPhone}
+                        onChange={(e) => setRecruiterPhone(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-200 focus:border-cyan-500 focus:outline-none"
                       />
                     </div>

@@ -36,12 +36,12 @@ export default function Skills() {
             return (
               <div
                 key={idx}
-                className="glass-card rounded-3xl p-6 sm:p-7 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between"
+                className="glass-card rounded-3xl p-5 sm:p-7 border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between"
               >
                 <div>
                   {/* Category Header */}
                   <div className="flex items-center gap-3 pb-4 mb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
-                    <div className="w-10 h-10 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400">
+                    <div className="w-10 h-10 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400 shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-bold text-slate-900 dark:text-white text-base tracking-tight">
@@ -54,19 +54,19 @@ export default function Skills() {
                     {category.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className={`flex items-center justify-between p-2.5 rounded-xl border transition-all ${
+                        className={`flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-xl border transition-all ${
                           skill.highlight
                             ? 'bg-black/[0.03] border-black/[0.1] text-slate-900 dark:bg-white/[0.08] dark:border-white/[0.16] dark:text-white shadow-xs'
                             : 'bg-black/[0.01] dark:bg-white/[0.03] border-black/[0.04] dark:border-white/[0.06] text-slate-700 dark:text-[#a1a1a6]'
                         }`}
                       >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
                           {skill.highlight && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400 shrink-0"></span>
                           )}
-                          <span className="text-xs font-medium">{skill.name}</span>
+                          <span className="text-xs font-medium truncate">{skill.name}</span>
                         </div>
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-medium ${
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-medium shrink-0 ${
                           skill.level === 'Advanced'
                             ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20'
                             : skill.level === 'Proficient'

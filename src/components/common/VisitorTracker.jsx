@@ -322,20 +322,20 @@ export default function VisitorTracker() {
   return (
     <>
       {/* Floating Visitor Status & Quick Check-in Pill (Bottom Left) */}
-      <div className="fixed bottom-4 left-4 z-40">
+      <div className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-40">
         <button
           onClick={() => (checkedIn ? setShowLedger(true) : setShowPrompt(true))}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-lg backdrop-blur-md text-[11px] font-mono text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group"
+          className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-lg hover:shadow-xl backdrop-blur-md text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group"
           title="Click to view visitor intelligence & check-in (Ctrl+Shift+V)"
         >
-          <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse"></span>
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse"></span>
           {checkedIn ? (
             <span className="flex items-center gap-1.5">
               <span className="font-semibold text-slate-900 dark:text-slate-100">Hi, {name}</span>
               {company && <span className="text-slate-500">({company})</span>}
             </span>
           ) : (
-            <span>👋 Visiting? Check in</span>
+            <span className="font-medium">👋 Visiting? Check in</span>
           )}
           <span className="text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400">
             • {visitorData?.client?.browser?.split(' ')[0] || 'Browser'}
@@ -345,82 +345,83 @@ export default function VisitorTracker() {
 
       {/* Recruiter / Guestbook Check-In Modal Prompt */}
       {showPrompt && (
-        <div className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.12] shadow-2xl p-6 space-y-4 animate-in slide-in-from-bottom-6 sm:zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-4 sm:p-6 pb-6 sm:pb-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg rounded-3xl bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.12] shadow-2xl p-6 sm:p-8 space-y-5 sm:space-y-6 animate-in slide-in-from-bottom-6 sm:zoom-in-95 duration-200">
             <button
               onClick={handleDismiss}
-              className="absolute top-4 right-4 p-1.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.08] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+              className="absolute top-5 right-5 sm:top-6 sm:right-6 p-2 rounded-full bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+              aria-label="Close modal"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
             </button>
 
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 text-[#0071e3] dark:text-cyan-400">
-                <Sparkles className="w-5 h-5" />
+            <div className="flex items-center gap-3 sm:gap-3.5 pr-8">
+              <div className="p-3 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 text-[#0071e3] dark:text-cyan-400 shrink-0">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight tracking-tight">
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight tracking-tight">
                   Welcome to Dhruva's Portfolio
                 </h4>
-                <p className="text-xs text-slate-500 dark:text-[#86868b]">
+                <p className="text-xs sm:text-[13px] text-slate-500 dark:text-[#86868b] mt-0.5">
                   Reviewing candidate profile? Say hello!
                 </p>
               </div>
             </div>
 
             {/* Auto-Accept Guarantee Banner */}
-            <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-800 dark:text-emerald-300 font-mono flex items-center gap-2">
-              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <div className="px-4 py-3 sm:px-4.5 sm:py-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs sm:text-[13px] text-emerald-800 dark:text-emerald-300 font-mono flex items-start gap-2.5 sm:gap-3 leading-relaxed">
+              <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
               <span>Auto-Accept Guarantee: All check-ins and meeting requests are instantly confirmed & priority acknowledged.</span>
             </div>
 
-            <p className="text-xs text-slate-600 dark:text-[#a1a1a6] leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-[#a1a1a6] leading-relaxed">
               If you're visiting from a recruitment team or engineering org, leave your name so Dhruva knows who reviewed his work:
             </p>
 
-            <form onSubmit={handleCheckIn} className="space-y-3 text-xs font-mono">
+            <form onSubmit={handleCheckIn} className="space-y-4 text-xs sm:text-sm font-mono">
               <div>
-                <label className="block text-slate-700 dark:text-slate-400 font-medium mb-1">Your Name</label>
+                <label className="block text-slate-700 dark:text-slate-400 font-medium mb-1.5">Your Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Alex Rivera"
                   maxLength={80}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-black/[0.02] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-slate-900 dark:text-slate-100 focus:border-[#0071e3] dark:focus:border-cyan-400 focus:bg-white dark:focus:bg-black/50 focus:outline-none placeholder-slate-400"
+                  className="w-full px-4 py-2.5 sm:py-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-slate-900 dark:text-slate-100 focus:border-[#0071e3] dark:focus:border-cyan-400 focus:bg-white dark:focus:bg-black/50 focus:outline-none placeholder-slate-400 transition-colors"
                   autoFocus
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-400 font-medium mb-1">Company / Organization</label>
+                <label className="block text-slate-700 dark:text-slate-400 font-medium mb-1.5">Company / Organization</label>
                 <input
                   type="text"
                   placeholder="e.g. Google, Microsoft, Tech Startup"
                   maxLength={80}
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-black/[0.02] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-slate-900 dark:text-slate-100 focus:border-[#0071e3] dark:focus:border-cyan-400 focus:bg-white dark:focus:bg-black/50 focus:outline-none placeholder-slate-400"
+                  className="w-full px-4 py-2.5 sm:py-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-slate-900 dark:text-slate-100 focus:border-[#0071e3] dark:focus:border-cyan-400 focus:bg-white dark:focus:bg-black/50 focus:outline-none placeholder-slate-400 transition-colors"
                 />
               </div>
 
-              <div className="p-2.5 rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] text-[10px] text-slate-500 dark:text-[#86868b] flex items-center justify-between">
+              <div className="px-4 py-2.5 sm:py-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] text-[11px] sm:text-xs text-slate-500 dark:text-[#86868b] flex items-center justify-between">
                 <span>Detected: {visitorData?.client?.browser} on {visitorData?.client?.os}</span>
                 <span className="text-[#0071e3] dark:text-cyan-400 font-semibold">{visitorData?.client?.screenResolution} ({visitorData?.client?.aspectRatio})</span>
               </div>
 
-              <div className="flex gap-2 pt-2">
+              <div className="flex flex-col sm:flex-row gap-3 pt-2 sm:pt-3">
                 <button
                   type="submit"
-                  className="flex-1 py-2 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95"
+                  className="flex-1 py-3 px-5 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg active:scale-95"
                 >
-                  <Check className="w-3.5 h-3.5 text-white" />
+                  <Check className="w-4 h-4 text-white shrink-0" />
                   <span>Auto-Accept & Check In</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleDismiss}
-                  className="px-4 py-2 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-700 dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:text-slate-300 text-xs font-medium transition-all active:scale-95"
+                  className="px-5 py-3 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-700 dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:text-slate-300 text-xs sm:text-sm font-medium transition-all active:scale-95 text-center"
                 >
                   Browse Anonymously
                 </button>
@@ -432,15 +433,15 @@ export default function VisitorTracker() {
 
       {/* Visitor Intelligence Ledger Modal (Accessible via Ctrl+Shift+V or clicking pill) */}
       {showLedger && (
-        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl max-h-[85vh] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl p-6 flex flex-col space-y-4 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl max-h-[85vh] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl p-6 sm:p-8 flex flex-col space-y-4 sm:space-y-5 animate-in zoom-in-95 duration-200">
             
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-              <div className="flex items-center gap-2.5">
-                <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-200 dark:border-slate-800">
+              <div className="flex items-center gap-3">
+                <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Visitor Intelligence Ledger</h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Visitor Intelligence Ledger</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-0.5">
                     Consolidated telemetry across N visitors (Recruiter vs Casual classification)
                   </p>
                 </div>
@@ -448,7 +449,7 @@ export default function VisitorTracker() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={exportLogsAsJson}
-                  className="p-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300 text-xs font-mono flex items-center gap-1 transition-colors"
+                  className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300 text-xs font-mono flex items-center gap-1.5 transition-colors"
                   title="Export Visitor Logs"
                 >
                   <Download className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
@@ -456,7 +457,7 @@ export default function VisitorTracker() {
                 </button>
                 <button
                   onClick={() => setShowLedger(false)}
-                  className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-white"
+                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-white transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -464,8 +465,8 @@ export default function VisitorTracker() {
             </div>
 
             {/* Consolidated Visitors Intelligence Strip */}
-            <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-              <div className="flex items-center gap-2">
+            <div className="px-4 py-3 sm:px-4.5 sm:py-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+              <div className="flex items-center gap-2.5">
                 <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
                 <div>
                   <span className="font-bold text-slate-900 dark:text-white">Consolidated Telemetry: </span>
@@ -474,43 +475,43 @@ export default function VisitorTracker() {
                   <span className="text-slate-700 dark:text-slate-300">{allLogs.filter(l => l.category !== 'RECRUITER' && !l.company).length} Casual Visitors</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[11px] font-bold">
                 <Check className="w-3 h-3" />
                 <span>Auto-Accept All: Active</span>
               </div>
             </div>
 
             {/* Current Session Summary */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Browser</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mb-0.5">Browser</span>
                 <span className="text-cyan-700 dark:text-cyan-400 font-bold">{visitorData?.client?.browser}</span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Platform / OS</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mb-0.5">Platform / OS</span>
                 <span className="text-emerald-700 dark:text-emerald-400 font-bold">{visitorData?.client?.os}</span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Screen Ratio</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mb-0.5">Screen Ratio</span>
                 <span className="text-amber-700 dark:text-amber-400 font-bold">{visitorData?.client?.aspectRatio}</span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Total Visits</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mb-0.5">Total Visits</span>
                 <span className="text-indigo-700 dark:text-indigo-400 font-bold">#{visitorData?.visitCount}</span>
               </div>
             </div>
 
             {/* Ledger List */}
-            <div className="flex-1 overflow-y-auto space-y-2 pr-1 text-xs font-mono">
+            <div className="flex-1 overflow-y-auto space-y-2.5 pr-1.5 text-xs font-mono">
               <p className="text-[11px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider pb-1">
                 Recent Visitor History ({allLogs.length} logged sessions):
               </p>
               {allLogs.length === 0 ? (
-                <p className="text-slate-400 text-center py-6">No previous visitor sessions recorded yet.</p>
+                <p className="text-slate-400 text-center py-8">No previous visitor sessions recorded yet.</p>
               ) : (
                 allLogs.map((log, idx) => (
-                  <div key={log.id || idx} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-3">
-                    <div className="space-y-0.5">
+                  <div key={log.id || idx} className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-3">
+                    <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-slate-900 dark:text-white">{log.name || 'Anonymous Guest'}</span>
                         {log.category === 'RECRUITER' ? (
@@ -545,7 +546,7 @@ export default function VisitorTracker() {
               )}
             </div>
 
-            <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-[10px] font-mono text-slate-500 flex justify-between">
+            <div className="pt-3 sm:pt-4 border-t border-slate-200 dark:border-slate-800 text-[10px] sm:text-[11px] font-mono text-slate-500 flex justify-between">
               <span>Press Ctrl+Shift+V anytime to toggle this ledger</span>
               <span>Dev Console: window.getPortfolioVisitorsSummary()</span>
             </div>

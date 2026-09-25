@@ -384,29 +384,29 @@ Looking forward to speaking with you!`;
 
       {/* Interactive Apple-Style Schedule Interview Modal */}
       {scheduleModalOpen && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-5 sm:p-8 space-y-5 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-6 sm:p-8 space-y-5 sm:space-y-6 animate-in zoom-in-95 duration-200">
             
             {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-200 dark:border-slate-800">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
                     Schedule an Interview
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Fast-track recruitment dialogue with Dhruva Bhattacharya
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setScheduleModalOpen(false)}
-                className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
+                className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
@@ -662,36 +662,36 @@ Looking forward to speaking with you!`;
                 </div>
 
                 {/* Launch Action Cluster (Auto-Accept + Instant Dispatch) */}
-                <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+                <div className="space-y-3 pt-3 border-t border-slate-200 dark:border-slate-800">
                   <button
                     onClick={handleAutoAcceptSubmit}
                     disabled={isSubmitting}
-                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 hover:opacity-95 shadow-md shadow-emerald-500/25 transition-all disabled:opacity-50"
+                    className="w-full py-3 sm:py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 hover:opacity-95 shadow-md shadow-emerald-500/25 transition-all disabled:opacity-50 active:scale-95"
                   >
                     {isSubmitting ? (
                       <span>Auto-Accepting & Processing...</span>
                     ) : (
                       <>
-                        <CheckCircle2 className="w-4 h-4 text-slate-950" />
+                        <CheckCircle2 className="w-4 h-4 text-slate-950 shrink-0" />
                         <span>Confirm & Auto-Accept Interview Request</span>
                       </>
                     )}
                   </button>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-2.5">
                     <button
                       onClick={openGmailWeb}
-                      className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-transparent text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
+                      className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-transparent text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors active:scale-95"
                     >
-                      <Send className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+                      <Send className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                       <span>Open in Gmail (Web)</span>
                     </button>
 
                     <button
                       onClick={copyInvitationTemplate}
-                      className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-transparent text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
+                      className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-transparent text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors active:scale-95"
                     >
-                      {inviteCopied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {inviteCopied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" /> : <Copy className="w-3.5 h-3.5 shrink-0" />}
                       <span>{inviteCopied ? "Copied Details!" : "Copy Full Invite"}</span>
                     </button>
                   </div>

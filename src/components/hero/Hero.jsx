@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowDown, Download, Mail, ExternalLink, Terminal, Code2, Sparkles, CheckCircle2 } from 'lucide-react';
 import KernelConsole from './KernelConsole';
+import CodingTypewriter from './CodingTypewriter';
 import profileData from '../../data/profile.json';
 
 export default function Hero() {
@@ -37,9 +38,9 @@ export default function Hero() {
                   {profileData.name}
                 </span>
               </h1>
-              <p className="text-lg sm:text-xl font-medium text-slate-700 dark:text-[#a1a1a6] tracking-tight">
-                Architecting high-scale distributed systems, microservices & production GenAI pipelines.
-              </p>
+              <div className="pt-1">
+                <CodingTypewriter />
+              </div>
             </div>
 
             {/* Minimalistic, High-Signal Summary */}

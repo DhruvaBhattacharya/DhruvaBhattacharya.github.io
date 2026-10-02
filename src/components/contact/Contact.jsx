@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle2, AlertCircle, MessageSquare } from 'lucide-react';
-import profileData from '../../data/profile.json';
 
 export default function Contact() {
   const [formState, setFormState] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
@@ -57,7 +56,7 @@ export default function Contact() {
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setFormState('error');
-        setErrorMessage('Could not deliver message via FormSubmit. Please try again.');
+        setErrorMessage('Could not deliver message. Please try again.');
       }
     } catch (err) {
       setFormState('error');
@@ -83,7 +82,7 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Centered FormSubmit Card */}
+        {/* Centered Form Card */}
         <div className="max-w-2xl mx-auto">
           <div className="glass-card rounded-3xl p-6 sm:p-10 border border-black/[0.06] dark:border-white/[0.08] shadow-sm">
             
@@ -91,21 +90,21 @@ export default function Contact() {
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Send a Message
               </h3>
-              <p className="text-xs text-slate-500 dark:text-[#86868b] mt-1 font-mono">
-                Delivered directly to dhruvabhattacharya130102@gmail.com
+              <p className="text-xs text-slate-500 dark:text-[#86868b] mt-1">
+                Leave a message below and I will get back to you shortly.
               </p>
             </div>
 
             {formState === 'success' ? (
-              <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3 animate-in zoom-in-95 duration-200">
+              <div className="p-6 sm:p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3 animate-in zoom-in-95 duration-200">
                 <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-slate-900 dark:text-white">
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                   Message Sent Successfully!
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-md mx-auto">
-                  Thank you for reaching out. Your message has been routed to <span className="font-semibold font-mono text-[#0071e3] dark:text-cyan-400">dhruvabhattacharya130102@gmail.com</span>. I will review it and follow up with you shortly.
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-md mx-auto">
+                  Thank you for reaching out! Your message has been received and I will contact you shortly.
                 </p>
                 <button
                   onClick={() => setFormState('idle')}
@@ -210,7 +209,7 @@ export default function Contact() {
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Send Message via FormSubmit</span>
+                      <span>Send Message</span>
                     </>
                   )}
                 </button>
@@ -218,22 +217,6 @@ export default function Contact() {
             )}
 
           </div>
-
-          {/* Clean Profile Links below Form */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
-            {profileData.socials.map((soc) => (
-              <a
-                key={soc.name}
-                href={soc.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 text-xs font-mono border border-black/[0.06] dark:border-white/[0.08] transition-colors shadow-2xs"
-              >
-                {soc.name}
-              </a>
-            ))}
-          </div>
-
         </div>
 
       </div>

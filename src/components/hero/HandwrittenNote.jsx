@@ -72,28 +72,28 @@ export default function HandwrittenNote({ isLoaded = true }) {
         <span>{displayText2}</span>
       </div>
 
-      {/* Hand-Drawn Curly Doodle Arrow Pointing Down Toward Photo (Does NOT Overlap Photo) */}
-      <div className="w-12 h-10 overflow-visible mt-1 ml-6 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
+      {/* Hand-Drawn Straight-Curly Doodle Arrow Pointing Down Toward Photo (No Loops, Does NOT Overlap Photo) */}
+      <div className="w-8 h-10 overflow-visible mt-1 ml-6 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
         <svg
           className="w-full h-full overflow-visible"
-          viewBox="0 0 50 42"
+          viewBox="0 0 32 40"
           fill="none"
         >
-          {/* Curly Loop Arrow Body */}
+          {/* Straight-Curly Wavy Shaft */}
           <path
-            d="M 22 2 C 34 2, 42 10, 36 18 C 30 26, 16 18, 20 10 C 22 6, 30 14, 28 34"
+            d="M 16 2 C 22 9, 22 17, 16 23 C 11 29, 12 33, 16 37"
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             style={{
-              strokeDasharray: 95,
-              strokeDashoffset: isComplete ? 0 : 95,
-              transition: 'stroke-dashoffset 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+              strokeDasharray: 45,
+              strokeDashoffset: isComplete ? 0 : 45,
+              transition: 'stroke-dashoffset 0.4s ease-out'
             }}
           />
           {/* Arrowhead Pointing Down */}
           <path
-            d="M 21 27 L 28 35 L 35 27"
+            d="M 10 28 L 16 37 L 22 28"
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
@@ -101,8 +101,8 @@ export default function HandwrittenNote({ isLoaded = true }) {
             style={{
               opacity: isComplete ? 1 : 0,
               transform: isComplete ? 'scale(1)' : 'scale(0.3)',
-              transformOrigin: '28px 35px',
-              transition: 'opacity 0.2s ease-out 0.35s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s'
+              transformOrigin: '16px 37px',
+              transition: 'opacity 0.2s ease-out 0.25s, transform 0.2s ease-out 0.25s'
             }}
           />
         </svg>

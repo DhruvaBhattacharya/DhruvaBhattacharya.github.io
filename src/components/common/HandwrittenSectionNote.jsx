@@ -72,15 +72,15 @@ export default function HandwrittenSectionNote({
       aria-hidden="true"
     >
       {/* Straight Handwritten Text */}
-      <div className="flex items-center text-xl sm:text-2xl md:text-3xl font-handwriting font-bold tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] whitespace-nowrap">
+      <div className="flex items-center text-xl sm:text-2xl md:text-3xl font-handwriting font-bold tracking-wide text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] whitespace-nowrap transition-colors">
         <span>{displayText}</span>
         {isWriting && !isComplete && (
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-white ml-1 animate-ping align-middle" />
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-white ml-1 animate-ping align-middle" />
         )}
       </div>
 
-      {/* Hand-Drawn White Doodle Arrow Curving Down-Right Toward Section Title */}
-      <div className="w-16 h-10 sm:w-20 sm:h-12 overflow-visible -mt-1 ml-6 sm:ml-10 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+      {/* Hand-Drawn Doodle Arrow Curving Down-Right Toward Section Title */}
+      <div className="w-16 h-10 sm:w-20 sm:h-12 overflow-visible -mt-1 ml-6 sm:ml-10 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
         <svg
           className="w-full h-full overflow-visible"
           viewBox="0 0 80 48"
@@ -89,7 +89,7 @@ export default function HandwrittenSectionNote({
           {/* Curved Arrow Body */}
           <path
             d="M 8 6 C 22 8, 46 14, 60 28 C 64 32, 68 36, 72 38"
-            stroke="#ffffff"
+            stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             style={{
@@ -101,7 +101,7 @@ export default function HandwrittenSectionNote({
           {/* Arrowhead */}
           <path
             d="M 60 38 L 73 38 L 70 27"
-            stroke="#ffffff"
+            stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"

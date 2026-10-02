@@ -63,22 +63,22 @@ export default function HandwrittenNote({ isLoaded = true }) {
 
   return (
     <div
-      className="absolute -top-24 sm:-top-28 left-2 sm:left-4 z-30 pointer-events-none select-none flex flex-col items-start"
+      className="absolute -top-14 sm:-top-16 lg:-top-20 left-2 sm:left-4 z-30 pointer-events-none select-none flex flex-col items-start"
       aria-hidden="true"
     >
       {/* Two-Line Straight Handwritten Text */}
-      <div className="flex flex-col items-start font-handwriting font-bold text-2xl sm:text-3xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] leading-tight whitespace-nowrap">
+      <div className="flex flex-col items-start font-handwriting font-bold text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] leading-tight whitespace-nowrap transition-colors">
         <span>{displayText1}</span>
         <div className="flex items-center">
           <span>{displayText2}</span>
           {isWriting && !isComplete && displayText1.length >= LINE1.length && (
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-white ml-1 animate-ping align-middle" />
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-white ml-1 animate-ping align-middle" />
           )}
         </div>
       </div>
 
-      {/* Hand-Drawn White Downward Arrow Pointing to Photo */}
-      <div className="w-8 h-10 overflow-visible mt-1 ml-4 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+      {/* Hand-Drawn Downward Arrow Pointing to Photo */}
+      <div className="w-6 h-8 sm:w-8 sm:h-10 overflow-visible mt-0.5 ml-3 sm:ml-4 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
         <svg
           className="w-full h-full overflow-visible"
           viewBox="0 0 32 40"
@@ -87,7 +87,7 @@ export default function HandwrittenNote({ isLoaded = true }) {
           {/* Vertical Arrow Shaft */}
           <path
             d="M 16 2 L 16 30"
-            stroke="#ffffff"
+            stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             style={{
@@ -99,7 +99,7 @@ export default function HandwrittenNote({ isLoaded = true }) {
           {/* Arrowhead Pointing Down */}
           <path
             d="M 9 22 L 16 31 L 23 22"
-            stroke="#ffffff"
+            stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"

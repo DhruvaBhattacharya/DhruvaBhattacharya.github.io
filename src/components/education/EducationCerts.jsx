@@ -3,15 +3,14 @@ import {
   GraduationCap, 
   Trophy, 
   CheckCircle, 
-  ShieldCheck, 
-  ArrowDown
+  ShieldCheck
 } from 'lucide-react';
 import certsData from '../../data/certifications.json';
 import ParallaxCard from '../common/ParallaxCard';
 
 /**
- * Horizontal Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
- * Points 'right' (→) or 'left' (←) cleanly without any number clutter.
+ * Horizontal Arrow with direct vector line drawing & advancing arrowhead
+ * Points 'right' (→) or 'left' (←) as shown in more clear design.png
  */
 function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) {
   const isRight = direction === 'right';
@@ -22,11 +21,12 @@ function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) 
   const startX = isRight ? 4 : 60;
   const endX = isRight ? 60 : 4;
   const currentX = startX + (endX - startX) * fraction;
+  const strokeColor = isComplete ? '#10b981' : '#0071e3';
 
   return (
     <div className={`relative flex items-center justify-center pointer-events-none select-none z-20 ${className}`}>
       <svg className="w-full h-8 overflow-visible" viewBox="0 0 64 24">
-        {/* Inactive Guide Track */}
+        {/* Subtle background guide dash */}
         <line
           x1={startX}
           y1="12"
@@ -38,51 +38,44 @@ function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) 
           className="text-black/10 dark:text-white/10"
         />
 
-        {/* Instantiating Drawing Line: draws from startX to currentX */}
+        {/* Instantiating Drawing Path: draws from startX to currentX */}
         {isStarted && (
           <line
             x1={startX}
             y1="12"
             x2={currentX}
             y2="12"
-            stroke={isComplete ? '#10b981' : '#0071e3'}
-            strokeWidth="2.5"
+            stroke={strokeColor}
+            strokeWidth="3"
             strokeLinecap="round"
           />
         )}
 
-        {/* Advancing Tip Particle */}
-        {isStarted && !isComplete && (
+        {/* Advancing Tip Arrowhead & Glow Particle */}
+        {isStarted && (
           <g>
-            <circle
-              cx={currentX}
-              cy="12"
-              r="4.5"
-              fill="#38bdf8"
-              opacity="0.5"
-              className="animate-ping"
+            <path
+              d={
+                isRight
+                  ? `M ${currentX - 7} 7 L ${currentX} 12 L ${currentX - 7} 17`
+                  : `M ${currentX + 7} 7 L ${currentX} 12 L ${currentX + 7} 17`
+              }
+              fill="none"
+              stroke={strokeColor}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
-            <circle
-              cx={currentX}
-              cy="12"
-              r="3"
-              fill="#0071e3"
-              stroke="#ffffff"
-              strokeWidth="1"
-            />
+            {!isComplete && (
+              <circle
+                cx={currentX}
+                cy="12"
+                r="3.5"
+                fill="#38bdf8"
+                className="animate-ping opacity-60"
+              />
+            )}
           </g>
-        )}
-
-        {/* Crisp Completed Arrowhead */}
-        {isComplete && (
-          <path
-            d={isRight ? 'M 52 7 L 60 12 L 52 17' : 'M 12 7 L 4 12 L 12 17'}
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
         )}
       </svg>
     </div>
@@ -90,8 +83,8 @@ function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) 
 }
 
 /**
- * Vertical Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
- * Points 'down' (↓) cleanly without any number clutter.
+ * Vertical Arrow with direct vector line drawing & advancing arrowhead
+ * Points 'down' (↓) as shown in more clear design.png
  */
 function VerticalArrow({ fraction = 0, className = '' }) {
   const isStarted = fraction > 0;
@@ -99,11 +92,12 @@ function VerticalArrow({ fraction = 0, className = '' }) {
   const startY = 4;
   const endY = 42;
   const currentY = startY + (endY - startY) * fraction;
+  const strokeColor = isComplete ? '#10b981' : '#0071e3';
 
   return (
     <div className={`relative flex items-center justify-center pointer-events-none select-none z-20 ${className}`}>
       <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 46">
-        {/* Inactive Guide Track */}
+        {/* Subtle background guide dash */}
         <line
           x1="12"
           y1={startY}
@@ -115,51 +109,40 @@ function VerticalArrow({ fraction = 0, className = '' }) {
           className="text-black/10 dark:text-white/10"
         />
 
-        {/* Instantiating Drawing Line */}
+        {/* Instantiating Drawing Path: from startY to currentY */}
         {isStarted && (
           <line
             x1="12"
             y1={startY}
             x2="12"
             y2={currentY}
-            stroke={isComplete ? '#10b981' : '#0071e3'}
-            strokeWidth="2.5"
+            stroke={strokeColor}
+            strokeWidth="3"
             strokeLinecap="round"
           />
         )}
 
-        {/* Advancing Tip Particle */}
-        {isStarted && !isComplete && (
+        {/* Advancing Tip Arrowhead & Glow Particle */}
+        {isStarted && (
           <g>
-            <circle
-              cx="12"
-              cy={currentY}
-              r="4.5"
-              fill="#38bdf8"
-              opacity="0.5"
-              className="animate-ping"
+            <path
+              d={`M 7 ${currentY - 7} L 12 ${currentY} L 17 ${currentY - 7}`}
+              fill="none"
+              stroke={strokeColor}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
-            <circle
-              cx="12"
-              cy={currentY}
-              r="3"
-              fill="#0071e3"
-              stroke="#ffffff"
-              strokeWidth="1"
-            />
+            {!isComplete && (
+              <circle
+                cx="12"
+                cy={currentY}
+                r="3.5"
+                fill="#38bdf8"
+                className="animate-ping opacity-60"
+              />
+            )}
           </g>
-        )}
-
-        {/* Crisp Completed Arrowhead pointing down */}
-        {isComplete && (
-          <path
-            d="M 7 34 L 12 42 L 17 34"
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
         )}
       </svg>
     </div>
@@ -167,16 +150,17 @@ function VerticalArrow({ fraction = 0, className = '' }) {
 }
 
 /**
- * Arrow 9: Curved line emerging from Tile 9 (bottom-right), curving left towards center,
- * and pointing straight down to directly guide into the Contact Us section.
+ * Arrow 9: Curved line emerging from Tile 9 (CPA C++), curving left across center,
+ * and pointing straight down directly at [ Direct Outreach ] / Contact Me
  */
 function ArrowNineCurve({ fraction = 0 }) {
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
   const strokeOffset = 100 * (1 - fraction);
+  const strokeColor = isComplete ? '#10b981' : '#0071e3';
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-36 hidden lg:block overflow-visible mt-2 select-none pointer-events-none">
+    <div className="relative w-full max-w-6xl mx-auto h-36 hidden lg:block overflow-visible mt-2 -mb-16 select-none pointer-events-none z-30">
       <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 144" preserveAspectRatio="none">
         {/* Inactive Guide Track */}
         <path
@@ -188,12 +172,12 @@ function ArrowNineCurve({ fraction = 0 }) {
           className="text-black/10 dark:text-white/10"
         />
 
-        {/* Instantiating Drawing Path: emerges from Tile 9 and ends at Contact Me */}
+        {/* Instantiating Drawing Path: emerges from Tile 9 and ends directly at Contact Me */}
         <path
           d="M 852 0 C 852 45, 852 55, 740 55 L 540 55 C 500 55, 500 75, 500 135"
           fill="none"
-          stroke={isComplete ? '#10b981' : '#0071e3'}
-          strokeWidth="3"
+          stroke={strokeColor}
+          strokeWidth="3.5"
           pathLength="100"
           strokeDasharray="100"
           strokeDashoffset={strokeOffset}
@@ -201,13 +185,13 @@ function ArrowNineCurve({ fraction = 0 }) {
           className="transition-[stroke-dashoffset] duration-75"
         />
 
-        {/* Crisp Completed Arrowhead pointing straight down into Contact Me */}
+        {/* Crisp Completed Arrowhead pointing straight down into [ Direct Outreach ] */}
         {isComplete && (
           <path
             d="M 492 122 L 500 138 L 508 122"
             fill="none"
-            stroke="#10b981"
-            strokeWidth="3"
+            stroke={strokeColor}
+            strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -287,9 +271,10 @@ export default function EducationCerts() {
             const rect = containerRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
-            // Animation triggers naturally as section traverses the comfortable reading viewport
-            const startTrigger = windowHeight * 0.75;
-            const endTrigger = windowHeight * 0.25;
+            // Starts when certifications heading enters comfortable view (70% down viewport)
+            // Finishes when bottom of Row 3 reaches 30% viewport (transitioning directly into Contact)
+            const startTrigger = windowHeight * 0.70;
+            const endTrigger = windowHeight * 0.30;
             const travelDistance = rect.height + (startTrigger - endTrigger);
 
             if (travelDistance > 0) {
@@ -329,7 +314,7 @@ export default function EducationCerts() {
   };
 
   return (
-    <section id="achievements" className="pt-24 pb-4 relative transition-colors duration-300">
+    <section id="achievements" className="pt-24 pb-0 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -544,7 +529,7 @@ export default function EducationCerts() {
 
           </div>
 
-          {/* Desktop Arrow 9: Curving down from Tile 9, pointing directly into Contact Us */}
+          {/* Desktop Arrow 9: Curving down from Tile 9, extending directly into [ Direct Outreach ] / Contact Me */}
           <ArrowNineCurve fraction={getArrowFraction(9)} />
 
           {/* Mobile / Tablet Sequential Flow (< 1024px) */}

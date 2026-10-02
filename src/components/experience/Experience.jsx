@@ -70,6 +70,7 @@ export default function Experience() {
 
                 {/* Experience Tile Card with 3D Parallax Tilt */}
                 <ParallaxCard
+                  disabled={isExpanded}
                   maxTilt={3}
                   scale={1.008}
                   glareColor="rgba(0, 113, 227, 0.10)"

@@ -5,15 +5,27 @@
     "category": "GenAI & Distributed Systems",
     "badge": "Production",
     "featured": true,
+    "image": "./images/projects/sc1.webp",
+    "imageFallback": "./images/projects/sc1.png",
     "description": "Full-stack EdTech platform architected with an embedded RAG chatbot (Groq Cloud / Llama-3.3-70B), semantic vector retrieval, role-based auth, and Razorpay payment gateways.",
-    "techStack": ["Groq Cloud", "Llama-3.3-70B", "RAG Pipeline", "Prompt Engineering", "MongoDB", "Express.js", "React", "Node.js", "Razorpay"],
+    "techStack": [
+      "Groq Cloud",
+      "Llama-3.3-70B",
+      "RAG Pipeline",
+      "Prompt Engineering",
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Razorpay"
+    ],
     "liveUrl": "https://logiclabs-ed.netlify.app/",
     "githubUrl": "https://github.com/dhruvaop/LogicLabsEd",
     "metrics": [
       "Sub-second Groq Inference",
       "Llama-3.3-70B RAG Architecture",
       "Zero N+1 Query Overhead",
-      "10+ Security Vulnerabilities Patched"
+      "10+ Security Patches"
     ]
   },
   {
@@ -22,8 +34,17 @@
     "category": "Computer Vision & AI",
     "badge": "Computer Vision",
     "featured": true,
+    "image": "./images/projects/sc2.webp",
+    "imageFallback": "./images/projects/sc2.jpg",
     "description": "Real-time optical recognition and gesture-tracking engine utilizing OpenCV and deep learning to process live video frames and classify spatial gestures with low-latency inference.",
-    "techStack": ["Python", "OpenCV", "Computer Vision", "Deep Learning", "NumPy", "Real-Time Inference"],
+    "techStack": [
+      "Python",
+      "OpenCV",
+      "Computer Vision",
+      "Deep Learning",
+      "NumPy",
+      "Real-Time Inference"
+    ],
     "liveUrl": "",
     "githubUrl": "https://github.com/dhruvaop/Spell-Cam",
     "metrics": [
@@ -31,23 +52,6 @@
       "Real-Time Frame Processing",
       "Sub-second Vision Inference",
       "Optical Gesture Classifiers"
-    ]
-  },
-  {
-    "id": "automatic-attendance-system",
-    "title": "Automatic Attendance System – Biometric Face Recognition",
-    "category": "Computer Vision & Automation",
-    "badge": "Biometrics",
-    "featured": true,
-    "description": "Automated facial recognition biometric attendance pipeline engineered with OpenCV and Python, featuring automated face encoding, anti-spoofing verification, and zero-touch attendance logging.",
-    "techStack": ["Python", "OpenCV", "Face Recognition", "Biometrics", "CSV Data Modeling", "Automation"],
-    "liveUrl": "",
-    "githubUrl": "https://github.com/Bauddhik-Geeks/Automatic-Attendence-System",
-    "metrics": [
-      "Automated Face Encoding",
-      "Automated Biometric Logging",
-      "Sub-50ms Facial Matching",
-      "Anti-Spoofing Verification"
     ]
   }
 ]

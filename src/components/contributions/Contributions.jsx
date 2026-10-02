@@ -5,7 +5,7 @@ import profileData from '../../data/profile.json';
 export default function Contributions() {
   const leetcodeMetric = profileData.metrics?.find(m => m.label.toLowerCase().includes('leetcode'))?.value || '900+';
   return (
-    <section id="achievements" className="py-20 relative transition-colors duration-300">
+    <section id="problem-solving" className="py-20 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

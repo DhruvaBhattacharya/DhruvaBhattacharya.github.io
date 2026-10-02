@@ -13,16 +13,15 @@ import certsData from '../../data/certifications.json';
 import ParallaxCard from '../common/ParallaxCard';
 
 /**
- * Horizontal Arrow with SVG line drawing based on fractional scroll (0.0 to 1.0)
+ * Horizontal Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
  * Points 'right' (→) or 'left' (←) with a centered number badge.
  */
 function HorizontalArrow({ number, direction = 'right', fraction = 0, className = '' }) {
   const isRight = direction === 'right';
-  const strokeLen = 56;
-  const strokeOffset = strokeLen * (1 - fraction);
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
 
+  // ViewBox: 64 wide x 24 high, center Y = 12
   const startX = isRight ? 4 : 60;
   const endX = isRight ? 60 : 4;
   const currentX = startX + (endX - startX) * fraction;
@@ -31,7 +30,7 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
     <div className={`relative flex items-center justify-center pointer-events-none select-none ${className}`}>
       {/* Number Badge above arrow */}
       <div 
-        className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-20 ${
+        className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
           isComplete
             ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
             : isStarted
@@ -50,23 +49,23 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
           x2={endX}
           y2="12"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.5"
           strokeDasharray="3 3"
           className="text-black/15 dark:text-white/15"
         />
 
-        {/* Instantiating Drawing Line */}
-        <line
-          x1={startX}
-          y1="12"
-          x2={endX}
-          y2="12"
-          stroke={isComplete ? '#10b981' : '#0071e3'}
-          strokeWidth="2.5"
-          strokeDasharray={strokeLen}
-          strokeDashoffset={strokeOffset}
-          strokeLinecap="round"
-        />
+        {/* Instantiating Drawing Line: draws from startX to currentX */}
+        {isStarted && (
+          <line
+            x1={startX}
+            y1="12"
+            x2={currentX}
+            y2="12"
+            stroke={isComplete ? '#10b981' : '#0071e3'}
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        )}
 
         {/* Advancing Tip Particle */}
         {isStarted && !isComplete && (
@@ -76,7 +75,7 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
               cy="12"
               r="4.5"
               fill="#38bdf8"
-              opacity="0.6"
+              opacity="0.5"
               className="animate-ping"
             />
             <circle
@@ -107,23 +106,21 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
 }
 
 /**
- * Vertical Arrow with SVG line drawing based on fractional scroll (0.0 to 1.0)
- * Points 'down' (↓) with the number badge to its right (as in architectural diagram).
+ * Vertical Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
+ * Points 'down' (↓) with the number badge to its right.
  */
 function VerticalArrow({ number, fraction = 0, className = '' }) {
-  const strokeLen = 42;
-  const strokeOffset = strokeLen * (1 - fraction);
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
   const startY = 4;
-  const endY = 46;
+  const endY = 40;
   const currentY = startY + (endY - startY) * fraction;
 
   return (
     <div className={`relative flex items-center justify-center pointer-events-none select-none ${className}`}>
       {/* Number Badge to the right of the vertical arrow */}
       <div 
-        className={`absolute top-1/2 -translate-y-1/2 left-[calc(50%+16px)] w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-20 ${
+        className={`absolute top-1/2 -translate-y-1/2 left-[calc(50%+16px)] w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
           isComplete
             ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
             : isStarted
@@ -134,7 +131,7 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
         {number}
       </div>
 
-      <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 50">
+      <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 44">
         {/* Inactive Guide Track */}
         <line
           x1="12"
@@ -142,23 +139,23 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
           x2="12"
           y2={endY}
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.5"
           strokeDasharray="3 3"
           className="text-black/15 dark:text-white/15"
         />
 
         {/* Instantiating Drawing Line */}
-        <line
-          x1="12"
-          y1={startY}
-          x2="12"
-          y2={endY}
-          stroke={isComplete ? '#10b981' : '#0071e3'}
-          strokeWidth="2.5"
-          strokeDasharray={strokeLen}
-          strokeDashoffset={strokeOffset}
-          strokeLinecap="round"
-        />
+        {isStarted && (
+          <line
+            x1="12"
+            y1={startY}
+            x2="12"
+            y2={currentY}
+            stroke={isComplete ? '#10b981' : '#0071e3'}
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        )}
 
         {/* Advancing Tip Particle */}
         {isStarted && !isComplete && (
@@ -168,7 +165,7 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
               cy={currentY}
               r="4.5"
               fill="#38bdf8"
-              opacity="0.6"
+              opacity="0.5"
               className="animate-ping"
             />
             <circle
@@ -182,10 +179,10 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
           </g>
         )}
 
-        {/* Crisp Completed Arrowhead */}
+        {/* Crisp Completed Arrowhead pointing down */}
         {isComplete && (
           <path
-            d="M 7 38 L 12 46 L 17 38"
+            d="M 7 33 L 12 40 L 17 33"
             fill="none"
             stroke="#10b981"
             strokeWidth="2.5"
@@ -208,21 +205,21 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
   const strokeOffset = 100 * (1 - fraction);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-32 hidden lg:block overflow-visible mt-2 select-none">
-      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 130" preserveAspectRatio="none">
+    <div className="relative w-full max-w-6xl mx-auto h-28 hidden lg:block overflow-visible mt-2 select-none">
+      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 110" preserveAspectRatio="none">
         {/* Inactive Guide Track */}
         <path
-          d="M 833 0 C 833 45, 833 55, 740 55 L 540 55 C 500 55, 500 70, 500 115"
+          d="M 833 0 C 833 40, 833 50, 740 50 L 540 50 C 500 50, 500 65, 500 105"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.5"
           strokeDasharray="4 4"
           className="text-black/15 dark:text-white/15"
         />
 
         {/* Instantiating Drawing Path */}
         <path
-          d="M 833 0 C 833 45, 833 55, 740 55 L 540 55 C 500 55, 500 70, 500 115"
+          d="M 833 0 C 833 40, 833 50, 740 50 L 540 50 C 500 50, 500 65, 500 105"
           fill="none"
           stroke={isComplete ? '#10b981' : '#0071e3'}
           strokeWidth="3"
@@ -235,7 +232,7 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
         {/* Crisp Completed Arrowhead pointing down */}
         {isComplete && (
           <path
-            d="M 492 105 L 500 118 L 508 105"
+            d="M 492 95 L 500 108 L 508 95"
             fill="none"
             stroke="#10b981"
             strokeWidth="3"
@@ -247,7 +244,7 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
 
       {/* Number Badge "9" above the horizontal curve */}
       <div
-        className={`absolute top-[42px] left-[66%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-20 ${
+        className={`absolute top-[38px] left-[66%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
           isComplete
             ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
             : isStarted
@@ -258,15 +255,15 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
         9
       </div>
 
-      {/* Target Destination: Contact Me Anchor Button */}
-      <div className="absolute top-[125px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
+      {/* Target Destination: Smooth-scroll bridge to Contact Me */}
+      <div className="absolute top-[112px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center">
         <a
           href="#contact"
           onClick={onNavigateContact}
-          className={`group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-md ${
+          className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-sm ${
             isComplete
-              ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:scale-105'
-              : 'bg-white/80 dark:bg-black/60 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10 hover:border-[#0071e3]'
+              ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.4)] hover:scale-105'
+              : 'bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10 hover:border-[#0071e3]'
           }`}
         >
           <span>Contact Me</span>
@@ -352,7 +349,7 @@ export default function EducationCerts() {
   const [isAllUnlocked, setIsAllUnlocked] = useState(false);
   const containerRef = useRef(null);
 
-  // Scroll Progress Listener mapped across 19 stages
+  // Scroll Progress Listener mapped across 19 stages without sticky traps
   useEffect(() => {
     let ticking = false;
 
@@ -363,24 +360,16 @@ export default function EducationCerts() {
             const rect = containerRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
-            if (window.innerWidth < 1024) {
-              // Mobile / Tablet calculation
-              const startOffset = windowHeight * 0.7;
-              const totalMobileDist = rect.height - windowHeight * 0.4;
-              if (totalMobileDist > 0) {
-                const scrolled = startOffset - rect.top;
-                const ratio = Math.max(0, Math.min(1, scrolled / totalMobileDist));
-                setScrollProgress(ratio * 19);
-              }
-            } else {
-              // Desktop Sticky calculation: tracks precisely while pinned
-              const stickyOffset = window.innerWidth >= 1280 ? 96 : 80;
-              const scrollDistance = rect.height - windowHeight;
-              if (scrollDistance > 0) {
-                const scrolled = stickyOffset - rect.top;
-                const ratio = Math.max(0, Math.min(1, scrolled / scrollDistance));
-                setScrollProgress(ratio * 19);
-              }
+            // Starts animating when container enters comfortable reading range (75% down viewport)
+            // Reaches end when bottom approaches 25% of viewport
+            const startTrigger = windowHeight * 0.75;
+            const endTrigger = windowHeight * 0.25;
+            const travelDistance = rect.height + (startTrigger - endTrigger);
+
+            if (travelDistance > 0) {
+              const scrolledDistance = startTrigger - rect.top;
+              const ratio = Math.max(0, Math.min(1, scrolledDistance / travelDistance));
+              setScrollProgress(ratio * 19);
             }
           }
           ticking = false;
@@ -545,200 +534,197 @@ export default function EducationCerts() {
         {/* 19-Stage Scroll-Driven Snake Flow Section */}
         <div 
           ref={containerRef} 
-          className="relative lg:min-h-[260vh] pt-8 border-t border-black/[0.06] dark:border-white/[0.08]"
+          className="pt-8 border-t border-black/[0.06] dark:border-white/[0.08]"
         >
-          <div className="lg:sticky lg:top-20 xl:top-24 w-full">
+          {/* Section Header & Sequence Tracker */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#0071e3] dark:text-cyan-400" />
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  Professional Certifications
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-[#86868b]">
+                Scroll down to advance the chronological flow from Step 1 to Step 9, connecting directly into Contact Me.
+              </p>
+            </div>
+
+            {/* Sequence Status & Quick Toggle */}
+            <div className="flex items-center gap-3 self-start md:self-auto">
+              <div className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse" />
+                <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
+                  Stage {currentStep} of 19
+                </span>
+                <div className="w-20 h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden hidden sm:block">
+                  <div 
+                    className="h-full bg-gradient-to-r from-[#0071e3] to-emerald-400 transition-all duration-150"
+                    style={{ width: `${(effectiveProgress / 19) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsAllUnlocked(prev => !prev)}
+                className="px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 text-xs font-mono font-medium text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-1.5 cursor-pointer"
+                title="Toggle instant view for all cards"
+              >
+                {isAllUnlocked ? (
+                  <>
+                    <RefreshCw className="w-3 h-3 text-[#0071e3]" />
+                    <span>Sync Scroll</span>
+                  </>
+                ) : (
+                  <>
+                    <Eye className="w-3 h-3 text-emerald-500" />
+                    <span>Reveal All</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop 3x3 Snake Grid Layout */}
+          <div className="hidden lg:grid grid-cols-3 gap-x-14 xl:gap-x-16 gap-y-10 relative max-w-6xl mx-auto">
             
-            {/* Section Header & Sequence Tracker */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-[#0071e3] dark:text-cyan-400" />
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                    Professional Certifications
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-[#86868b]">
-                  Scroll down to advance the chronological flow from Step 1 to Step 9, connecting directly to Contact Me.
-                </p>
-              </div>
-
-              {/* Sequence Status & Quick Toggle */}
-              <div className="flex items-center gap-3 self-start md:self-auto">
-                <div className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse" />
-                  <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
-                    Stage {currentStep} of 19
-                  </span>
-                  <div className="w-20 h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden hidden sm:block">
-                    <div 
-                      className="h-full bg-gradient-to-r from-[#0071e3] to-emerald-400 transition-all duration-150"
-                      style={{ width: `${(effectiveProgress / 19) * 100}%` }}
-                    />
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setIsAllUnlocked(prev => !prev)}
-                  className="px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 text-xs font-mono font-medium text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-1.5 cursor-pointer"
-                  title="Toggle instant view for all cards"
-                >
-                  {isAllUnlocked ? (
-                    <>
-                      <RefreshCw className="w-3 h-3 text-[#0071e3]" />
-                      <span>Sync Scroll</span>
-                    </>
-                  ) : (
-                    <>
-                      <Eye className="w-3 h-3 text-emerald-500" />
-                      <span>Reveal All</span>
-                    </>
-                  )}
-                </button>
-              </div>
+            {/* Row 1: Box 1 (Azure AI) ──[1]──> Box 2 (AWS CCP) ──[2]──> Box 3 (AWS Cloud) */}
+            <div className="relative z-10">
+              <CertCard cert={certs[0]} stepNum={1} isActive={isBoxActive(1)} />
+              <HorizontalArrow
+                number={1}
+                direction="right"
+                fraction={getArrowFraction(1)}
+                className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
             </div>
 
-            {/* Desktop 3x3 Snake Grid Layout */}
-            <div className="hidden lg:grid grid-cols-3 gap-x-16 gap-y-12 relative max-w-6xl mx-auto">
-              
-              {/* Row 1: Box 1 (Azure AI) ──[1]──> Box 2 (AWS CCP) ──[2]──> Box 3 (AWS Cloud) */}
-              <div className="relative">
-                <CertCard cert={certs[0]} stepNum={1} isActive={isBoxActive(1)} />
-                <HorizontalArrow
-                  number={1}
-                  direction="right"
-                  fraction={getArrowFraction(1)}
-                  className="absolute -right-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[1]} stepNum={2} isActive={isBoxActive(2)} />
-                <HorizontalArrow
-                  number={2}
-                  direction="right"
-                  fraction={getArrowFraction(2)}
-                  className="absolute -right-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[2]} stepNum={3} isActive={isBoxActive(3)} />
-                <VerticalArrow
-                  number={3}
-                  fraction={getArrowFraction(3)}
-                  className="absolute -bottom-12 left-1/2 -translate-x-1/2 h-12 w-12"
-                />
-              </div>
-
-              {/* Row 2: Box 6 (Airtribe) <──[5]── Box 5 (UpGrad) <──[4]── Box 4 (AWS NLP) */}
-              <div className="relative">
-                <CertCard cert={certs[5]} stepNum={6} isActive={isBoxActive(6)} />
-                <VerticalArrow
-                  number={6}
-                  fraction={getArrowFraction(6)}
-                  className="absolute -bottom-12 left-1/2 -translate-x-1/2 h-12 w-12"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[4]} stepNum={5} isActive={isBoxActive(5)} />
-                <HorizontalArrow
-                  number={5}
-                  direction="left"
-                  fraction={getArrowFraction(5)}
-                  className="absolute -left-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[3]} stepNum={4} isActive={isBoxActive(4)} />
-                <HorizontalArrow
-                  number={4}
-                  direction="left"
-                  fraction={getArrowFraction(4)}
-                  className="absolute -left-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              {/* Row 3: Box 7 (ISRO) ──[7]──> Box 8 (IBM Cloud) ──[8]──> Box 9 (CISCO C++) */}
-              <div className="relative">
-                <CertCard cert={certs[6]} stepNum={7} isActive={isBoxActive(7)} />
-                <HorizontalArrow
-                  number={7}
-                  direction="right"
-                  fraction={getArrowFraction(7)}
-                  className="absolute -right-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[7]} stepNum={8} isActive={isBoxActive(8)} />
-                <HorizontalArrow
-                  number={8}
-                  direction="right"
-                  fraction={getArrowFraction(8)}
-                  className="absolute -right-16 top-1/2 -translate-y-1/2 w-16"
-                />
-              </div>
-
-              <div className="relative">
-                <CertCard cert={certs[8]} stepNum={9} isActive={isBoxActive(9)} />
-              </div>
-
+            <div className="relative z-10">
+              <CertCard cert={certs[1]} stepNum={2} isActive={isBoxActive(2)} />
+              <HorizontalArrow
+                number={2}
+                direction="right"
+                fraction={getArrowFraction(2)}
+                className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
             </div>
 
-            {/* Desktop Arrow 9: Curving down from Box 9 to Contact Me */}
-            <ArrowNineCurve 
-              fraction={getArrowFraction(9)} 
-              onNavigateContact={handleSmoothScrollContact}
-            />
+            <div className="relative z-10">
+              <CertCard cert={certs[2]} stepNum={3} isActive={isBoxActive(3)} />
+              <VerticalArrow
+                number={3}
+                fraction={getArrowFraction(3)}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-10 w-12"
+              />
+            </div>
 
-            {/* Mobile / Tablet Sequential Flow (< 1024px) */}
-            <div className="lg:hidden space-y-4 max-w-md mx-auto pt-6">
-              {certs.map((cert, idx) => {
-                const boxNum = idx + 1;
-                const arrowNum = boxNum;
-                const isBoxOn = isBoxActive(boxNum);
-                const arrowFrac = getArrowFraction(arrowNum);
+            {/* Row 2: Box 6 (Airtribe) <──[5]── Box 5 (UpGrad) <──[4]── Box 4 (AWS NLP) */}
+            <div className="relative z-10">
+              <CertCard cert={certs[5]} stepNum={6} isActive={isBoxActive(6)} />
+              <VerticalArrow
+                number={6}
+                fraction={getArrowFraction(6)}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-10 w-12"
+              />
+            </div>
 
-                return (
-                  <div key={cert.id || cert.name} className="flex flex-col items-center">
-                    <div className="w-full">
-                      <CertCard cert={cert} stepNum={boxNum} isActive={isBoxOn} />
-                    </div>
+            <div className="relative z-10">
+              <CertCard cert={certs[4]} stepNum={5} isActive={isBoxActive(5)} />
+              <HorizontalArrow
+                number={5}
+                direction="left"
+                fraction={getArrowFraction(5)}
+                className="absolute -left-14 xl:-left-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
+            </div>
 
-                    {arrowNum <= 9 && (
-                      <div className="py-2 w-full flex justify-center">
-                        <VerticalArrow
-                          number={arrowNum}
-                          fraction={arrowFrac}
-                          className="h-14 w-12"
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+            <div className="relative z-10">
+              <CertCard cert={certs[3]} stepNum={4} isActive={isBoxActive(4)} />
+              <HorizontalArrow
+                number={4}
+                direction="left"
+                fraction={getArrowFraction(4)}
+                className="absolute -left-14 xl:-left-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
+            </div>
 
-              {/* Mobile Contact Target */}
-              <div className="pt-4 pb-2 flex justify-center">
-                <a
-                  href="#contact"
-                  onClick={handleSmoothScrollContact}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-md ${
-                    effectiveProgress >= 18
-                      ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)]'
-                      : 'bg-white/80 dark:bg-black/60 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10'
-                  }`}
-                >
-                  <span>Contact Me</span>
-                  <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-                </a>
-              </div>
+            {/* Row 3: Box 7 (ISRO) ──[7]──> Box 8 (IBM Cloud) ──[8]──> Box 9 (CISCO C++) */}
+            <div className="relative z-10">
+              <CertCard cert={certs[6]} stepNum={7} isActive={isBoxActive(7)} />
+              <HorizontalArrow
+                number={7}
+                direction="right"
+                fraction={getArrowFraction(7)}
+                className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
+            </div>
+
+            <div className="relative z-10">
+              <CertCard cert={certs[7]} stepNum={8} isActive={isBoxActive(8)} />
+              <HorizontalArrow
+                number={8}
+                direction="right"
+                fraction={getArrowFraction(8)}
+                className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
+              />
+            </div>
+
+            <div className="relative z-10">
+              <CertCard cert={certs[8]} stepNum={9} isActive={isBoxActive(9)} />
             </div>
 
           </div>
+
+          {/* Desktop Arrow 9: Curving down from Box 9 to Contact Me */}
+          <ArrowNineCurve 
+            fraction={getArrowFraction(9)} 
+            onNavigateContact={handleSmoothScrollContact}
+          />
+
+          {/* Mobile / Tablet Sequential Flow (< 1024px) */}
+          <div className="lg:hidden space-y-4 max-w-md mx-auto pt-6">
+            {certs.map((cert, idx) => {
+              const boxNum = idx + 1;
+              const arrowNum = boxNum;
+              const isBoxOn = isBoxActive(boxNum);
+              const arrowFrac = getArrowFraction(arrowNum);
+
+              return (
+                <div key={cert.id || cert.name} className="flex flex-col items-center">
+                  <div className="w-full">
+                    <CertCard cert={cert} stepNum={boxNum} isActive={isBoxOn} />
+                  </div>
+
+                  {arrowNum <= 9 && (
+                    <div className="py-2 w-full flex justify-center">
+                      <VerticalArrow
+                        number={arrowNum}
+                        fraction={arrowFrac}
+                        className="h-12 w-12"
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Mobile Contact Target */}
+            <div className="pt-4 pb-2 flex justify-center">
+              <a
+                href="#contact"
+                onClick={handleSmoothScrollContact}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-md ${
+                  effectiveProgress >= 18
+                    ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)]'
+                    : 'bg-white/80 dark:bg-black/60 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10'
+                }`}
+              >
+                <span>Contact Me</span>
+                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+              </a>
+            </div>
+          </div>
+
         </div>
 
       </div>

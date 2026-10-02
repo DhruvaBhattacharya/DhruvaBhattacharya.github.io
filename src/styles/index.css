@@ -202,3 +202,60 @@ html:not(.dark) .apple-segmented-container {
 .animate-uml-beam {
   animation: umlPulseTravel 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
+/* ==========================================================================
+   Poppy White Flow Arrow System (Certifications -> Contact Flow)
+   ========================================================================== */
+
+/* Inactive dashed guide track */
+.poppy-arrow-track {
+  stroke: rgba(0, 0, 0, 0.12);
+}
+
+.dark .poppy-arrow-track {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+/* Radiant soft aura glow layer */
+.poppy-arrow-glow {
+  stroke: #0f172a;
+  opacity: 0.15;
+}
+
+.dark .poppy-arrow-glow {
+  stroke: #ffffff;
+  opacity: 0.45;
+  filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(255, 255, 255, 0.85));
+}
+
+/* Solid core laser line with intense luminous specular bloom */
+.poppy-arrow-core {
+  stroke: #0f172a;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+}
+
+.dark .poppy-arrow-core {
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 18px rgba(255, 255, 255, 0.65));
+}
+
+/* Arrowhead */
+.poppy-arrow-head {
+  stroke: #0f172a;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+}
+
+.dark .poppy-arrow-head {
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 18px rgba(255, 255, 255, 0.65));
+}
+
+/* Advancing Tip Beacon / Dot */
+.poppy-arrow-dot {
+  fill: #0f172a;
+}
+
+.dark .poppy-arrow-dot {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 10px rgba(255, 255, 255, 0.95));
+}

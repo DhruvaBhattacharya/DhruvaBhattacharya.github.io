@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Cpu, Server, Database, Cloud, Code2, CheckCircle2, Sparkles, Layers } from 'lucide-react';
+import { Cpu, Server, Database, Cloud, Code2, Sparkles, Layers } from 'lucide-react';
 import skillsData from '../../data/skills.json';
 import ParallaxCard from '../common/ParallaxCard';
 import UmlArrow from '../common/UmlArrow';
@@ -17,7 +17,6 @@ const pipelineNodes = [
     id: 'Languages & Core Systems',
     label: 'Languages & Core Systems',
     shortLabel: 'Languages & Core',
-    nodeTag: 'UML::NODE_01',
     connectorLabel: 'Compiled / OOP',
     icon: Code2
   },
@@ -25,7 +24,6 @@ const pipelineNodes = [
     id: 'Backend Engineering & Microservices',
     label: 'Backend Engineering & Microservices',
     shortLabel: 'Backend & Services',
-    nodeTag: 'UML::NODE_02',
     connectorLabel: 'REST / RPC',
     icon: Server
   },
@@ -33,7 +31,6 @@ const pipelineNodes = [
     id: 'Databases & High-Throughput Storage',
     label: 'Databases & High-Throughput Storage',
     shortLabel: 'Databases & Cache',
-    nodeTag: 'UML::NODE_03',
     connectorLabel: 'ACID / Memory',
     icon: Database
   },
@@ -41,7 +38,6 @@ const pipelineNodes = [
     id: 'AI, Generative AI & Agentic Systems',
     label: 'AI, Generative AI & Agentic Systems',
     shortLabel: 'GenAI & Agents',
-    nodeTag: 'UML::NODE_04',
     connectorLabel: 'RAG / LLM',
     icon: Cpu
   },
@@ -49,7 +45,6 @@ const pipelineNodes = [
     id: 'Cloud, DevOps & Observability',
     label: 'Cloud, DevOps & Observability',
     shortLabel: 'Cloud & DevOps',
-    nodeTag: 'UML::NODE_05',
     connectorLabel: 'K8s / CI-CD',
     icon: Cloud
   }
@@ -71,14 +66,14 @@ export default function Skills() {
     skillsData.find(c => c.category.includes('Cloud')) || skillsData[4]
   ].filter(Boolean);
 
-  // Scroll-triggered automatic sequential UML arrow completion
+  // Scroll-triggered automatic sequential arrow completion
   useEffect(() => {
     const handleScrollOrIntersect = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // When section is partially in view
+      // When section is in view
       if (rect.top <= windowHeight * 0.75 && rect.bottom >= windowHeight * 0.2) {
         if (!hasAnimated) {
           setHasAnimated(true);
@@ -95,7 +90,7 @@ export default function Skills() {
     };
 
     window.addEventListener('scroll', handleScrollOrIntersect, { passive: true });
-    handleScrollOrIntersect(); // Initial check
+    handleScrollOrIntersect();
 
     return () => window.removeEventListener('scroll', handleScrollOrIntersect);
   }, [hasAnimated]);
@@ -122,15 +117,15 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Dynamic NeetCode / UML Sequential Pipeline Bar */}
+        {/* Sequential Architecture Pipeline Bar */}
         <div className="mb-14">
           <div className="flex items-center justify-between pb-3 px-1">
             <span className="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse"></span>
-              SYSTEM ARCHITECTURE PIPELINE [UML SEQUENCE FLOW]
+              SYSTEM ARCHITECTURE ROADMAP
             </span>
             <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-medium">
-              {completedStep >= pipelineNodes.length ? 'PIPELINE CONNECTED: 100%' : `LINKING NODES: ${completedStep}/${pipelineNodes.length}`}
+              {completedStep >= pipelineNodes.length ? 'PIPELINE CONNECTED: 100%' : `LINKING STAGES: ${completedStep}/${pipelineNodes.length}`}
             </span>
           </div>
 
@@ -142,8 +137,6 @@ export default function Skills() {
               {pipelineNodes.map((node, i) => {
                 const isCurrentActive = activeNode === node.id;
                 const isStepCompleted = completedStep > i;
-                const isStepAnimating = completedStep === i;
-                const Icon = node.icon;
 
                 return (
                   <React.Fragment key={node.id}>
@@ -151,7 +144,7 @@ export default function Skills() {
                     <button
                       type="button"
                       onClick={() => handleNodeClick(node.id)}
-                      className={`group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-left font-mono text-xs transition-all duration-300 relative ${
+                      className={`group flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-left text-xs font-medium transition-all duration-300 relative ${
                         isCurrentActive
                           ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/25 scale-105 z-10'
                           : isStepCompleted
@@ -169,19 +162,12 @@ export default function Skills() {
                         }`}
                       />
                       
-                      <div className="flex flex-col min-w-0">
-                        <span className={`text-[10px] uppercase font-bold tracking-wider ${
-                          isCurrentActive ? 'text-white/80' : 'text-[#0071e3] dark:text-cyan-400'
-                        }`}>
-                          {node.nodeTag}
-                        </span>
-                        <span className="font-semibold truncate max-w-[170px]">
-                          {node.label}
-                        </span>
-                      </div>
+                      <span className="font-semibold truncate max-w-[200px]">
+                        {node.label}
+                      </span>
                     </button>
 
-                    {/* Animated UML Arrow Connector */}
+                    {/* Animated Arrow Connector */}
                     {i < pipelineNodes.length - 1 && (
                       <UmlArrow
                         isCompleted={completedStep > i}
@@ -200,7 +186,6 @@ export default function Skills() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
           {orderedCategories.map((category, idx) => {
             const Icon = iconMap[category.icon] || Code2;
-            const matchingNode = pipelineNodes.find(n => n.id === category.category);
             const isHighlightedNode = activeNode === category.category;
 
             return (
@@ -216,17 +201,6 @@ export default function Skills() {
                 }`}
               >
                 <div>
-                  {/* UML Node Tag Header */}
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 dark:text-slate-500 pb-3 border-b border-black/[0.05] dark:border-white/[0.06] mb-4">
-                    <span className="flex items-center gap-1.5 font-bold text-[#0071e3] dark:text-cyan-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse"></span>
-                      <span>{matchingNode?.nodeTag || `UML::NODE_0${idx + 1}`}</span>
-                    </span>
-                    <span className="text-[10px] tracking-widest uppercase text-slate-400">
-                      SYSTEM COMPONENT
-                    </span>
-                  </div>
-
                   {/* Category Title & Icon */}
                   <div className="flex items-center gap-3 pb-4 mb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
                     <div className="w-11 h-11 rounded-2xl bg-[#0071e3]/10 dark:bg-cyan-950/40 border border-[#0071e3]/20 dark:border-cyan-500/30 flex items-center justify-center text-[#0071e3] dark:text-cyan-400 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -266,17 +240,6 @@ export default function Skills() {
                       </div>
                     ))}
                   </div>
-                </div>
-
-                {/* Subdued UML Node Status */}
-                <div className="pt-4 mt-5 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-slate-500">
-                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    Synchronized
-                  </span>
-                  <span className="text-[10px] text-slate-400">
-                    UML::LINKED
-                  </span>
                 </div>
               </ParallaxCard>
             );

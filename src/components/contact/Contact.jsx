@@ -101,7 +101,7 @@ export default function Contact() {
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                  Message Sent Successfully!
+                  Message Delivered to dhruvabhattacharya130102@gmail.com
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-md mx-auto">
                   Thank you for reaching out! Your message has been received and I will contact you shortly.

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Award, GraduationCap, Trophy, CheckCircle, ShieldCheck, Cpu, Cloud, Terminal, Sparkles, Filter } from 'lucide-react';
+import { Award, GraduationCap, Trophy, CheckCircle, ShieldCheck, Cpu, Cloud, Terminal } from 'lucide-react';
 import certsData from '../../data/certifications.json';
 import ParallaxCard from '../common/ParallaxCard';
 import UmlArrow from '../common/UmlArrow';
@@ -8,7 +8,6 @@ const certTracks = [
   {
     id: 'Cloud & Distributed Systems',
     label: 'Cloud & Distributed Systems',
-    tag: 'TRACK::01_CLOUD',
     connectorLabel: 'Infra / IAM',
     icon: Cloud,
     count: 3
@@ -16,7 +15,6 @@ const certTracks = [
   {
     id: 'GenAI & Agentic Systems',
     label: 'GenAI & Agentic Systems',
-    tag: 'TRACK::02_GENAI',
     connectorLabel: 'LLMs / RAG',
     icon: Cpu,
     count: 4
@@ -24,7 +22,6 @@ const certTracks = [
   {
     id: 'Core Systems & Research',
     label: 'Core Systems & Research',
-    tag: 'TRACK::03_CORE',
     connectorLabel: 'DSA / Modeling',
     icon: Terminal,
     count: 2
@@ -37,7 +34,7 @@ export default function EducationCerts() {
   const [hasAnimated, setHasAnimated] = useState(false);
   const certSectionRef = useRef(null);
 
-  // Scroll-triggered automatic UML arrow completion for Certifications
+  // Scroll-triggered automatic arrow completion for Certifications
   useEffect(() => {
     const handleScrollOrIntersect = () => {
       if (!certSectionRef.current) return;
@@ -185,7 +182,7 @@ export default function EducationCerts() {
 
         </div>
 
-        {/* Professional Certifications with NeetCode / UML Architecture Pipeline */}
+        {/* Professional Certifications */}
         <div ref={certSectionRef} className="space-y-8 pt-8 border-t border-black/[0.06] dark:border-white/[0.08]">
           
           {/* Section Header */}
@@ -232,21 +229,19 @@ export default function EducationCerts() {
             </div>
           </div>
 
-          {/* UML Architecture Pipeline Flow Bar for Certifications */}
+          {/* Sequential Pipeline Flow Bar for Certifications */}
           <div className="overflow-x-auto pb-2 scrollbar-none">
             <div className="flex items-center justify-between min-w-[760px] p-3 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] shadow-xs">
               {certTracks.map((track, i) => {
                 const isSelected = activeTrack === track.id;
                 const isCompleted = completedCertStep > i;
-                const isCurrent = completedCertStep === i + 1;
-                const Icon = track.icon;
 
                 return (
                   <React.Fragment key={track.id}>
                     <button
                       type="button"
                       onClick={() => setActiveTrack(prev => (prev === track.id ? 'ALL' : track.id))}
-                      className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left font-mono text-xs transition-all duration-300 ${
+                      className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-left text-xs font-medium transition-all duration-300 ${
                         isSelected
                           ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20 scale-105 z-10'
                           : isCompleted
@@ -263,16 +258,9 @@ export default function EducationCerts() {
                             : 'bg-slate-300 dark:bg-slate-700'
                         }`}
                       />
-                      <div className="flex flex-col min-w-0">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider ${
-                          isSelected ? 'text-white/80' : 'text-[#0071e3] dark:text-cyan-400'
-                        }`}>
-                          {track.tag}
-                        </span>
-                        <span className="font-semibold truncate">
-                          {track.label}
-                        </span>
-                      </div>
+                      <span className="font-semibold truncate">
+                        {track.label}
+                      </span>
                     </button>
 
                     {i < certTracks.length - 1 && (
@@ -288,7 +276,7 @@ export default function EducationCerts() {
             </div>
           </div>
 
-          {/* 9 Professional Certifications Grid with 3D Parallax & UML Styling */}
+          {/* 9 Professional Certifications Grid with 3D Parallax */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredCerts.map((cert) => (
               <ParallaxCard
@@ -298,31 +286,17 @@ export default function EducationCerts() {
                 glareColor="rgba(0, 113, 227, 0.16)"
                 className="glass-card rounded-2xl p-5 border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 transition-all flex flex-col justify-between group"
               >
-                <div>
-                  {/* Monospace Node ID & Category */}
-                  <div className="flex items-center justify-between text-[11px] font-mono pb-2.5 mb-3 border-b border-black/[0.05] dark:border-white/[0.06]">
-                    <span className="font-bold text-[#0071e3] dark:text-cyan-400 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse"></span>
-                      {cert.nodeId || 'UML::CRED_NODE'}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate max-w-[130px]">
-                      {cert.issuer}
-                    </span>
-                  </div>
-
-                  {/* Issuer & Certification Title */}
-                  <div className="space-y-1.5">
-                    <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                      {cert.issuer}
-                    </span>
-                    <h4 className="text-base font-bold text-slate-900 dark:text-slate-100 leading-snug tracking-tight group-hover:text-[#0071e3] dark:group-hover:text-cyan-400 transition-colors">
-                      {cert.name}
-                    </h4>
-                  </div>
+                <div className="space-y-2">
+                  <span className="text-[11px] font-mono font-bold text-[#0071e3] dark:text-cyan-400 uppercase tracking-wider block">
+                    {cert.issuer}
+                  </span>
+                  <h4 className="text-base font-bold text-slate-900 dark:text-slate-100 leading-snug tracking-tight group-hover:text-[#0071e3] dark:group-hover:text-cyan-400 transition-colors">
+                    {cert.name}
+                  </h4>
                 </div>
 
                 {/* Verified Credential Badge */}
-                <div className="pt-4 mt-4 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between">
+                <div className="pt-4 mt-5 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400">
                     <CheckCircle className="w-3.5 h-3.5" />
                     Verified Credential

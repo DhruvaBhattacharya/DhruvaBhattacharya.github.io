@@ -254,14 +254,10 @@ export default function VisitorTracker() {
     };
   }, []);
 
-  // Show prompt ONLY when BOTH conditions are met:
-  // 1) 10+ seconds have passed
-  // 2) User has scrolled to the bottom of the portfolio
+  // Automatic popup disabled to keep user experience clean and free of unprompted popups
   useEffect(() => {
-    if (hasPassed10Seconds && isNearBottom && !checkedIn && !dismissed) {
-      setShowPrompt(true);
-    }
-  }, [hasPassed10Seconds, isNearBottom, checkedIn, dismissed]);
+    // Check-in modal only opens if user explicitly clicks the bottom-left check-in button
+  }, []);
 
   const handleCheckIn = (e) => {
     if (e) e.preventDefault();

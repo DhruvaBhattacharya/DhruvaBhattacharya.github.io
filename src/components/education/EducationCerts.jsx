@@ -23,7 +23,7 @@ function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) 
   const currentX = startX + (endX - startX) * fraction;
 
   return (
-    <div className={`relative flex items-center justify-center pointer-events-none select-none overflow-visible z-20 ${className}`}>
+    <div className={`pointer-events-none select-none overflow-visible z-20 flex items-center justify-center ${className}`}>
       <svg className="w-full h-8 overflow-visible" viewBox="0 0 64 24">
         {/* Subtle background guide dash */}
         <line
@@ -126,7 +126,7 @@ function VerticalArrow({ fraction = 0, className = '' }) {
   const currentY = startY + (endY - startY) * fraction;
 
   return (
-    <div className={`relative flex items-center justify-center pointer-events-none select-none overflow-visible z-20 ${className}`}>
+    <div className={`pointer-events-none select-none overflow-visible z-20 flex items-center justify-center ${className}`}>
       <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 46">
         {/* Subtle background guide dash */}
         <line
@@ -634,7 +634,7 @@ export default function EducationCerts() {
                     <div className="py-2 w-full flex justify-center">
                       <VerticalArrow
                         fraction={arrowFrac}
-                        className="h-12 w-10"
+                        className="relative h-12 w-10"
                       />
                     </div>
                   )}

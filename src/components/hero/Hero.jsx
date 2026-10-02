@@ -39,7 +39,7 @@ export default function Hero({ isLoaded = true }) {
                   {profileData.name}
                 </span>
               </h1>
-              <div className="pt-1 flex justify-center lg:justify-start">
+              <div className="pt-1.5 w-full flex justify-center lg:justify-start">
                 <CodingTypewriter />
               </div>
             </div>

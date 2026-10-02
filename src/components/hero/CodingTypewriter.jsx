@@ -74,27 +74,29 @@ export default function CodingTypewriter() {
   return (
     <div
       onClick={handleQuickCycle}
-      className="inline-flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-slate-950/95 dark:bg-black/95 border border-emerald-500/30 dark:border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.15)] font-mono cursor-pointer select-none transition-all hover:border-emerald-400/60 hover:shadow-[0_0_28px_rgba(16,185,129,0.25)] max-w-2xl mx-auto lg:mx-0 min-h-[46px] sm:min-h-[50px] group"
+      className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 px-3.5 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-slate-950/95 dark:bg-black/95 border border-emerald-500/30 dark:border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.12)] font-mono cursor-pointer select-none transition-all hover:border-emerald-400/60 hover:shadow-[0_0_28px_rgba(16,185,129,0.22)] min-h-[52px] sm:min-h-[56px] flex items-center group"
       title="Click to cycle next role"
     >
-      {/* PowerShell Hacker Prompt */}
-      <div className="flex items-center gap-1.5 select-none shrink-0 text-emerald-500 dark:text-emerald-400 font-bold text-sm sm:text-base lg:text-lg">
-        <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse hidden sm:inline" />
-        <span className="tracking-tight">PS &gt;</span>
-      </div>
+      <div className="w-full flex items-start sm:items-center gap-2 sm:gap-2.5">
+        {/* PowerShell Hacker Prompt */}
+        <div className="flex items-center gap-1.5 select-none shrink-0 text-emerald-500 dark:text-emerald-400 font-bold font-mono text-xs xs:text-sm sm:text-base pt-0.5 sm:pt-0">
+          <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse shrink-0" />
+          <span className="tracking-tight">PS &gt;</span>
+        </div>
 
-      {/* Live Typed Text with Blinking Terminal Block Cursor */}
-      <div className="flex items-center flex-wrap">
-        <span className="text-emerald-400 dark:text-emerald-300 font-semibold text-sm sm:text-base lg:text-lg tracking-wide drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">
-          {displayedText}
-        </span>
-        <span className="inline-block w-2 sm:w-2.5 h-4 sm:h-5 bg-emerald-400 dark:bg-emerald-300 animate-pulse rounded-xs shadow-[0_0_8px_#34d399] ml-1.5 align-middle shrink-0" />
-      </div>
+        {/* Live Typed Text with Blinking Terminal Block Cursor */}
+        <div className="flex-1 min-w-0 font-mono text-xs xs:text-sm sm:text-base leading-relaxed sm:leading-normal">
+          <span className="text-emerald-400 dark:text-emerald-300 font-semibold tracking-normal sm:tracking-wide drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">
+            {displayedText}
+          </span>
+          <span className="inline-block w-1.5 xs:w-2 sm:w-2.5 h-3.5 xs:h-4 sm:h-5 bg-emerald-400 dark:bg-emerald-300 animate-pulse rounded-xs shadow-[0_0_8px_#34d399] ml-1 align-baseline shrink-0" />
+        </div>
 
-      {/* Subtle Hint on Desktop */}
-      <div className="ml-auto pl-2 hidden md:flex items-center gap-1 text-[10px] font-mono text-emerald-600/60 dark:text-emerald-500/50 select-none group-hover:text-emerald-400 transition-colors">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span>ENTER ↵</span>
+        {/* Subtle Hint on Desktop */}
+        <div className="shrink-0 pl-2 hidden md:flex items-center gap-1.5 text-[10px] font-mono text-emerald-600/60 dark:text-emerald-500/50 select-none group-hover:text-emerald-400 transition-colors self-center">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span>ENTER ↵</span>
+        </div>
       </div>
     </div>
   );

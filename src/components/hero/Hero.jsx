@@ -110,7 +110,7 @@ export default function Hero({ isLoaded = true }) {
           </div>
 
           {/* Right Column: Single Professional Image (Coding Dhruva Only) */}
-          <div className="lg:col-span-5 flex flex-col items-center w-full mt-16 sm:mt-20 lg:mt-0">
+          <div className="lg:col-span-5 flex flex-col items-center w-full mt-24 sm:mt-28 lg:mt-0">
             {showConsole ? (
               <KernelConsole onClose={() => setShowConsole(false)} />
             ) : (

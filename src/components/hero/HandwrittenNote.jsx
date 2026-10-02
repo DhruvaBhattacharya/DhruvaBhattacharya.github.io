@@ -63,42 +63,37 @@ export default function HandwrittenNote({ isLoaded = true }) {
 
   return (
     <div
-      className="absolute -top-14 sm:-top-16 lg:-top-20 left-2 sm:left-4 z-30 pointer-events-none select-none flex flex-col items-start"
+      className="absolute -top-24 sm:-top-28 lg:-top-28 left-3 sm:left-6 z-30 pointer-events-none select-none flex flex-col items-start"
       aria-hidden="true"
     >
       {/* Two-Line Straight Handwritten Text */}
       <div className="flex flex-col items-start font-handwriting font-bold text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] leading-tight whitespace-nowrap transition-colors">
         <span>{displayText1}</span>
-        <div className="flex items-center">
-          <span>{displayText2}</span>
-          {isWriting && !isComplete && displayText1.length >= LINE1.length && (
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-white ml-1 animate-ping align-middle" />
-          )}
-        </div>
+        <span>{displayText2}</span>
       </div>
 
-      {/* Hand-Drawn Downward Arrow Pointing to Photo */}
-      <div className="w-6 h-8 sm:w-8 sm:h-10 overflow-visible mt-0.5 ml-3 sm:ml-4 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
+      {/* Hand-Drawn Curly Doodle Arrow Pointing Down Toward Photo (Does NOT Overlap Photo) */}
+      <div className="w-12 h-10 overflow-visible mt-1 ml-6 text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] transition-colors">
         <svg
           className="w-full h-full overflow-visible"
-          viewBox="0 0 32 40"
+          viewBox="0 0 50 42"
           fill="none"
         >
-          {/* Vertical Arrow Shaft */}
+          {/* Curly Loop Arrow Body */}
           <path
-            d="M 16 2 L 16 30"
+            d="M 22 2 C 34 2, 42 10, 36 18 C 30 26, 16 18, 20 10 C 22 6, 30 14, 28 34"
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             style={{
-              strokeDasharray: 35,
-              strokeDashoffset: isComplete ? 0 : 35,
-              transition: 'stroke-dashoffset 0.4s ease-out'
+              strokeDasharray: 95,
+              strokeDashoffset: isComplete ? 0 : 95,
+              transition: 'stroke-dashoffset 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           />
           {/* Arrowhead Pointing Down */}
           <path
-            d="M 9 22 L 16 31 L 23 22"
+            d="M 21 27 L 28 35 L 35 27"
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
@@ -106,8 +101,8 @@ export default function HandwrittenNote({ isLoaded = true }) {
             style={{
               opacity: isComplete ? 1 : 0,
               transform: isComplete ? 'scale(1)' : 'scale(0.3)',
-              transformOrigin: '16px 31px',
-              transition: 'opacity 0.2s ease-out 0.28s, transform 0.2s ease-out 0.28s'
+              transformOrigin: '28px 35px',
+              transition: 'opacity 0.2s ease-out 0.35s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s'
             }}
           />
         </svg>

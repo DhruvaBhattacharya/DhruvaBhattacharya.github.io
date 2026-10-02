@@ -74,9 +74,6 @@ export default function HandwrittenSectionNote({
       {/* Straight Handwritten Text */}
       <div className="flex items-center text-xl sm:text-2xl md:text-3xl font-handwriting font-bold tracking-wide text-slate-900 dark:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] whitespace-nowrap transition-colors">
         <span>{displayText}</span>
-        {isWriting && !isComplete && (
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-white ml-1 animate-ping align-middle" />
-        )}
       </div>
 
       {/* Hand-Drawn Doodle Arrow Curving Down-Right Toward Section Title */}

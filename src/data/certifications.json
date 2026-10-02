@@ -42,57 +42,84 @@
   ],
   "certifications": [
     {
+      "id": "cert-az-ai",
+      "nodeId": "UML::MS_AZAI_01",
+      "category": "GenAI & Agentic Systems",
       "name": "Microsoft Certified: Azure AI Engineer Associate",
       "issuer": "Microsoft",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "cyan"
     },
     {
+      "id": "cert-aws-ccp",
+      "nodeId": "UML::AWS_CCP_02",
+      "category": "Cloud & Distributed Systems",
       "name": "AWS Certified Cloud Practitioner",
       "issuer": "Amazon Web Services",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "amber"
     },
     {
+      "id": "cert-aws-cld",
+      "nodeId": "UML::AWS_CLD_03",
+      "category": "Cloud & Distributed Systems",
       "name": "AWS Cloud Foundations",
       "issuer": "Amazon Web Services",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "amber"
     },
     {
+      "id": "cert-aws-nlp",
+      "nodeId": "UML::AWS_NLP_04",
+      "category": "GenAI & Agentic Systems",
       "name": "AWS Machine Learning for NLP",
       "issuer": "Amazon Web Services",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "amber"
     },
     {
+      "id": "cert-upgrad-genai",
+      "nodeId": "UML::UPG_AI_05",
+      "category": "GenAI & Agentic Systems",
       "name": "Executive Certificate in Generative AI",
       "issuer": "UpGrad",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "indigo"
     },
     {
+      "id": "cert-airtribe-se",
+      "nodeId": "UML::AIR_SE_06",
+      "category": "GenAI & Agentic Systems",
       "name": "AI-First Software Engineering",
       "issuer": "Airtribe",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "emerald"
     },
     {
+      "id": "cert-isro-hm",
+      "nodeId": "UML::ISRO_HM_07",
+      "category": "Core Systems & Research",
       "name": "Hydrological Modelling",
       "issuer": "Indian Space Research Organization (ISRO)",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "blue"
     },
     {
+      "id": "cert-ibm-cld",
+      "nodeId": "UML::IBM_CLD_08",
+      "category": "Cloud & Distributed Systems",
       "name": "IBM Cloud Essentials - V3",
       "issuer": "IBM",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "blue"
     },
     {
+      "id": "cert-cisco-cpp",
+      "nodeId": "UML::CISCO_CPP_09",
+      "category": "Core Systems & Research",
       "name": "CPA: Programming Essentials in C++",
       "issuer": "CISCO Networking Academy",
-      "date": "Verified",
+      "status": "Verified Credential",
       "badgeColor": "emerald"
     }
   ]

@@ -176,11 +176,11 @@ function ArrowNineCurve({ fraction = 0 }) {
   const strokeOffset = 100 * (1 - fraction);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-24 hidden lg:block overflow-visible mt-2 select-none pointer-events-none">
-      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 96" preserveAspectRatio="none">
+    <div className="relative w-full max-w-6xl mx-auto h-36 hidden lg:block overflow-visible mt-2 select-none pointer-events-none">
+      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 144" preserveAspectRatio="none">
         {/* Inactive Guide Track */}
         <path
-          d="M 833 0 C 833 35, 833 45, 740 45 L 540 45 C 500 45, 500 60, 500 90"
+          d="M 852 0 C 852 45, 852 55, 740 55 L 540 55 C 500 55, 500 75, 500 135"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -188,9 +188,9 @@ function ArrowNineCurve({ fraction = 0 }) {
           className="text-black/10 dark:text-white/10"
         />
 
-        {/* Instantiating Drawing Path */}
+        {/* Instantiating Drawing Path: emerges from Tile 9 and ends at Contact Me */}
         <path
-          d="M 833 0 C 833 35, 833 45, 740 45 L 540 45 C 500 45, 500 60, 500 90"
+          d="M 852 0 C 852 45, 852 55, 740 55 L 540 55 C 500 55, 500 75, 500 135"
           fill="none"
           stroke={isComplete ? '#10b981' : '#0071e3'}
           strokeWidth="3"
@@ -201,10 +201,10 @@ function ArrowNineCurve({ fraction = 0 }) {
           className="transition-[stroke-dashoffset] duration-75"
         />
 
-        {/* Crisp Completed Arrowhead pointing straight down towards Contact Us */}
+        {/* Crisp Completed Arrowhead pointing straight down into Contact Me */}
         {isComplete && (
           <path
-            d="M 492 78 L 500 92 L 508 78"
+            d="M 492 122 L 500 138 L 508 122"
             fill="none"
             stroke="#10b981"
             strokeWidth="3"
@@ -329,7 +329,7 @@ export default function EducationCerts() {
   };
 
   return (
-    <section id="achievements" className="py-24 relative transition-colors duration-300">
+    <section id="achievements" className="pt-24 pb-4 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

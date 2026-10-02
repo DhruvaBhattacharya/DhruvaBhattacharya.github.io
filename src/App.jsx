@@ -32,7 +32,7 @@ export default function App() {
       {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <main className="flex-grow w-full max-w-full overflow-x-clip">
-        <Hero />
+        <Hero isLoaded={!showSplash} />
         <Experience />
         <Projects />
         <Skills />

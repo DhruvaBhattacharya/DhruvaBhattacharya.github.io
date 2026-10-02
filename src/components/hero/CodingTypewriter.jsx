@@ -4,8 +4,7 @@ import { Terminal } from 'lucide-react';
 const phrases = [
   "Java Backend Developer",
   "Architecting High-Scale Distributed Systems",
-  "Microservices & Enterprise GenAI Pipelines",
-  "Low-Latency Architectures (Redis & Spring Boot)"
+  "Engineering Scalable Backend Systems"
 ];
 
 /**

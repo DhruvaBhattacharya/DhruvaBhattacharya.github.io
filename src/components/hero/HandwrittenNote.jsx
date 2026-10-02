@@ -2,100 +2,115 @@ import React, { useState, useEffect } from 'react';
 
 /**
  * HandwrittenNote
- * Organic handwritten annotation appearing on the left side of the hero photo.
- * When the page renders, it naturally writes out "this is me :)" in realistic cursive handwriting,
- * accompanied by a cute hand-drawn arrow curving towards the photo.
+ * Organic handwritten annotation appearing above the hero photo (Design 2).
+ * Writes out:
+ * "This is
+ *  me :)"
+ * with a pure white downward-pointing hand-drawn arrow directly indicating the photo.
+ * Fixed straight orientation (no diagonal rotation), pure white color, text emoji :).
  */
-export default function HandwrittenNote() {
-  const TARGET_TEXT = "this is me :)";
-  const [displayText, setDisplayText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
+export default function HandwrittenNote({ isLoaded = true }) {
+  const [displayText1, setDisplayText1] = useState('');
+  const [displayText2, setDisplayText2] = useState('');
   const [isWriting, setIsWriting] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+
+  const LINE1 = "This is";
+  const LINE2 = "me :)";
 
   useEffect(() => {
-    // Brief initial delay so the visitor observes the handwriting instantiate in real-time
+    if (!isLoaded) return;
+
+    // Start after full page is loaded and splash screen dismisses
     const startTimeout = setTimeout(() => {
       setIsWriting(true);
-    }, 450);
+    }, 400);
 
     return () => clearTimeout(startTimeout);
-  }, []);
+  }, [isLoaded]);
 
   useEffect(() => {
     if (!isWriting) return;
 
-    if (displayText.length < TARGET_TEXT.length) {
-      const nextChar = TARGET_TEXT[displayText.length];
-      // Natural handwriting speed variation (65ms - 95ms)
-      let delay = Math.floor(Math.random() * 30) + 65;
-      if (nextChar === ' ') delay += 45;
-      if (nextChar === ':' || nextChar === ')') delay += 70;
+    // First write Line 1: "This is"
+    if (displayText1.length < LINE1.length) {
+      let delay = Math.floor(Math.random() * 25) + 60;
+      const timer = setTimeout(() => {
+        setDisplayText1(LINE1.slice(0, displayText1.length + 1));
+      }, delay);
+      return () => clearTimeout(timer);
+    } 
+    // Then write Line 2: "me :)"
+    else if (displayText2.length < LINE2.length) {
+      const nextChar = LINE2[displayText2.length];
+      let delay = Math.floor(Math.random() * 25) + 60;
+      if (nextChar === ' ') delay += 40;
+      if (nextChar === ':' || nextChar === ')') delay += 60;
 
       const timer = setTimeout(() => {
-        setDisplayText(TARGET_TEXT.slice(0, displayText.length + 1));
+        setDisplayText2(LINE2.slice(0, displayText2.length + 1));
       }, delay);
-
       return () => clearTimeout(timer);
-    } else {
-      // Completed writing: trigger hand-drawn arrow reveal
+    } 
+    // Both lines complete: trigger white arrow reveal
+    else {
       const completeTimer = setTimeout(() => {
         setIsComplete(true);
-      }, 120);
+      }, 100);
       return () => clearTimeout(completeTimer);
     }
-  }, [displayText, isWriting]);
+  }, [displayText1, displayText2, isWriting]);
 
   return (
     <div
-      className="absolute left-0 -top-12 sm:left-auto sm:-left-32 md:-left-36 sm:top-10 md:top-12 z-30 pointer-events-none select-none -rotate-6 sm:-rotate-12 transition-transform duration-500 hover:scale-105"
+      className="absolute -top-24 sm:-top-28 left-2 sm:left-4 z-30 pointer-events-none select-none flex flex-col items-start"
       aria-hidden="true"
     >
-      <div className="flex flex-col items-start sm:items-end">
-        {/* Handwritten text */}
-        <div className="flex items-center text-2xl sm:text-3xl md:text-[32px] font-handwriting font-bold tracking-wide text-[#0071e3] dark:text-cyan-300 drop-shadow-[0_2px_10px_rgba(0,113,227,0.25)] dark:drop-shadow-[0_0_12px_rgba(6,182,212,0.45)] whitespace-nowrap">
-          <span>{displayText}</span>
-          
-          {/* Subtle pen tip glow while writing */}
-          {isWriting && !isComplete && (
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-300 ml-1 animate-ping align-middle" />
+      {/* Two-Line Straight Handwritten Text */}
+      <div className="flex flex-col items-start font-handwriting font-bold text-2xl sm:text-3xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] leading-tight whitespace-nowrap">
+        <span>{displayText1}</span>
+        <div className="flex items-center">
+          <span>{displayText2}</span>
+          {isWriting && !isComplete && displayText1.length >= LINE1.length && (
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-white ml-1 animate-ping align-middle" />
           )}
         </div>
+      </div>
 
-        {/* Hand-drawn doodle arrow curving towards the photo */}
-        <div className="w-16 h-10 sm:w-20 sm:h-12 overflow-visible -mt-1 sm:-mt-1 text-[#0071e3] dark:text-cyan-300 drop-shadow-[0_2px_8px_rgba(0,113,227,0.2)] dark:drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] ml-12 sm:ml-auto">
-          <svg
-            className="w-full h-full overflow-visible"
-            viewBox="0 0 80 48"
-            fill="none"
-          >
-            {/* Curved arrow arc */}
-            <path
-              d="M 10 8 C 24 10, 48 16, 62 30 C 66 34, 69 38, 72 40"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              style={{
-                strokeDasharray: 90,
-                strokeDashoffset: isComplete ? 0 : 90,
-                transition: 'stroke-dashoffset 0.55s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-            />
-            {/* Arrowhead */}
-            <path
-              d="M 61 40 L 73 40 L 71 29"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{
-                opacity: isComplete ? 1 : 0,
-                transform: isComplete ? 'scale(1)' : 'scale(0.3)',
-                transformOrigin: '73px 40px',
-                transition: 'opacity 0.25s ease-out 0.4s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.4s'
-              }}
-            />
-          </svg>
-        </div>
+      {/* Hand-Drawn White Downward Arrow Pointing to Photo */}
+      <div className="w-8 h-10 overflow-visible mt-1 ml-4 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+        <svg
+          className="w-full h-full overflow-visible"
+          viewBox="0 0 32 40"
+          fill="none"
+        >
+          {/* Vertical Arrow Shaft */}
+          <path
+            d="M 16 2 L 16 30"
+            stroke="#ffffff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            style={{
+              strokeDasharray: 35,
+              strokeDashoffset: isComplete ? 0 : 35,
+              transition: 'stroke-dashoffset 0.4s ease-out'
+            }}
+          />
+          {/* Arrowhead Pointing Down */}
+          <path
+            d="M 9 22 L 16 31 L 23 22"
+            stroke="#ffffff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              opacity: isComplete ? 1 : 0,
+              transform: isComplete ? 'scale(1)' : 'scale(0.3)',
+              transformOrigin: '16px 31px',
+              transition: 'opacity 0.2s ease-out 0.28s, transform 0.2s ease-out 0.28s'
+            }}
+          />
+        </svg>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
         ? darkMode
           ? 'bg-black/75 apple-glass-nav border-b border-white/[0.08] shadow-lg shadow-black/40 py-3'
           : 'bg-[#fbfbfd]/80 apple-glass-nav border-b border-black/[0.06] shadow-sm py-3'
-        : 'bg-transparent py-5'
+        : 'bg-transparent py-5 border-b border-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">

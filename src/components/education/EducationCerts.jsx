@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import certsData from '../../data/certifications.json';
 import ParallaxCard from '../common/ParallaxCard';
+import HandwrittenSectionNote from '../common/HandwrittenSectionNote';
 
 /**
  * Horizontal Arrow with direct vector line drawing & advancing arrowhead
@@ -292,7 +293,11 @@ export default function EducationCerts() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3 relative">
+          <HandwrittenSectionNote
+            text="My Journey :)"
+            className="-top-11 sm:-top-14 left-2 sm:-left-12 md:-left-20 lg:-left-24"
+          />
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-slate-800 dark:text-slate-200 text-xs font-mono font-medium">
             <Trophy className="w-3.5 h-3.5 text-amber-500" />
             <span>Honors & Academic Credentials</span>

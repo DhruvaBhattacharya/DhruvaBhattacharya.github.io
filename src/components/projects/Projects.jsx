@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink, Github, FolderGit2 } from 'lucide-react';
 import projectsData from '../../data/projects.json';
+import HandwrittenSectionNote from '../common/HandwrittenSectionNote';
 
 export default function Projects() {
   return (
@@ -8,7 +9,11 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3 relative">
+          <HandwrittenSectionNote
+            text="My Projects :)"
+            className="-top-11 sm:-top-14 left-2 sm:-left-12 md:-left-20 lg:-left-24"
+          />
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-slate-800 dark:text-slate-200 text-xs font-mono font-medium">
             <FolderGit2 className="w-3.5 h-3.5 text-[#0071e3] dark:text-cyan-400" />
             <span>Featured Engineering Work</span>

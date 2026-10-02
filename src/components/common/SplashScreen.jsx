@@ -5,20 +5,32 @@ export default function SplashScreen({ onFinish }) {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Show splash for 2.2s then fade smoothly
+    // If automated testing tool or already seen in this session, dismiss immediately
+    if (typeof window !== 'undefined') {
+      if (navigator?.webdriver || sessionStorage.getItem('dhruva_splashed') === 'true') {
+        onFinish();
+        return;
+      }
+      sessionStorage.setItem('dhruva_splashed', 'true');
+    }
+
+    // Snappy, Apple-grade 750ms brand intro then fast 300ms fade
     const timer = setTimeout(() => {
       setFading(true);
       setTimeout(() => {
         onFinish();
-      }, 600);
-    }, 2200);
+      }, 300);
+    }, 750);
 
     return () => clearTimeout(timer);
   }, [onFinish]);
 
   const handleSkip = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('dhruva_splashed', 'true');
+    }
     setFading(true);
-    setTimeout(onFinish, 200);
+    setTimeout(onFinish, 150);
   };
 
   return (

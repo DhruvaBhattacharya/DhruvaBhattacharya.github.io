@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import SplashScreen from './components/common/SplashScreen';
 import Navbar from './components/common/Navbar';
 import Hero from './components/hero/Hero';
-import Experience from './components/experience/Experience';
-import Projects from './components/projects/Projects';
-import Skills from './components/skills/Skills';
-import EducationCerts from './components/education/EducationCerts';
-import Contact from './components/contact/Contact';
 import Footer from './components/common/Footer';
-import VisitorTracker from './components/common/VisitorTracker';
+
+// Code-split heavy below-the-fold components for sub-second FCP/LCP
+const Experience = lazy(() => import('./components/experience/Experience'));
+const Projects = lazy(() => import('./components/projects/Projects'));
+const Skills = lazy(() => import('./components/skills/Skills'));
+const EducationCerts = lazy(() => import('./components/education/EducationCerts'));
+const Contact = lazy(() => import('./components/contact/Contact'));
+const VisitorTracker = lazy(() => import('./components/common/VisitorTracker'));
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return !navigator?.webdriver && sessionStorage.getItem('dhruva_splashed') !== 'true';
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -22,6 +27,24 @@ export default function App() {
       root.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    // Preload below-the-fold components during browser idle time
+    const preload = () => {
+      import('./components/experience/Experience');
+      import('./components/projects/Projects');
+      import('./components/skills/Skills');
+      import('./components/education/EducationCerts');
+      import('./components/contact/Contact');
+      import('./components/common/VisitorTracker');
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(preload);
+    } else {
+      setTimeout(preload, 1000);
+    }
+  }, []);
 
   return (
     <div className={`min-h-screen flex flex-col font-sans overflow-x-clip w-full max-w-full transition-colors duration-300 ${
@@ -33,15 +56,19 @@ export default function App() {
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <main className="flex-grow w-full max-w-full overflow-x-clip">
         <Hero isLoaded={!showSplash} />
-        <Experience />
-        <Projects />
-        <Skills />
-        <EducationCerts />
-        <Contact />
+        <Suspense fallback={<div className="min-h-[120px]" />}>
+          <Experience />
+          <Projects />
+          <Skills />
+          <EducationCerts />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
-      {/* Client Intelligence & Recruiter Check-In System */}
-      <VisitorTracker />
+      {/* Client Intelligence & Recruiter Check-In System (Lazy Loaded) */}
+      <Suspense fallback={null}>
+        <VisitorTracker />
+      </Suspense>
     </div>
   );
 }

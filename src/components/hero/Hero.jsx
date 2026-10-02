@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { ArrowDown, Download, Mail, ExternalLink, Terminal, Code2, Sparkles, CheckCircle2 } from 'lucide-react';
-import KernelConsole from './KernelConsole';
 import CodingTypewriter from './CodingTypewriter';
 import HandwrittenNote from './HandwrittenNote';
 import profileData from '../../data/profile.json';
+
+const KernelConsole = lazy(() => import('./KernelConsole'));
 
 export default function Hero({ isLoaded = true }) {
   const [showConsole, setShowConsole] = useState(false);
@@ -112,7 +113,9 @@ export default function Hero({ isLoaded = true }) {
           {/* Right Column: Single Professional Image (Coding Dhruva Only) */}
           <div className="lg:col-span-5 flex flex-col items-center w-full mt-24 sm:mt-28 lg:mt-0">
             {showConsole ? (
-              <KernelConsole onClose={() => setShowConsole(false)} />
+              <Suspense fallback={<div className="w-[280px] xs:w-72 sm:w-80 h-[400px] xs:h-[440px] sm:h-[470px] rounded-3xl bg-slate-900 border border-white/10 animate-pulse" />}>
+                <KernelConsole onClose={() => setShowConsole(false)} />
+              </Suspense>
             ) : (
               <div className="relative group w-[280px] xs:w-72 sm:w-80 h-[400px] xs:h-[440px] sm:h-[470px]">
                 {/* Natural Handwriting Annotation on Left Side */}

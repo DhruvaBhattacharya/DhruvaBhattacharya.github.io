@@ -247,7 +247,7 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
 
       {/* Number Badge "9" above the horizontal curve */}
       <div
-        className={`absolute top-[42px] left-[660px] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-20 ${
+        className={`absolute top-[42px] left-[66%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-20 ${
           isComplete
             ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
             : isStarted
@@ -363,14 +363,24 @@ export default function EducationCerts() {
             const rect = containerRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
-            // Starts animating when container enters comfortably into viewport
-            const startOffset = windowHeight * 0.25;
-            const scrollDistance = rect.height - windowHeight;
-
-            if (scrollDistance > 0) {
-              const scrolled = startOffset - rect.top;
-              const ratio = Math.max(0, Math.min(1, scrolled / scrollDistance));
-              setScrollProgress(ratio * 19);
+            if (window.innerWidth < 1024) {
+              // Mobile / Tablet calculation
+              const startOffset = windowHeight * 0.7;
+              const totalMobileDist = rect.height - windowHeight * 0.4;
+              if (totalMobileDist > 0) {
+                const scrolled = startOffset - rect.top;
+                const ratio = Math.max(0, Math.min(1, scrolled / totalMobileDist));
+                setScrollProgress(ratio * 19);
+              }
+            } else {
+              // Desktop Sticky calculation: tracks precisely while pinned
+              const stickyOffset = window.innerWidth >= 1280 ? 96 : 80;
+              const scrollDistance = rect.height - windowHeight;
+              if (scrollDistance > 0) {
+                const scrolled = stickyOffset - rect.top;
+                const ratio = Math.max(0, Math.min(1, scrolled / scrollDistance));
+                setScrollProgress(ratio * 19);
+              }
             }
           }
           ticking = false;

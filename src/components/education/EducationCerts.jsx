@@ -4,19 +4,16 @@ import {
   Trophy, 
   CheckCircle, 
   ShieldCheck, 
-  ArrowDown, 
-  Sparkles, 
-  Eye, 
-  RefreshCw 
+  ArrowDown
 } from 'lucide-react';
 import certsData from '../../data/certifications.json';
 import ParallaxCard from '../common/ParallaxCard';
 
 /**
  * Horizontal Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
- * Points 'right' (→) or 'left' (←) with a centered number badge.
+ * Points 'right' (→) or 'left' (←) cleanly without any number clutter.
  */
-function HorizontalArrow({ number, direction = 'right', fraction = 0, className = '' }) {
+function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) {
   const isRight = direction === 'right';
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
@@ -27,20 +24,7 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
   const currentX = startX + (endX - startX) * fraction;
 
   return (
-    <div className={`relative flex items-center justify-center pointer-events-none select-none ${className}`}>
-      {/* Number Badge above arrow */}
-      <div 
-        className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
-          isComplete
-            ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
-            : isStarted
-            ? 'bg-[#0071e3] text-white shadow-[0_0_14px_rgba(0,113,227,0.7)] scale-110'
-            : 'bg-black/10 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-black/10 dark:border-white/10'
-        }`}
-      >
-        {number}
-      </div>
-
+    <div className={`relative flex items-center justify-center pointer-events-none select-none z-20 ${className}`}>
       <svg className="w-full h-8 overflow-visible" viewBox="0 0 64 24">
         {/* Inactive Guide Track */}
         <line
@@ -51,7 +35,7 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
           stroke="currentColor"
           strokeWidth="1.5"
           strokeDasharray="3 3"
-          className="text-black/15 dark:text-white/15"
+          className="text-black/10 dark:text-white/10"
         />
 
         {/* Instantiating Drawing Line: draws from startX to currentX */}
@@ -107,31 +91,18 @@ function HorizontalArrow({ number, direction = 'right', fraction = 0, className 
 
 /**
  * Vertical Arrow with direct vector line drawing based on fractional scroll (0.0 to 1.0)
- * Points 'down' (↓) with the number badge to its right.
+ * Points 'down' (↓) cleanly without any number clutter.
  */
-function VerticalArrow({ number, fraction = 0, className = '' }) {
+function VerticalArrow({ fraction = 0, className = '' }) {
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
   const startY = 4;
-  const endY = 40;
+  const endY = 42;
   const currentY = startY + (endY - startY) * fraction;
 
   return (
-    <div className={`relative flex items-center justify-center pointer-events-none select-none ${className}`}>
-      {/* Number Badge to the right of the vertical arrow */}
-      <div 
-        className={`absolute top-1/2 -translate-y-1/2 left-[calc(50%+16px)] w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
-          isComplete
-            ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
-            : isStarted
-            ? 'bg-[#0071e3] text-white shadow-[0_0_14px_rgba(0,113,227,0.7)] scale-110'
-            : 'bg-black/10 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-black/10 dark:border-white/10'
-        }`}
-      >
-        {number}
-      </div>
-
-      <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 44">
+    <div className={`relative flex items-center justify-center pointer-events-none select-none z-20 ${className}`}>
+      <svg className="w-8 h-full overflow-visible" viewBox="0 0 24 46">
         {/* Inactive Guide Track */}
         <line
           x1="12"
@@ -141,7 +112,7 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
           stroke="currentColor"
           strokeWidth="1.5"
           strokeDasharray="3 3"
-          className="text-black/15 dark:text-white/15"
+          className="text-black/10 dark:text-white/10"
         />
 
         {/* Instantiating Drawing Line */}
@@ -182,7 +153,7 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
         {/* Crisp Completed Arrowhead pointing down */}
         {isComplete && (
           <path
-            d="M 7 33 L 12 40 L 17 33"
+            d="M 7 34 L 12 42 L 17 34"
             fill="none"
             stroke="#10b981"
             strokeWidth="2.5"
@@ -196,30 +167,30 @@ function VerticalArrow({ number, fraction = 0, className = '' }) {
 }
 
 /**
- * Arrow 9: Curved line emerging from Box 9 (bottom-right), curving left towards center,
- * with label "9" above the horizontal segment, and pointing down to Contact Me.
+ * Arrow 9: Curved line emerging from Tile 9 (bottom-right), curving left towards center,
+ * and pointing straight down to directly guide into the Contact Us section.
  */
-function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
+function ArrowNineCurve({ fraction = 0 }) {
   const isStarted = fraction > 0;
   const isComplete = fraction >= 1;
   const strokeOffset = 100 * (1 - fraction);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-28 hidden lg:block overflow-visible mt-2 select-none">
-      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 110" preserveAspectRatio="none">
+    <div className="relative w-full max-w-6xl mx-auto h-24 hidden lg:block overflow-visible mt-2 select-none pointer-events-none">
+      <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 96" preserveAspectRatio="none">
         {/* Inactive Guide Track */}
         <path
-          d="M 833 0 C 833 40, 833 50, 740 50 L 540 50 C 500 50, 500 65, 500 105"
+          d="M 833 0 C 833 35, 833 45, 740 45 L 540 45 C 500 45, 500 60, 500 90"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeDasharray="4 4"
-          className="text-black/15 dark:text-white/15"
+          className="text-black/10 dark:text-white/10"
         />
 
         {/* Instantiating Drawing Path */}
         <path
-          d="M 833 0 C 833 40, 833 50, 740 50 L 540 50 C 500 50, 500 65, 500 105"
+          d="M 833 0 C 833 35, 833 45, 740 45 L 540 45 C 500 45, 500 60, 500 90"
           fill="none"
           stroke={isComplete ? '#10b981' : '#0071e3'}
           strokeWidth="3"
@@ -227,12 +198,13 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
           strokeDasharray="100"
           strokeDashoffset={strokeOffset}
           strokeLinecap="round"
+          className="transition-[stroke-dashoffset] duration-75"
         />
 
-        {/* Crisp Completed Arrowhead pointing down */}
+        {/* Crisp Completed Arrowhead pointing straight down towards Contact Us */}
         {isComplete && (
           <path
-            d="M 492 95 L 500 108 L 508 95"
+            d="M 492 78 L 500 92 L 508 78"
             fill="none"
             stroke="#10b981"
             strokeWidth="3"
@@ -241,85 +213,46 @@ function ArrowNineCurve({ fraction = 0, onNavigateContact }) {
           />
         )}
       </svg>
-
-      {/* Number Badge "9" above the horizontal curve */}
-      <div
-        className={`absolute top-[38px] left-[66%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-200 z-30 shadow-xs ${
-          isComplete
-            ? 'bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] scale-105'
-            : isStarted
-            ? 'bg-[#0071e3] text-white shadow-[0_0_14px_rgba(0,113,227,0.7)] scale-110'
-            : 'bg-black/10 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-black/10 dark:border-white/10'
-        }`}
-      >
-        9
-      </div>
-
-      {/* Target Destination: Smooth-scroll bridge to Contact Me */}
-      <div className="absolute top-[112px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center">
-        <a
-          href="#contact"
-          onClick={onNavigateContact}
-          className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-sm ${
-            isComplete
-              ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.4)] hover:scale-105'
-              : 'bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10 hover:border-[#0071e3]'
-          }`}
-        >
-          <span>Contact Me</span>
-          <ArrowDown className={`w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5 ${
-            isComplete ? 'text-white animate-bounce' : 'text-slate-400'
-          }`} />
-        </a>
-      </div>
     </div>
   );
 }
 
 /**
- * Individual Certification Card
+ * Individual Certification Tile — rendered fully in one go with 3D Parallax & live flow illumination
  */
-function CertCard({ cert, stepNum, isActive }) {
+function CertCard({ cert, isLit }) {
   const activeGlows = {
-    cyan: 'dark:border-cyan-500/50 dark:shadow-[0_0_24px_rgba(6,182,212,0.18)] border-cyan-500/40 shadow-md',
-    amber: 'dark:border-amber-500/50 dark:shadow-[0_0_24px_rgba(245,158,11,0.18)] border-amber-500/40 shadow-md',
-    indigo: 'dark:border-indigo-500/50 dark:shadow-[0_0_24px_rgba(99,102,241,0.18)] border-indigo-500/40 shadow-md',
-    emerald: 'dark:border-emerald-500/50 dark:shadow-[0_0_24px_rgba(16,185,129,0.18)] border-emerald-500/40 shadow-md',
-    blue: 'dark:border-blue-500/50 dark:shadow-[0_0_24px_rgba(59,130,246,0.18)] border-blue-500/40 shadow-md'
+    cyan: 'border-cyan-500/40 dark:border-cyan-500/50 shadow-[0_4px_24px_rgba(6,182,212,0.18)]',
+    amber: 'border-amber-500/40 dark:border-amber-500/50 shadow-[0_4px_24px_rgba(245,158,11,0.18)]',
+    indigo: 'border-indigo-500/40 dark:border-indigo-500/50 shadow-[0_4px_24px_rgba(99,102,241,0.18)]',
+    emerald: 'border-emerald-500/40 dark:border-emerald-500/50 shadow-[0_4px_24px_rgba(16,185,129,0.18)]',
+    blue: 'border-blue-500/40 dark:border-blue-500/50 shadow-[0_4px_24px_rgba(59,130,246,0.18)]'
   };
 
   return (
     <ParallaxCard
-      maxTilt={isActive ? 5 : 0}
-      scale={isActive ? 1.015 : 1}
+      maxTilt={6}
+      scale={1.02}
       glareColor="rgba(0, 113, 227, 0.15)"
-      className={`glass-card rounded-2xl p-5 border transition-all duration-500 flex flex-col justify-between h-full relative group ${
-        isActive
-          ? `${activeGlows[cert.badgeColor] || 'border-cyan-500/40'} bg-white/85 dark:bg-black/50 backdrop-blur-xl opacity-100 scale-100`
-          : 'border-dashed border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] opacity-35 grayscale'
+      className={`glass-card rounded-2xl p-5 border transition-all duration-300 flex flex-col justify-between h-full relative group ${
+        isLit
+          ? `${activeGlows[cert.badgeColor] || 'border-[#0071e3]/40'} bg-white/95 dark:bg-black/60`
+          : 'border-black/[0.08] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20'
       }`}
     >
-      {/* Top Header */}
+      {/* Top Issuer */}
       <div className="flex items-center justify-between gap-2 mb-2">
-        <span className={`text-[10px] font-mono uppercase tracking-wider font-bold ${
-          isActive ? 'text-[#0071e3] dark:text-cyan-400' : 'text-slate-400 dark:text-slate-600'
-        }`}>
+        <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#0071e3] dark:text-cyan-400">
           {cert.issuer}
         </span>
-        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${
-          isActive
-            ? 'bg-black/5 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-black/10 dark:border-white/10'
-            : 'text-slate-400 dark:text-slate-600 border-black/5 dark:border-white/5'
-        }`}>
-          0{stepNum}
-        </span>
+        <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+          isLit ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' : 'bg-slate-300 dark:bg-slate-700'
+        }`} />
       </div>
 
       {/* Credential Name & Category */}
       <div className="space-y-1.5 flex-grow">
-        <h4 className={`text-sm sm:text-base font-bold tracking-tight leading-snug transition-colors ${
-          isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'
-        }`}>
+        <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0071e3] dark:group-hover:text-cyan-400 transition-colors">
           {cert.name}
         </h4>
         <p className="text-[11px] font-mono text-slate-500 dark:text-[#86868b]">
@@ -329,15 +262,10 @@ function CertCard({ cert, stepNum, isActive }) {
 
       {/* Verified Credential Badge */}
       <div className="pt-3 mt-4 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center justify-between">
-        <span className={`inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold ${
-          isActive ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 dark:text-slate-600'
-        }`}>
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-emerald-600 dark:text-emerald-400">
           <CheckCircle className="w-3.5 h-3.5" />
           {cert.status}
         </span>
-        <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
-          isActive ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' : 'bg-slate-400/40 dark:bg-slate-700'
-        }`} />
       </div>
     </ParallaxCard>
   );
@@ -345,11 +273,10 @@ function CertCard({ cert, stepNum, isActive }) {
 
 export default function EducationCerts() {
   const certs = certsData.certifications;
-  const [scrollProgress, setScrollProgress] = useState(0); // 0.0 to 19.0
-  const [isAllUnlocked, setIsAllUnlocked] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0); // 0.0 to 9.0
   const containerRef = useRef(null);
 
-  // Scroll Progress Listener mapped across 19 stages without sticky traps
+  // Scroll Progress Listener mapped across the 9 sequential arrows
   useEffect(() => {
     let ticking = false;
 
@@ -360,8 +287,7 @@ export default function EducationCerts() {
             const rect = containerRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
-            // Starts animating when container enters comfortable reading range (75% down viewport)
-            // Reaches end when bottom approaches 25% of viewport
+            // Animation triggers naturally as section traverses the comfortable reading viewport
             const startTrigger = windowHeight * 0.75;
             const endTrigger = windowHeight * 0.25;
             const travelDistance = rect.height + (startTrigger - endTrigger);
@@ -369,7 +295,7 @@ export default function EducationCerts() {
             if (travelDistance > 0) {
               const scrolledDistance = startTrigger - rect.top;
               const ratio = Math.max(0, Math.min(1, scrolledDistance / travelDistance));
-              setScrollProgress(ratio * 19);
+              setScrollProgress(ratio * 9);
             }
           }
           ticking = false;
@@ -388,32 +314,19 @@ export default function EducationCerts() {
     };
   }, []);
 
-  const effectiveProgress = isAllUnlocked ? 19 : scrollProgress;
-
-  // Fraction [0, 1] for Arrow k (k from 1 to 9)
-  const getArrowFraction = (num) => {
-    const start = 2 * num - 1;
-    const end = 2 * num;
-    if (effectiveProgress <= start) return 0;
-    if (effectiveProgress >= end) return 1;
-    return (effectiveProgress - start) / (end - start);
+  // Compute fraction [0, 1] for Arrow k (k from 1 to 9)
+  const getArrowFraction = (arrowIndex) => {
+    const start = arrowIndex - 1;
+    const end = arrowIndex;
+    if (scrollProgress <= start) return 0;
+    if (scrollProgress >= end) return 1;
+    return scrollProgress - start;
   };
 
-  // Check if Box k is active (k from 1 to 9)
-  const isBoxActive = (boxNum) => {
-    const threshold = 2 * (boxNum - 1);
-    return effectiveProgress >= threshold;
+  // Check if tile is lit (Tile 1 lit at start, Tile k lit when Arrow k-1 reaches it)
+  const isTileLit = (tileIndex) => {
+    return scrollProgress >= (tileIndex - 1);
   };
-
-  const handleSmoothScrollContact = (e) => {
-    e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const currentStep = Math.min(19, Math.floor(effectiveProgress) + 1);
 
   return (
     <section id="achievements" className="py-24 relative transition-colors duration-300">
@@ -531,68 +444,31 @@ export default function EducationCerts() {
 
         </div>
 
-        {/* 19-Stage Scroll-Driven Snake Flow Section */}
+        {/* Professional Certifications Section with Sequential Flow */}
         <div 
           ref={containerRef} 
           className="pt-8 border-t border-black/[0.06] dark:border-white/[0.08]"
         >
-          {/* Section Header & Sequence Tracker */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#0071e3] dark:text-cyan-400" />
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  Professional Certifications
-                </h3>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-[#86868b]">
-                Scroll down to advance the chronological flow from Step 1 to Step 9, connecting directly into Contact Me.
-              </p>
+          {/* Section Header */}
+          <div className="mb-12 space-y-1">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#0071e3] dark:text-cyan-400" />
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Professional Certifications
+              </h3>
             </div>
-
-            {/* Sequence Status & Quick Toggle */}
-            <div className="flex items-center gap-3 self-start md:self-auto">
-              <div className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#0071e3] dark:bg-cyan-400 animate-pulse" />
-                <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
-                  Stage {currentStep} of 19
-                </span>
-                <div className="w-20 h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden hidden sm:block">
-                  <div 
-                    className="h-full bg-gradient-to-r from-[#0071e3] to-emerald-400 transition-all duration-150"
-                    style={{ width: `${(effectiveProgress / 19) * 100}%` }}
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={() => setIsAllUnlocked(prev => !prev)}
-                className="px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 text-xs font-mono font-medium text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-1.5 cursor-pointer"
-                title="Toggle instant view for all cards"
-              >
-                {isAllUnlocked ? (
-                  <>
-                    <RefreshCw className="w-3 h-3 text-[#0071e3]" />
-                    <span>Sync Scroll</span>
-                  </>
-                ) : (
-                  <>
-                    <Eye className="w-3 h-3 text-emerald-500" />
-                    <span>Reveal All</span>
-                  </>
-                )}
-              </button>
-            </div>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-[#86868b]">
+              Verified credentials across Cloud Platforms, GenAI Engineering, and Core Systems.
+            </p>
           </div>
 
-          {/* Desktop 3x3 Snake Grid Layout */}
-          <div className="hidden lg:grid grid-cols-3 gap-x-14 xl:gap-x-16 gap-y-10 relative max-w-6xl mx-auto">
+          {/* Desktop 3x3 Snake Grid Layout (All 9 tiles rendered in one go, interconnected by scroll-driven arrows) */}
+          <div className="hidden lg:grid grid-cols-3 gap-x-14 xl:gap-x-16 gap-y-12 relative max-w-6xl mx-auto">
             
-            {/* Row 1: Box 1 (Azure AI) ──[1]──> Box 2 (AWS CCP) ──[2]──> Box 3 (AWS Cloud) */}
+            {/* Row 1: Tile 1 (Azure AI) ──> Tile 2 (AWS CCP) ──> Tile 3 (AWS Cloud) */}
             <div className="relative z-10">
-              <CertCard cert={certs[0]} stepNum={1} isActive={isBoxActive(1)} />
+              <CertCard cert={certs[0]} isLit={isTileLit(1)} />
               <HorizontalArrow
-                number={1}
                 direction="right"
                 fraction={getArrowFraction(1)}
                 className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
@@ -600,9 +476,8 @@ export default function EducationCerts() {
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[1]} stepNum={2} isActive={isBoxActive(2)} />
+              <CertCard cert={certs[1]} isLit={isTileLit(2)} />
               <HorizontalArrow
-                number={2}
                 direction="right"
                 fraction={getArrowFraction(2)}
                 className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
@@ -610,28 +485,25 @@ export default function EducationCerts() {
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[2]} stepNum={3} isActive={isBoxActive(3)} />
+              <CertCard cert={certs[2]} isLit={isTileLit(3)} />
               <VerticalArrow
-                number={3}
                 fraction={getArrowFraction(3)}
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-10 w-12"
+                className="absolute -bottom-12 left-1/2 -translate-x-1/2 h-12 w-10"
               />
             </div>
 
-            {/* Row 2: Box 6 (Airtribe) <──[5]── Box 5 (UpGrad) <──[4]── Box 4 (AWS NLP) */}
+            {/* Row 2: Tile 6 (Airtribe) <── Tile 5 (UpGrad) <── Tile 4 (AWS NLP) */}
             <div className="relative z-10">
-              <CertCard cert={certs[5]} stepNum={6} isActive={isBoxActive(6)} />
+              <CertCard cert={certs[5]} isLit={isTileLit(6)} />
               <VerticalArrow
-                number={6}
                 fraction={getArrowFraction(6)}
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-10 w-12"
+                className="absolute -bottom-12 left-1/2 -translate-x-1/2 h-12 w-10"
               />
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[4]} stepNum={5} isActive={isBoxActive(5)} />
+              <CertCard cert={certs[4]} isLit={isTileLit(5)} />
               <HorizontalArrow
-                number={5}
                 direction="left"
                 fraction={getArrowFraction(5)}
                 className="absolute -left-14 xl:-left-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
@@ -639,20 +511,18 @@ export default function EducationCerts() {
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[3]} stepNum={4} isActive={isBoxActive(4)} />
+              <CertCard cert={certs[3]} isLit={isTileLit(4)} />
               <HorizontalArrow
-                number={4}
                 direction="left"
                 fraction={getArrowFraction(4)}
                 className="absolute -left-14 xl:-left-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
               />
             </div>
 
-            {/* Row 3: Box 7 (ISRO) ──[7]──> Box 8 (IBM Cloud) ──[8]──> Box 9 (CISCO C++) */}
+            {/* Row 3: Tile 7 (ISRO) ──> Tile 8 (IBM Cloud) ──> Tile 9 (CISCO C++) */}
             <div className="relative z-10">
-              <CertCard cert={certs[6]} stepNum={7} isActive={isBoxActive(7)} />
+              <CertCard cert={certs[6]} isLit={isTileLit(7)} />
               <HorizontalArrow
-                number={7}
                 direction="right"
                 fraction={getArrowFraction(7)}
                 className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
@@ -660,9 +530,8 @@ export default function EducationCerts() {
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[7]} stepNum={8} isActive={isBoxActive(8)} />
+              <CertCard cert={certs[7]} isLit={isTileLit(8)} />
               <HorizontalArrow
-                number={8}
                 direction="right"
                 fraction={getArrowFraction(8)}
                 className="absolute -right-14 xl:-right-16 top-1/2 -translate-y-1/2 w-14 xl:w-16"
@@ -670,59 +539,39 @@ export default function EducationCerts() {
             </div>
 
             <div className="relative z-10">
-              <CertCard cert={certs[8]} stepNum={9} isActive={isBoxActive(9)} />
+              <CertCard cert={certs[8]} isLit={isTileLit(9)} />
             </div>
 
           </div>
 
-          {/* Desktop Arrow 9: Curving down from Box 9 to Contact Me */}
-          <ArrowNineCurve 
-            fraction={getArrowFraction(9)} 
-            onNavigateContact={handleSmoothScrollContact}
-          />
+          {/* Desktop Arrow 9: Curving down from Tile 9, pointing directly into Contact Us */}
+          <ArrowNineCurve fraction={getArrowFraction(9)} />
 
           {/* Mobile / Tablet Sequential Flow (< 1024px) */}
           <div className="lg:hidden space-y-4 max-w-md mx-auto pt-6">
             {certs.map((cert, idx) => {
-              const boxNum = idx + 1;
-              const arrowNum = boxNum;
-              const isBoxOn = isBoxActive(boxNum);
+              const tileNum = idx + 1;
+              const arrowNum = tileNum;
+              const isLit = isTileLit(tileNum);
               const arrowFrac = getArrowFraction(arrowNum);
 
               return (
                 <div key={cert.id || cert.name} className="flex flex-col items-center">
                   <div className="w-full">
-                    <CertCard cert={cert} stepNum={boxNum} isActive={isBoxOn} />
+                    <CertCard cert={cert} isLit={isLit} />
                   </div>
 
                   {arrowNum <= 9 && (
                     <div className="py-2 w-full flex justify-center">
                       <VerticalArrow
-                        number={arrowNum}
                         fraction={arrowFrac}
-                        className="h-12 w-12"
+                        className="h-12 w-10"
                       />
                     </div>
                   )}
                 </div>
               );
             })}
-
-            {/* Mobile Contact Target */}
-            <div className="pt-4 pb-2 flex justify-center">
-              <a
-                href="#contact"
-                onClick={handleSmoothScrollContact}
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-tight border transition-all duration-300 shadow-md ${
-                  effectiveProgress >= 18
-                    ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)]'
-                    : 'bg-white/80 dark:bg-black/60 text-slate-700 dark:text-slate-200 border-black/10 dark:border-white/10'
-                }`}
-              >
-                <span>Contact Me</span>
-                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              </a>
-            </div>
           </div>
 
         </div>

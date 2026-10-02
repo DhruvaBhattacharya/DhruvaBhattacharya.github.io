@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Sparkles, FolderGit2 } from 'lucide-react';
+import { ExternalLink, Github, FolderGit2 } from 'lucide-react';
 import projectsData from '../../data/projects.json';
 
 export default function Projects() {
@@ -21,14 +21,14 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* 2 Featured Projects Grid (Side by Side on Large Screens) */}
+        {/* 2 Featured Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {projectsData.map((project) => (
             <div
               key={project.id}
               className="glass-card glass-card-hover rounded-3xl overflow-hidden border border-black/[0.06] dark:border-white/[0.08] flex flex-col justify-between group transition-all"
             >
-              {/* Image Preview Container */}
+              {/* Clean Image Container (No Superimposed Overlays) */}
               <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-950 border-b border-black/[0.06] dark:border-white/[0.08]">
                 <picture>
                   <source srcSet={project.image} type="image/webp" />
@@ -37,30 +37,20 @@ export default function Projects() {
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </picture>
-
-                {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-
-                {/* Floating Category & Status Badges */}
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
-                  <span className="text-xs font-mono font-medium text-white px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 shadow-sm">
-                    {project.category}
-                  </span>
-                  {project.badge && (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-mono text-amber-300 bg-black/60 backdrop-blur-md border border-amber-500/40 px-3 py-1 rounded-full font-medium shadow-sm">
-                      <Sparkles className="w-3 h-3 text-amber-400" />
-                      {project.badge}
-                    </span>
-                  )}
-                </div>
               </div>
 
               {/* Project Body */}
               <div className="p-6 sm:p-7 flex flex-col justify-between flex-grow space-y-4">
                 <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="text-xs font-mono font-medium text-[#0071e3] dark:text-cyan-400 px-3 py-1 rounded-full bg-[#0071e3]/10 dark:bg-cyan-950/40 border border-[#0071e3]/20 dark:border-cyan-500/30">
+                      {project.category}
+                    </span>
+                  </div>
+
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-[#0071e3] dark:group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>

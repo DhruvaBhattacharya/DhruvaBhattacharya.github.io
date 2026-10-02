@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cpu, Server, Database, Cloud, Code2, ArrowRight, GitBranch, CheckCircle2 } from 'lucide-react';
+import { Cpu, Server, Database, Cloud, Code2, ArrowRight } from 'lucide-react';
 import skillsData from '../../data/skills.json';
 
 const iconMap = {
@@ -21,7 +21,7 @@ const nodeFlow = [
 export default function Skills() {
   const [activeNode, setActiveNode] = useState(null);
 
-  // Order categories logically in flowchart order: Core -> Backend -> Database -> AI -> Cloud
+  // Order categories logically: Core -> Backend -> Database -> AI -> Cloud
   const orderedCategories = [
     skillsData.find(c => c.category.includes('Languages')) || skillsData[3],
     skillsData.find(c => c.category.includes('Backend')) || skillsData[1],
@@ -44,11 +44,11 @@ export default function Skills() {
             Skills & Architectural Proficiencies
           </h2>
           <p className="text-slate-600 dark:text-[#86868b] text-sm sm:text-base">
-            Structured system architecture flow — from low-level systems programming to distributed microservices and production GenAI pipelines.
+            Structured architectural roadmap — from low-level systems programming to distributed microservices and production GenAI pipelines.
           </p>
         </div>
 
-        {/* NeetCode / UML Flowchart Pipeline Bar */}
+        {/* System Architecture Flow Bar */}
         <div className="hidden lg:flex items-center justify-between max-w-5xl mx-auto mb-12 p-3 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] font-mono text-xs shadow-xs">
           {nodeFlow.map((node, i) => (
             <React.Fragment key={node.label}>
@@ -73,7 +73,7 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* UML Architecture Boxes Grid */}
+        {/* Skill Category Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
           {orderedCategories.map((category, idx) => {
             const Icon = iconMap[category.icon] || Code2;
@@ -82,44 +82,35 @@ export default function Skills() {
             return (
               <div
                 key={idx}
-                className={`glass-card rounded-3xl p-5 sm:p-6 border transition-all flex flex-col justify-between relative group ${
+                className={`glass-card rounded-3xl p-6 border transition-all flex flex-col justify-between relative group ${
                   isHighlightedNode
                     ? 'border-[#0071e3] dark:border-cyan-400 shadow-lg ring-1 ring-[#0071e3]/30'
                     : 'border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20'
                 }`}
               >
-                {/* UML Node Tag Header */}
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 dark:text-slate-500 pb-3 border-b border-black/[0.05] dark:border-white/[0.06] mb-4">
-                  <span className="flex items-center gap-1.5 font-semibold text-[#0071e3] dark:text-cyan-400">
-                    <GitBranch className="w-3 h-3" />
-                    <span>NODE::{`0${idx + 1}`}</span>
-                  </span>
-                  <span className="uppercase tracking-widest text-[9px]">UML ARCH COMPONENT</span>
-                </div>
-
                 <div>
                   {/* Category Title */}
-                  <div className="flex items-center gap-3 pb-3 mb-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400 shrink-0">
-                      <Icon className="w-4 h-4" />
+                  <div className="flex items-center gap-3 pb-4 mb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
+                    <div className="w-10 h-10 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/20 flex items-center justify-center text-[#0071e3] dark:text-cyan-400 shrink-0">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base tracking-tight leading-snug">
+                    <h3 className="font-bold text-slate-900 dark:text-white text-base tracking-tight leading-snug">
                       {category.category}
                     </h3>
                   </div>
 
-                  {/* Skills List: Short, Sweet & Professional */}
-                  <div className="space-y-1.5">
+                  {/* Skills List */}
+                  <div className="space-y-2">
                     {category.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className={`flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-lg border transition-all ${
+                        className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl border transition-all ${
                           skill.highlight
                             ? 'bg-black/[0.025] dark:bg-white/[0.06] border-black/[0.08] dark:border-white/[0.12] text-slate-900 dark:text-white shadow-2xs font-medium'
                             : 'bg-transparent border-transparent text-slate-600 dark:text-[#a1a1a6]'
                         }`}
                       >
-                        <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-2.5 min-w-0">
                           {skill.highlight ? (
                             <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400 shrink-0 shadow-xs"></span>
                           ) : (
@@ -129,19 +120,13 @@ export default function Skills() {
                         </div>
 
                         {skill.highlight && (
-                          <span className="text-[10px] font-mono px-2 py-0.2 rounded-full font-semibold bg-[#0071e3]/10 text-[#0071e3] dark:text-cyan-300 border border-[#0071e3]/20 shrink-0">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-[#0071e3]/10 text-[#0071e3] dark:text-cyan-300 border border-[#0071e3]/20 shrink-0">
                             Core
                           </span>
                         )}
                       </div>
                     ))}
                   </div>
-                </div>
-
-                {/* Subtle UML Footer Connector */}
-                <div className="pt-4 mt-4 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-slate-400 dark:text-slate-500">
-                  <span>STATUS: OPTIMIZED</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-medium">PASS 100%</span>
                 </div>
               </div>
             );

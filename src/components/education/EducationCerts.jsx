@@ -91,22 +91,6 @@ function HorizontalArrow({ direction = 'right', fraction = 0, className = '' }) 
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            {!isComplete && (
-              <>
-                <circle
-                  cx={currentX}
-                  cy="12"
-                  r="4"
-                  className="poppy-arrow-dot animate-ping opacity-75"
-                />
-                <circle
-                  cx={currentX}
-                  cy="12"
-                  r="2.5"
-                  className="poppy-arrow-dot"
-                />
-              </>
-            )}
           </g>
         )}
       </svg>
@@ -186,22 +170,6 @@ function VerticalArrow({ fraction = 0, className = '' }) {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            {!isComplete && (
-              <>
-                <circle
-                  cx="12"
-                  cy={currentY}
-                  r="4"
-                  className="poppy-arrow-dot animate-ping opacity-75"
-                />
-                <circle
-                  cx="12"
-                  cy={currentY}
-                  r="2.5"
-                  className="poppy-arrow-dot"
-                />
-              </>
-            )}
           </g>
         )}
       </svg>

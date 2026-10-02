@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowDown, Download, Mail, ExternalLink, Terminal, Code2, Sparkles, CheckCircle2 } from 'lucide-react';
 import KernelConsole from './KernelConsole';
 import CodingTypewriter from './CodingTypewriter';
+import HandwrittenNote from './HandwrittenNote';
 import profileData from '../../data/profile.json';
 
 export default function Hero() {
@@ -114,6 +115,9 @@ export default function Hero() {
               <KernelConsole onClose={() => setShowConsole(false)} />
             ) : (
               <div className="relative group w-[280px] xs:w-72 sm:w-80 h-[400px] xs:h-[440px] sm:h-[470px]">
+                {/* Natural Handwriting Annotation on Left Side */}
+                <HandwrittenNote />
+
                 {/* Subtle Ambient Glow */}
                 <div className="absolute -inset-1 bg-gradient-to-b from-[#0071e3]/20 to-cyan-500/10 rounded-[32px] blur-xl opacity-70 group-hover:opacity-95 transition duration-500"></div>
                 

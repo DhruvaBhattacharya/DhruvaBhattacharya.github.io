@@ -117,11 +117,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
             {/* Right Action Cluster */}
             <div className="hidden lg:flex items-center gap-3">
-              {/* Status indicator */}
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
-                <span>{profileData.status.badge}</span>
-              </div>
 
               {/* Apple System Blue Resume Button */}
               <a
@@ -216,11 +211,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
           <div className={`md:hidden px-4 pt-3 pb-6 mt-3 space-y-3 border-b backdrop-blur-2xl ${
             darkMode ? 'bg-black/90 border-white/[0.08]' : 'bg-[#fbfbfd]/90 border-black/[0.06] shadow-xl'
           }`}>
-            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
-              <span>{profileData.status.badge}</span>
-            </div>
-
             <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <a

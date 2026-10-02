@@ -4,27 +4,19 @@
   "tagline": "I build backend systems that are designed to scale, not just work",
   "status": {
     "available": true,
-    "badge": "Targeting Product-Based SDE Roles",
-    "lookingFor": "Product-Based SDE / Backend & AI Engineering Roles"
+    "badge": "Backend Software Engineer",
+    "lookingFor": "Backend & Distributed Systems SDE Roles"
   },
   "contact": {
     "email": "dhruvabhattacharya130102@gmail.com",
     "location": "Jabalpur, Madhya Pradesh, India",
-    "preferredLocations": [
-      "Indore",
-      "Bangalore",
-      "Hyderabad",
-      "Pune",
-      "NCR",
-      "Remote"
-    ],
     "resumeUrl": "./resume.pdf"
   },
   "summary": "I build backend systems that are designed to scale, not just work. Backend Software Engineer architecting high-scale Java/Spring Boot microservices and enterprise Generative AI/RAG agent systems for global platforms at Tata Consultancy Services. Slashed API latency by 85% and boosted throughput by +40% in telecom OSS/BSS, backed by 900+ LeetCode problems and Rank 1 in Asia (Alibaba Cloud Low Code Development Contest 2022).",
   "highlights": [
     {
-      "id": "target-roles",
-      "label": "Targeting Product-Based SDE & AI Roles"
+      "id": "distributed-systems",
+      "label": "Distributed Systems & High-Scale Microservices"
     },
     {
       "id": "latency",

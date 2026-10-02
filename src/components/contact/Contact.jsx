@@ -102,7 +102,7 @@ export default function Contact() {
                   Let's Build Something High-Scale
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-[#a1a1a6] mt-2 leading-relaxed">
-                  I read every incoming inquiry and typically respond within 12–24 hours. Open to Product-Based SDE roles, Distributed Systems engineering, and production GenAI pipelines.
+                  I read every incoming message and typically respond within 12–24 hours. Feel free to reach out for backend engineering, system architecture, or project discussions.
                 </p>
               </div>
 
@@ -132,17 +132,14 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Location & Relocation */}
+              {/* Location */}
               <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.08] space-y-1">
                 <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
-                  Location & Availability
+                  Location
                 </span>
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-[#0071e3] dark:text-cyan-400 shrink-0" />
                   <span>{profileData.contact.location}</span>
-                </p>
-                <p className="text-xs text-emerald-700 dark:text-emerald-400 font-mono pt-1">
-                  Open to Bangalore, Hyderabad, Pune, Indore, NCR & Remote
                 </p>
               </div>
 

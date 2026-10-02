@@ -47,22 +47,6 @@ export default function Hero() {
               I build backend architectures that are engineered to scale under mission-critical workloads. Specializing in <span className="font-semibold text-slate-900 dark:text-slate-100">Java/Spring Boot microservices</span>, distributed caching with <span className="font-semibold text-slate-900 dark:text-slate-100">Redis</span>, and autonomous <span className="font-semibold text-slate-900 dark:text-slate-100">Generative AI/RAG agents</span>. Recognized as <span className="font-semibold text-amber-600 dark:text-amber-400">Asia Rank #1 (Alibaba Cloud Contest 2022)</span> with <span className="font-semibold text-amber-600 dark:text-amber-400">900+ LeetCode DSA</span> problems mastered.
             </p>
 
-            {/* High-Signal Engineering Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs font-mono">
-              <span className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] inline-flex items-center gap-1.5 font-medium shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#0071e3] dark:text-cyan-400 shrink-0" />
-                <span>85% Latency Cut in Telecom Core</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] inline-flex items-center gap-1.5 font-medium shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#0071e3] dark:text-cyan-400 shrink-0" />
-                <span>+40% Throughput Boost</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-black/[0.06] dark:border-white/[0.08] inline-flex items-center gap-1.5 font-medium shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#0071e3] dark:text-cyan-400 shrink-0" />
-                <span>900+ DSA Solved</span>
-              </span>
-            </div>
-
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
               <a

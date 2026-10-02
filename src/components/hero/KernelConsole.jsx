@@ -17,9 +17,9 @@ const getDynamicResponse = (cmdRaw) => {
       lines: [
         `"${profileData.tagline}"`,
         `• Role: ${profileData.title}`,
-        `• Status: ${profileData.status.badge} (${profileData.status.lookingFor})`,
+        `• Status: ${profileData.status.badge}`,
         `• Summary: ${profileData.summary}`,
-        `• Relocation: Open to ${profileData.contact.preferredLocations.join(', ')}.`
+        `• Location: ${profileData.contact.location}`
       ]
     };
   }
@@ -46,11 +46,11 @@ const getDynamicResponse = (cmdRaw) => {
     };
   }
 
-  if (lower === 'locations' || lower === 'location' || lower === 'indore') {
+  if (lower === 'locations' || lower === 'location' || lower === 'base') {
     return {
-      commandLabel: 'locations',
-      title: 'Relocation & Open Engineering Hubs',
-      lines: profileData.contact.preferredLocations.map((loc) => `• ${loc}`)
+      commandLabel: 'location',
+      title: 'Current Location',
+      lines: [`• Base: ${profileData.contact.location}`]
     };
   }
 
@@ -95,7 +95,7 @@ const getDynamicResponse = (cmdRaw) => {
         `● Candidate: ${profileData.name} <${profileData.contact.email}>`,
         `● Status: ${profileData.status.badge}`,
         `● Seeking: ${profileData.status.lookingFor}`,
-        `● Preferred Hubs: ${profileData.contact.preferredLocations.join(', ')}`,
+        `● Location: ${profileData.contact.location}`,
         `● Last Synced: ${new Date(profileData.lastSyncedAt).toLocaleString()}`
       ]
     };

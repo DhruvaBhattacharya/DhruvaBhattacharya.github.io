@@ -6,7 +6,6 @@ import Experience from './components/experience/Experience';
 import Projects from './components/projects/Projects';
 import Skills from './components/skills/Skills';
 import EducationCerts from './components/education/EducationCerts';
-import Contributions from './components/contributions/Contributions';
 import Contact from './components/contact/Contact';
 import Footer from './components/common/Footer';
 import VisitorTracker from './components/common/VisitorTracker';
@@ -38,7 +37,6 @@ export default function App() {
         <Projects />
         <Skills />
         <EducationCerts />
-        <Contributions />
         <Contact />
       </main>
       <Footer />

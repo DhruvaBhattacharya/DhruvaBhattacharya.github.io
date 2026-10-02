@@ -4,8 +4,8 @@ import experienceData from '../../data/experience.json';
 import ParallaxCard from '../common/ParallaxCard';
 
 export default function Experience() {
-  // Single-open accordion: default to the current role (TCS). Opening one closes the others.
-  const [expandedId, setExpandedId] = useState('tcs-backend');
+  // Single-open accordion: default to all collapsed (shrunk). Clicking a tile expands it automatically.
+  const [expandedId, setExpandedId] = useState(null);
 
   const toggleExpand = (id) => {
     setExpandedId(prev => (prev === id ? null : id));
@@ -47,6 +47,14 @@ export default function Experience() {
                       <span className="absolute w-5 h-5 rounded-full bg-[#0071e3]/20 dark:bg-cyan-400/20 animate-pulse" />
                       <span className="relative w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-[#0071e3] dark:border-cyan-400 flex items-center justify-center shadow-[0_0_12px_#0071e3]">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] dark:bg-cyan-400" />
+                      </span>
+                    </div>
+                  ) : idx === 0 ? (
+                    // Current Role beacon when collapsed
+                    <div className="relative flex items-center justify-center w-7 h-7 group-hover:scale-125 transition-transform duration-300">
+                      <span className="absolute w-full h-full rounded-full bg-emerald-500/25 animate-ping opacity-75" />
+                      <span className="relative w-3.5 h-3.5 rounded-full bg-white dark:bg-slate-950 border-2 border-emerald-500 flex items-center justify-center shadow-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       </span>
                     </div>
                   ) : (

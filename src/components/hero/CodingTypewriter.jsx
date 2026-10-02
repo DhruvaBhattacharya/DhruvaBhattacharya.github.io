@@ -1,69 +1,69 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Terminal } from 'lucide-react';
 
 const phrases = [
-  {
-    role: "Java Developer",
-    comment: "// Enterprise Concurrency, Spring Boot & Distributed Architecture",
-    badge: "Core Backend"
-  },
-  {
-    role: "Architecting High-Scale Distributed Systems",
-    comment: "// Low-Latency Microservices, Redis Caching & 99.9% Uptime SLA",
-    badge: "System Design"
-  },
-  {
-    role: "Microservices & Gen AI",
-    comment: "// Autonomous RAG Pipelines, Multi-Agent Handoffs & Copilot Studio",
-    badge: "AI Engineering"
-  }
+  "Java Backend Developer",
+  "Architecting High-Scale Distributed Systems",
+  "Microservices & Enterprise GenAI Pipelines",
+  "Low-Latency Architectures (Redis & Spring Boot)"
 ];
 
+/**
+ * CodingTypewriter
+ * Hacker Green PowerShell-themed live terminal typing animation.
+ * Features:
+ * - Natural human-like keystroke cadence (variable delay + spacebar micro-pauses)
+ * - Authentic PowerShell prompt (PS >) in hacker green
+ * - Monospace phosphor green glowing text and blinking block cursor
+ * - Clean terminal bar without IDE window tabs or code syntax wrappers
+ * - Click-to-cycle to immediately advance to the next specialization
+ */
 export default function CodingTypewriter() {
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const typingSpeedRef = useRef(60);
 
   const currentPhrase = phrases[phraseIdx];
 
   useEffect(() => {
     let timer;
-
-    if (isPaused) return;
-
-    const fullText = currentPhrase.role;
+    const fullText = currentPhrase;
 
     if (!isDeleting) {
       // Typing forward
       if (displayedText.length < fullText.length) {
-        // Human-like slight variance in typing speed (45ms to 75ms)
-        const randomDelay = Math.floor(Math.random() * 30) + 45;
+        const nextChar = fullText[displayedText.length];
+        // Human typing variation: 45ms to 75ms base, slight pause on spaces and capitals
+        let delay = Math.floor(Math.random() * 30) + 45;
+        if (nextChar === ' ') delay += 40;
+        if (nextChar && nextChar === nextChar.toUpperCase() && nextChar !== ' ') delay += 25;
+
         timer = setTimeout(() => {
           setDisplayedText(fullText.slice(0, displayedText.length + 1));
-        }, randomDelay);
+        }, delay);
       } else {
-        // Finished typing word, pause so recruiter can read
+        // Full phrase typed: pause so visitor can read comfortably
         timer = setTimeout(() => {
           setIsDeleting(true);
         }, 2200);
       }
     } else {
-      // Deleting backward (clean & fast ~30ms)
+      // Deleting backward (fast smooth backspace ~22ms)
       if (displayedText.length > 0) {
         timer = setTimeout(() => {
           setDisplayedText(fullText.slice(0, displayedText.length - 1));
-        }, 28);
+        }, 22);
       } else {
-        // Finished deleting, move to next phrase
-        setIsDeleting(false);
-        setPhraseIdx((prev) => (prev + 1) % phrases.length);
+        // Finished deleting, brief pause then move to next phrase
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setPhraseIdx((prev) => (prev + 1) % phrases.length);
+        }, 320);
       }
     }
 
     return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, isPaused, phraseIdx, currentPhrase.role]);
+  }, [displayedText, isDeleting, phraseIdx, currentPhrase]);
 
   // Click to instantly jump to the next phrase
   const handleQuickCycle = () => {
@@ -75,69 +75,27 @@ export default function CodingTypewriter() {
   return (
     <div
       onClick={handleQuickCycle}
-      className="glass-card rounded-2xl p-4 sm:p-5 border border-black/[0.08] dark:border-white/[0.1] shadow-lg max-w-2xl mx-auto lg:mx-0 backdrop-blur-xl transition-all hover:border-[#0071e3]/40 dark:hover:border-cyan-400/40 cursor-pointer group select-none relative overflow-hidden"
-      title="Click to cycle next specialization"
+      className="inline-flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-slate-950/95 dark:bg-black/95 border border-emerald-500/30 dark:border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.15)] font-mono cursor-pointer select-none transition-all hover:border-emerald-400/60 hover:shadow-[0_0_28px_rgba(16,185,129,0.25)] max-w-2xl mx-auto lg:mx-0 min-h-[46px] sm:min-h-[50px] group"
+      title="Click to cycle next role"
     >
-      {/* Background subtle neon glow */}
-      <div className="absolute -right-10 -bottom-10 w-44 h-44 bg-[#0071e3]/10 dark:bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
-
-      {/* Code Editor Header Bar */}
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-slate-500">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-2xs" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-2xs" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-2xs" />
-          <span className="ml-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            dhruva.architect.ts
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#0071e3]/10 dark:bg-cyan-950/40 text-[#0071e3] dark:text-cyan-400 border border-[#0071e3]/20 dark:border-cyan-500/30 font-semibold">
-            {currentPhrase.badge}
-          </span>
-          <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 hidden sm:inline">
-            UTF-8
-          </span>
-        </div>
+      {/* PowerShell Hacker Prompt */}
+      <div className="flex items-center gap-1.5 select-none shrink-0 text-emerald-500 dark:text-emerald-400 font-bold text-sm sm:text-base lg:text-lg">
+        <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse hidden sm:inline" />
+        <span className="tracking-tight">PS &gt;</span>
       </div>
 
-      {/* Interactive Code Editor Line with Fixed Height */}
-      <div className="font-mono min-h-[64px] sm:min-h-[58px] flex flex-col justify-center space-y-1.5">
-        
-        {/* Line 01: The Executable Typewriter Statement */}
-        <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-sm sm:text-base lg:text-lg font-bold leading-relaxed">
-          <span className="text-slate-400 dark:text-slate-600 select-none text-xs w-4">01</span>
-          <span className="text-purple-600 dark:text-purple-400 font-semibold select-none">const</span>
-          <span className="text-blue-600 dark:text-cyan-400 font-semibold select-none">specialization</span>
-          <span className="text-slate-400 dark:text-slate-500 font-semibold select-none">=</span>
-          <span className="text-emerald-600 dark:text-emerald-400 font-extrabold tracking-tight">
-            &ldquo;{displayedText}&rdquo;<span className="text-slate-500 dark:text-slate-400 font-normal">;</span>
-          </span>
-          
-          {/* Animated Blinking Block Caret */}
-          <span className="inline-block w-2.5 h-5 sm:h-6 bg-[#0071e3] dark:bg-cyan-400 animate-pulse rounded-xs shadow-[0_0_8px_#38bdf8] align-middle" />
-        </div>
-
-        {/* Line 02: Dynamic Code Comment Annotation */}
-        <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 pt-0.5">
-          <span className="text-slate-400 dark:text-slate-600 select-none text-xs w-4">02</span>
-          <span className="italic font-mono text-slate-500 dark:text-slate-400 line-clamp-1">
-            {currentPhrase.comment}
-          </span>
-        </div>
-
+      {/* Live Typed Text with Blinking Terminal Block Cursor */}
+      <div className="flex items-center flex-wrap">
+        <span className="text-emerald-400 dark:text-emerald-300 font-semibold text-sm sm:text-base lg:text-lg tracking-wide drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">
+          {displayedText}
+        </span>
+        <span className="inline-block w-2 sm:w-2.5 h-4 sm:h-5 bg-emerald-400 dark:bg-emerald-300 animate-pulse rounded-xs shadow-[0_0_8px_#34d399] ml-1.5 align-middle shrink-0" />
       </div>
 
-      {/* Interactive Hint */}
-      <div className="pt-2 mt-2 border-t border-black/[0.04] dark:border-white/[0.04] flex items-center justify-between text-[10px] font-mono text-slate-400 dark:text-slate-500">
-        <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>TypeScript 5.4 Active</span>
-        </span>
-        <span className="group-hover:text-[#0071e3] dark:group-hover:text-cyan-400 transition-colors">
-          Click box to cycle ↵
-        </span>
+      {/* Subtle Hint on Desktop */}
+      <div className="ml-auto pl-2 hidden md:flex items-center gap-1 text-[10px] font-mono text-emerald-600/60 dark:text-emerald-500/50 select-none group-hover:text-emerald-400 transition-colors">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <span>ENTER ↵</span>
       </div>
     </div>
   );
